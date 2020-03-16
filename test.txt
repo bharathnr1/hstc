@@ -1,0 +1,2 @@
+Creating this test file to initialize git
+HSTC project commences!
