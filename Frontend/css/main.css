@@ -1,0 +1,23 @@
+.add_cus{
+    float: right;
+    margin-right: 2em;
+    margin-top: 2em;
+}
+
+#asdf{
+    font-size: 20px;
+}
+
+h2{
+    color: blue;
+}
+
+.cus_list{
+    margin-top: 5em;
+    margin-right: 0;
+}
+
+table, th, td {
+    border: 1px solid black;
+    padding: 2em;
+}

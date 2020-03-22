@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="../css/add_cus.css"> 
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="nav-link" href="./main.html">HSTC <span class="sr-only">(current)</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Customers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Vendors</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+    <div class="container add_cus_form">
+    <form>        
+        <div class="form-group">
+            <label for="photos">Photos</label>
+            <input type="text" class="form-control" id="photos">
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" class="form-control" id="description">
+        </div>
+        <div class="form-group">
+            <label for="model">Model</label>
+            <input type="text" class="form-control" id="model">
+        </div>
+        <div class="form-group">
+            <label for="color">Color</label>
+            <input type="text" class="form-control" id="color">
+        </div>
+        <div class="form-group">
+            <label for="remarks">Remarks</label>
+            <input type="text" class="form-control" id="remarks">
+        </div>
+        <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="number" class="form-control" id="quantity">
+        </div>
+        <div class="form-group">
+            <label for="unit_price">Unit Price</label>
+            <input type="number" class="form-control" id="unit_price">
+        </div>
+        <div class="form-group">
+            <label for="total_amt">Total Amount</label>
+            <input type="number" class="form-control" id="total_amt">
+        </div>
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" class="form-control" id="amount">
+        </div>
+        <div class="form-group">
+            <label for="token_hstc">Token Depost (HSTC)</label>
+            <input type="number" class="form-control" id="token_hstc">
+        </div>
+        <div class="form-group">
+            <label for="token_cus">Token Depost (Customer)</label>
+            <input type="number" class="form-control" id="token_cus">
+        </div>
+        <div class="form-group">
+            <label for="adv_depo">Advance Deposit %</label>
+            <input type="number" class="form-control" id="adv_depo">
+        </div>
+        <div class="form-group">
+            <label for="adv_amt">Advance Amount</label>
+            <input type="number" class="form-control" id="adv_amt">
+        </div>
+        <div class="form-group">
+            <label for="adv_bal">Advance Balance</label>
+            <input type="number" class="form-control" id="adv_bal">
+        </div>
+        <div class="form-group">
+            <label for="adv_bal_paid">Advance Balance Paid</label>
+            <input type="number" class="form-control" id="adv_bal_paid">
+        </div>
+        <div class="form-group">
+            <label for="final_bal">Final Balance</label>
+            <input type="number" class="form-control" id="final_bal">
+        </div>
+        <div class="form-group">
+            <label for="final_bal_date">Final Balance Date</label>
+            <input type="number" class="form-control" id="final_bal_date">
+        </div>
+        <div class="form-group">
+            <label for="cbm">CBM (m3)</label>
+            <input type="number" class="form-control" id="cbm">
+        </div>
+        <div class="form-group">
+            <label for="cartons">Cartons</label>
+            <input type="number" class="form-control" id="cartons">
+        </div>
+        <div class="form-group">
+            <label for="gross_wt">Gross Weight</label>
+            <input type="number" class="form-control" id="gross_wt">
+        </div>
+        <div class="form-group">
+            <label for="net_wt">Net Weight</label>
+            <input type="number" class="form-control" id="net_wt">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+</body>
+</html>

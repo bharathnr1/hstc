@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Container Loading Pictures</title>
+    
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    
+        <link rel="stylesheet" href="../css/cus_detail.css"> 
+    
+    </head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="nav-link" href="./main.html">HSTC <span class="sr-only">(current)</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Customers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Vendors</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+
+    <br><br>
+    <div style="margin-left: 40%;">
+      <div class="card" style="width: 19rem;">
+          <img src="../images/e.png" class="card-img-top">
+          <div class="card-body">
+            <p class="card-text" style="margin-left: 20%;">Upload container Pictures</p>
+          </div>
+      </div>
+        <br>
+
+        <label for="port_details">India Port Details: </label>
+        <input type="text" id="port_details" name="port_details"><br><br>
+        <label for="shipment_eta">Shipment ETA: &nbsp&nbsp&nbsp&nbsp</label>
+        <input type="text" id="shipment_eta" name="shipment_eta"><br><br>
+        <button style="margin-left: 3em;" class="btn btn-success">Send Email to Customer</button>
+    </div>
+    <p style="margin-left: 30%;">Clicking the above button will send an email to the customer with the Container details and ETA</p>
+
+<br><br>
+    <div class="container">
+      <h3>Fill the below details to send an email to the customer demanding the balance amount and last payment date</h3>
+      <label for="balance_amount">Balance Amount: </label>
+      <input type="text" id="balance_amount" name="balance_amount"><br><br>
+      <label for="payment_date">Payment Date: </label>
+      <input type="text" id="payment_date" name="payment_date"><br><br>
+      <button style="margin-left: 3em;" class="btn btn-success">Send Email to Customer</button>
+    </div>
+
+    <br><br><br>
+    <a href="./doorstep_grievance.html"><button class="btn btn-success" style="margin-left: 43%; font-size: 20px;">Go to Doorstep Delivery and Grievance</button></a>
+    <br><br><br>
+
+</body>
+</html>
