@@ -95,38 +95,9 @@ page h3{
 }
 
 
-/* Example values */
-
-  #five:checked ~ .progress > .progress-bar {
-    width: 5%;
-    background-color: #f63a0f;
-  }
-  
-  #twentyfive:checked ~ .progress > .progress-bar {
-    width: 25%;
-    background-color: #f27011;
-  }
-  
-  #fifty:checked ~ .progress > .progress-bar {
-    width: 50%;
-    background-color: #f2b01e;
-  }
-  
-  #seventyfive:checked ~ .progress > .progress-bar {
-    width: 75%;
-    background-color: #f2d31b;
-  }
-  
-  #onehundred:checked ~ .progress > .progress-bar {
-    width: 100%;
-    background-color: #86e01e;
-  }
-  
-  
-
 /* Actual values */
 
 .progress > .progress-bar{
-    width: 16.67%;
-    background-color: #FF0000;
+    width: 100%;
+    background-color: #86e01e; 
 }
