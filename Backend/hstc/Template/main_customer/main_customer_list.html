@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <body>
+        <h1>Main Customer List! </h1>
+<!-- Only Company Names on List Pages -->
+        {% for each in object_list %}
+        {{each.pk}}
+            <li>Customer:  <a href="{% url 'customer:main_customer-detail' each.id %}">  {{ each.customer_name }}</a></li>
+            {% empty %}
+            <li>No articles yet.</li>
+        {% endfor %}
+
+    </body>
+</html>
