@@ -110,3 +110,5 @@ class Customer_PI(models.Model):
 
     def __str__(self):
         return "Customer PI For " + self.customer
+
+

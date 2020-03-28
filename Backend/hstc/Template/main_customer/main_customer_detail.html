@@ -29,5 +29,31 @@
                 <li>No articles yet.</li>
          {% endfor %}
     
+    <h2>Customer PI View: </h2>
+    {% for CP in vendor_list %}
+        <p>{{CP.s_no }} </p>
+        <p>{{CP.list_no }} </p>
+        <p>{{CP.sub_list_no }} </p>
+        <p>{{CP.description}} </p>
+        <p>{{CP.model }} </p>
+        <p>{{CP.photo }} </p>
+        <p>{{CP.dimensions }} </p>
+        <p>{{CP.remarks }} </p>
+        <p>{{CP.unit }} </p>
+        <p>{{CP.unit_price }} </p>
+        <p>{{CP.qty}} </p>
+        <p>{{CP.customer_amount }} </p>
+        <p>{{CP.customer_amount_after_discount }} </p>
+        <p>{{CP.token_deposit_customer }} </p>
+        <p>{{CP.token_deposit_HSTC }} </p>
+        <p>{{CP.token_deposit_date}}  </p>
+        <p>{{CP.CBM_m3}}  </p>
+        <p>{{CP.ctns}} </p>
+        <p>{{CP.gross_weight_kgs}} </p>
+        <p>{{CP.net_weight_kgs}} </p>
+        <img src="{{ CP.photo.url }}" alt="" style="width: 200px; height: 200px;">
+    {% endfor %}
+<P></P>
+    <a href="{% url 'customer:send_CPI' object.pk %}">Send Email</a>
 </body>
 </html>
