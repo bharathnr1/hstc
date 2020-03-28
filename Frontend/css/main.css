@@ -1,0 +1,86 @@
+.add_cus{
+    float: right;
+    margin-right: 2em;
+    margin-top: 2em;
+}
+
+#asdf{
+    font-size: 20px;
+}
+
+h2{
+    color: blue;
+}
+
+.cus_list{
+    margin-top: 5em;
+    margin-right: 0;
+}
+
+table, th, td {
+    border: 1px solid black;
+    padding: 2em;
+}
+
+
+.navbar-nav{
+    width: 100%;
+}
+
+.nav-item{
+    width: inherit;
+    /* border-top-right-radius: 5em;
+    border-bottom-right-radius: 5em;   */
+    border-top-right-radius: 20%;
+    border-bottom-right-radius: 20%;
+    /* border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;   */
+    margin-right: 1em;
+
+}
+
+.btn-success:not(:disabled):not(.disabled).active, .btn-success:not(:disabled):not(.disabled):active, .show>.btn-success.dropdown-toggle {
+    color: #fff;
+    background-color: red;
+    border-color: black;
+    border-bottom-width: 1em;
+}
+
+.nav-item a{
+    text-align: center;
+    font-size: 18px;  
+    color: white !important;
+}
+
+.bookmark{
+    border-top-right-radius: 20%;
+    border-bottom-right-radius: 20%;
+}
+
+
+
+#five:checked ~ .progress > .progress-bar {
+    width: 5%;
+    background-color: #f63a0f;
+  }
+  
+  #twentyfive:checked ~ .progress > .progress-bar {
+    width: 25%;
+    background-color: #f27011;
+  }
+  
+  #fifty:checked ~ .progress > .progress-bar {
+    width: 50%;
+    background-color: #f2981b;
+  }
+
+  #seventyfive:checked ~ .progress > .progress-bar {
+    width: 75%;
+    background-color: #f2d31b;
+  }
+  
+  #onehundred:checked ~ .progress > .progress-bar {
+    width: 100%;
+    background-color: #86e01e;
+  }
+  

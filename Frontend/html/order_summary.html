@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Order Summary</title>
+    
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="../css/order_summary.css"> 
+    
+    </head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="nav-link" href="./main.html">HSTC <span class="sr-only">(current)</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active" >
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Customers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Vendors</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+
+    <br><br>
+    <div class="progress">
+      <div class="progress-bar"></div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item btn btn-success">
+            <a class="nav-link" href="./cus_detail.html">Customer PI &nbsp &nbsp</a>
+          </li>
+          <li class="nav-item active btn btn-success">
+            <a class="nav-link" href="./order_summary.html">Order Summary &nbsp &nbsp</a>
+          </li>
+          <li class="nav-item btn btn-success">
+            <a class="nav-link" href="./inspection.html">Inspection Page &nbsp &nbsp</a>
+          </li>
+          <li class="nav-item btn btn-success">
+            <a class="nav-link" href="./shipment_marks.html">Shipment Marks &nbsp &nbsp</a>
+          </li>
+          <li class="nav-item btn btn-success">
+            <a class="nav-link" href="./container_pics.html">Container Loading Pics &nbsp &nbsp</a>
+          </li>
+          <li class="nav-item btn btn-success">
+            <a class="nav-link" href="./doorstep_grievance.html">Delivery and Grievance &nbsp &nbsp</a>
+          </li>
+        </ul>
+      </div>
+  </nav>
+
+<br>
+    <div class="vendor_list">
+        <h2 style="text-align: center;">Order Summary based on Vendors</h2>
+        <p style="text-align: center;">Click on the vendors to view complete information</p>
+        
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse1">
+                  Elegancy 高泽美家	- S0539416 0000409052 - Dressing table + Side table + TV Cabinet"
+                </a>
+                <span style="margin: 95%;"> <button class="btn btn-success">Edit</button></span>
+              </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+              <table>
+                <tr>
+                    <th>Photos</th>
+                    <th>Description</th>
+                    <th>Model</th>
+                    <th>Color</th>
+                    <th>Remarks</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Manufacturing Date</th>
+                    <th>Inspection Date</th>
+                    <th>Shipment Number</th>
+                </tr>
+                <tr>
+                  <th><img src="../images/a.JPG" alt="A picture" width="150px" height="150px"></th>
+                  <td>Bed</td>
+                  <td>Teak Wood</td>
+                  <td>SAS</td>
+                  <td>Full Leather</td>
+                  <td>1</td>
+                  <td>18300</td>
+                  <td>20</td>
+                  <td>11 April 2020</td>
+                  <td>2</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+  
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse2">
+                  DaiFenDi 黛分迪 -	0001415	- Sofa + Dining Set + Center Table
+                </a>
+                <span style="margin: 95%;"> <button class="btn btn-success">Edit</button></span>
+              </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+              <table>
+                <tr>
+                    <th>Photos</th>
+                    <th>Description</th>
+                    <th>Model</th>
+                    <th>Color</th>
+                    <th>Remarks</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Manufacturing Dates</th>
+                    <th>Inspection Date</th>
+                    <th>Shipment Number</th>
+                </tr>
+                <tr>
+                  <th><img src="../images/b.JPG" alt="A picture" width="150px" height="150px"></th>
+                  <td>Bed</td>
+                  <td>Teak Wood</td>
+                  <td>SAS</td>
+                  <td>Full Leather</td>
+                  <td>1</td>
+                  <td>18300</td>
+                  <td>15</td>
+                  <td>06 April 2020</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <th><img src="../images/d.JPG" alt="A picture" width="150px" height="150px"></th>
+                  <td>Bed</td>
+                  <td>Teak Wood</td>
+                  <td>SAS</td>
+                  <td>Full Leather</td>
+                  <td>1</td>
+                  <td>18300</td>
+                  <td>25</td>
+                  <td>16 April 2020</td>
+                  <td>3</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+  
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse3">
+                  Cayman 卡宴 - 0000857 Sofa + Center Table + Leisure Chair + Decoration Shelf
+                </a>
+                <span style="margin: 95%;"> <button class="btn btn-success">Edit</button></span>
+              </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
+              <table>
+                <tr>
+                    <th>Photos</th>
+                    <th>Description</th>
+                    <th>Model</th>
+                    <th>Color</th>
+                    <th>Remarks</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Manufacturing Dates</th>
+                    <th>Inspection Date</th>
+                    <th>Shipment Number</th>
+                </tr>
+                <tr>
+                  <th><img src="../images/c.JPG" alt="A picture" width="150px" height="150px"></th>
+                  <td>Bed</td>
+                  <td>Teak Wood</td>
+                  <td>SAS</td>
+                  <td>Full Leather</td>
+                  <td>1</td>
+                  <td>18300</td>
+                  <td>25</td>
+                  <td>16 April 2020</td>
+                  <td>3</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <br><br>
+        <div class="vendor_email_links">
+          <button class="btn btn-success">Group based on Shipments</button>
+        </div>
+        <br><br>
+     
+  
+      
+        <div class="panel-group">
+          <div class="panel panel-default shipments">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#shipment1">Shipment 1 </a>
+                <span style="margin: 95%;"> <button class="btn btn-success">Edit</button></span>
+              </h4>
+            </div>
+            <div id="shipment1" class="panel-collapse collapse">
+              <table>
+                <tr>
+                    <th>Photos</th>
+                    <th>Description</th>
+                    <th>Model</th>
+                    <th>Color</th>
+                    <th>Remarks</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Manufacturing Dates</th>
+                    <th>Inspection Date</th>
+                    <th>Shipment Number</th>
+                </tr>
+                <tr>
+                  <th><img src="../images/b.JPG" alt="A picture" width="150px" height="150px"></th>
+                  <td>Bed</td>
+                  <td>Teak Wood</td>
+                  <td>SAS</td>
+                  <td>Full Leather</td>
+                  <td>1</td>
+                  <td>18300</td>
+                  <td>15</td>
+                  <td>06 April 2020</td>
+                  <td>1</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+  
+        <div class="panel-group">
+          <div class="panel panel-default shipments">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#shipment2">Shipment 2</a>
+                <span style="margin: 95%;"> <button class="btn btn-success">Edit</button></span>
+              </h4>
+            </div>
+            <div id="shipment2" class="panel-collapse collapse">
+              <table>
+                <tr>
+                    <th>Photos</th>
+                    <th>Description</th>
+                    <th>Model</th>
+                    <th>Color</th>
+                    <th>Remarks</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Manufacturing Dates</th>
+                    <th>Inspection Date</th>
+                    <th>Shipment Number</th>
+                </tr>
+                <tr>
+                  <th><img src="../images/a.JPG" alt="A picture" width="150px" height="150px"></th>
+                  <td>Bed</td>
+                  <td>Teak Wood</td>
+                  <td>SAS</td>
+                  <td>Full Leather</td>
+                  <td>1</td>
+                  <td>18300</td>
+                  <td>20</td>
+                  <td>11 April 2020</td>
+                  <td>2</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+  
+        <div class="panel-group">
+          <div class="panel panel-default shipments">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#shipment3">Shipment 3</a>
+                <span style="margin: 95%;"> <button class="btn btn-success">Edit</button></span>
+              </h4>
+            </div>
+            <div id="shipment3" class="panel-collapse collapse">
+              <table>
+                <tr>
+                    <th>Photos</th>
+                    <th>Description</th>
+                    <th>Model</th>
+                    <th>Color</th>
+                    <th>Remarks</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Manufacturing Dates</th>
+                    <th>Inspection Date</th>
+                    <th>Shipment Number</th>
+                </tr>
+                <tr>
+                  <th><img src="../images/c.JPG" alt="A picture" width="150px" height="150px"></th>
+                  <td>Bed</td>
+                  <td>Teak Wood</td>
+                  <td>SAS</td>
+                  <td>Full Leather</td>
+                  <td>1</td>
+                  <td>18300</td>
+                  <td>25</td>
+                  <td>16 April 2020</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <th><img src="../images/d.JPG" alt="A picture" width="150px" height="150px"></th>
+                  <td>Bed</td>
+                  <td>Teak Wood</td>
+                  <td>SAS</td>
+                  <td>Full Leather</td>
+                  <td>1</td>
+                  <td>18300</td>
+                  <td>25</td>
+                  <td>16 April 2020</td>
+                  <td>3</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <br><br>
+        
+      <br>
+        <div class="vendor_email_links">
+          <h6>Click the below button to send an email to customer and vendor with the updated dates and shipments</h6>
+          <br>
+          <button class="btn btn-success">Send Email</button>
+        </div>
+  
+      </div> <!--End of Vendor container -->
+
+      <br><br><br>
+      <a href="./inspection.html"><button class="btn btn-success" style="margin-left: 43%; font-size: 20px;">Go to Inspection</button></a>
+      <br><br><br>
+</body>
+</html>
