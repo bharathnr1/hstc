@@ -14,6 +14,7 @@ urlpatterns = [
     path('main_edit/<int:pk>', views.main_Customer_Update.as_view(), name='main_customer-edit'),
     path('main_delete/<int:pk>', views.main_Customer_Delete.as_view(), name="main_customer-delete"),
 
+    path('sendCPI/<int:pk>', views.send_CPI, name="send_CPI"),
 
 #Customer Paths
 
