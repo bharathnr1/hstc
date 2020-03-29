@@ -13,12 +13,14 @@
     <h2>edit this <a href="{% url 'customer:main_customer-edit' object.pk %}">Edit me</a> </h2>
     <h2>Delete This: <a href="{% url 'customer:main_customer-delete' object.pk %}">Delete me</a> </h2>
     <h2>Add Vendor: <a href="{% url 'customer:customer-create' object.pk %}">Add me</a> </h2>
+<!-- Excel Upload button should come here -->
+
 
     <h1>Vendor List! </h1>
     <!-- Only Company Names on List Pages -->
         {% for each in vendor_list %}
                 <h2>One way is we redirect to another page. </h2>
-                <li> <a href="{% url 'customer:customer-detail' each.id %}"> Company: {{ each.company_name }}</a></li>
+                <li> <a href="{% url 'customer:customer-detail' each.id %}"> Vendor Company: {{ each.company_name }}</a></li>
                 <h2>Or we can have all in as below</h2>
                 <p>{{ each.customer_name }}</p>
                 <p>{{ each.customer_contact }}</p>

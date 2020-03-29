@@ -4,17 +4,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HSTC</title>
+
+    <!-- JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static '/css/main_customer_list.css' %}"> 
+
 </head>
     <body>
-        <h1>Main Customer List! </h1>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="nav-link" href="./main.html">HSTC <span class="sr-only">(current)</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <!-- Left Aligned -->
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Customers</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Vendors</a>
+                </li>
+              </ul>
+
+              <!-- Center Aligned -->
+              <ul class="navbar-nav ml-auto">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-4" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" style="color: white;" type="submit">Search</button>
+                </form>
+              </ul>
+
+              <!-- Right Aligned -->
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Notifications</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">User</a>
+                </li>
+              </ul>
+              
+            </div>
+        </nav>
+
+        <div class="grid">
+            <div class="item-1">
+                <div class="mb-3 card">
+                    <div class="card-header-tab card-header" id="item-1">
+                        <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+                            <i class="fa fa-bar-chart" aria-hidden="true"></i> Statistics  
+                        </div>
+                    </div>
+                    <section class="cards">
+                        <article class="card">
+                            <div class="wrapper0c">
+                                <div class="wrapper1">
+                                    <div class="wrapper11">
+                                        <div class="icon-graph" style="color: rgb(199, 28, 34);" ><i class="fa fa-rupee" aria-hidden="true"></i></div>
+                                        <div class="wrapper12">150000
+                                            <div class="sub-heading" >Total amount of <span style="color: rgb(199, 28, 34); font-weight: bolder;" > loan</span> given</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>           
+                         </article><!-- /card-one -->
+            
+                        <article class="card">
+                            <div class="wrapper0c">
+                                <div class="wrapper1">
+                                    <div class="wrapper11">
+                                        <div class="icon-graph" style="color: rgb(255, 127, 80);" ><i class="fa fa-balance-scale" aria-hidden="true"></i></div>
+                                        <div class="wrapper12">50000
+                                            <div class="sub-heading" >Total money <span style="color: rgb(255, 127, 80); font-weight: bolder;"> collected </span> so far</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>     
+                        </article><!-- /card-two -->
+            
+                        <article class="card">
+                            <div class="wrapper0c">
+                                <div class="wrapper1">
+                                    <div class="wrapper11">
+                                        <div class="icon-graph" style="color: rgb(40, 204, 40);" ><i class="fa fa-line-chart" aria-hidden="true"></i></div>
+                                        <div class="wrapper12">20000
+                                            <div class="sub-heading" > <span style="color: rgb(40, 204, 40); font-weight: bolder;"> Profit </span> earnings so far</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article><!-- /card-three -->
+                    </section>  
+                </div>
+
+            </div>
+            <div class="item-2">
+                <div class="mb-3 card">
+                    <div class="card-header-tab card-header" id="item-2">
+                        <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+                            <i class="fa fa-users" aria-hidden="true"></i> Customer List  
+                        </div>
+                    </div>
+                <div class="scrollit" id="style-1">
+                    <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+                        <thead>
+                        <tr>
+                            <th class="text-center" style="width: 3em;">SI No.</th>
+                            <th class="text-center" style="width: 3em;">Customer Name</th>
+                            <th class="text-center" style="width: 3em;">Customer Company</th>
+                            <th class="text-center" style="width: 3em;">Phone Number</th>
+                            <th class="text-center" style="width: 3em;">Email ID</th>
+                            <th class="text-center" style="width: 3em;">Stage</th>                    
+                        </tr>
+                        </thead>
+                    
+                    <tbody>
+                    {% for each in object_list %}
+                    <tr>
+                        <td class="text-center"> <a href="{% url 'customer:main_customer-detail' each.id %}">  {{ each.pk }}</a></td>
+                        <td class="text-center"> <a href="{% url 'customer:main_customer-detail' each.id %}">  {{ each.customer_name }}</a></td>
+                        <td class="text-center"> <a href="{% url 'customer:main_customer-detail' each.id %}">  {{ each.customer_company }}</a></td>
+                        <td class="text-center"> <a href="{% url 'customer:main_customer-detail' each.id %}">  {{ each.customer_contact }}</a></td>
+                        <td class="text-center"> <a href="{% url 'customer:main_customer-detail' each.id %}">  {{ each.customer_email }}</a></td>
+                        <td class="text-center"> <a href="{% url 'customer:main_customer-detail' each.id %}">  Customer Contract</a></td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td class="text-center"> <a href="#">  4</a></td>
+                        <td class="text-center"> <a href="#">  Bharath</a></td>
+                        <td class="text-center"> <a href="#">  RM</a></td>
+                        <td class="text-center"> <a href="#">  1234567890</a></td>
+                        <td class="text-center"> <a href="#">  b@gmail.com</a></td>
+                        <td class="text-center"> <a href="#">  Customer Contract</a></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"> <a href="#">  4</a></td>
+                        <td class="text-center"> <a href="#">  Bharath</a></td>
+                        <td class="text-center"> <a href="#">  RM</a></td>
+                        <td class="text-center"> <a href="#">  1234567890</a></td>
+                        <td class="text-center"> <a href="#">  b@gmail.com</a></td>
+                        <td class="text-center"> <a href="#">  Customer Contract</a></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"> <a href="#">  4</a></td>
+                        <td class="text-center"> <a href="#">  Bharath</a></td>
+                        <td class="text-center"> <a href="#">  RM</a></td>
+                        <td class="text-center"> <a href="#">  1234567890</a></td>
+                        <td class="text-center"> <a href="#">  b@gmail.com</a></td>
+                        <td class="text-center"> <a href="#">  Customer Contract</a></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"> <a href="#">  4</a></td>
+                        <td class="text-center"> <a href="#">  Bharath</a></td>
+                        <td class="text-center"> <a href="#">  RM</a></td>
+                        <td class="text-center"> <a href="#">  1234567890</a></td>
+                        <td class="text-center"> <a href="#">  b@gmail.com</a></td>
+                        <td class="text-center"> <a href="#">  Customer Contract</a></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"> <a href="#">  4</a></td>
+                        <td class="text-center"> <a href="#">  Bharath</a></td>
+                        <td class="text-center"> <a href="#">  RM</a></td>
+                        <td class="text-center"> <a href="#">  1234567890</a></td>
+                        <td class="text-center"> <a href="#">  b@gmail.com</a></td>
+                        <td class="text-center"> <a href="#">  Customer Contract</a></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"> <a href="#">  4</a></td>
+                        <td class="text-center"> <a href="#">  Bharath</a></td>
+                        <td class="text-center"> <a href="#">  RM</a></td>
+                        <td class="text-center"> <a href="#">  1234567890</a></td>
+                        <td class="text-center"> <a href="#">  b@gmail.com</a></td>
+                        <td class="text-center"> <a href="#">  Customer Contract</a></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"> <a href="#">  4</a></td>
+                        <td class="text-center"> <a href="#">  Bharath</a></td>
+                        <td class="text-center"> <a href="#">  RM</a></td>
+                        <td class="text-center"> <a href="#">  1234567890</a></td>
+                        <td class="text-center"> <a href="#">  b@gmail.com</a></td>
+                        <td class="text-center"> <a href="#">  Customer Contract</a></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"> <a href="#">  4</a></td>
+                        <td class="text-center"> <a href="#">  Bharath</a></td>
+                        <td class="text-center"> <a href="#">  RM</a></td>
+                        <td class="text-center"> <a href="#">  1234567890</a></td>
+                        <td class="text-center"> <a href="#">  b@gmail.com</a></td>
+                        <td class="text-center"> <a href="#">  Customer Contract</a></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"> <a href="#">  4</a></td>
+                        <td class="text-center"> <a href="#">  Bharath</a></td>
+                        <td class="text-center"> <a href="#">  RM</a></td>
+                        <td class="text-center"> <a href="#">  1234567890</a></td>
+                        <td class="text-center"> <a href="#">  b@gmail.com</a></td>
+                        <td class="text-center"> <a href="#">  Customer Contract</a></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"> <a href="#">  4</a></td>
+                        <td class="text-center"> <a href="#">  Bharath</a></td>
+                        <td class="text-center"> <a href="#">  RM</a></td>
+                        <td class="text-center"> <a href="#">  1234567890</a></td>
+                        <td class="text-center"> <a href="#">  b@gmail.com</a></td>
+                        <td class="text-center"> <a href="#">  Customer Contract</a></td>
+                    </tr>
+                    </tbody>
+                    </table>
+                  </div>
+                  </div>
+            </div>
+
+            <div class="item-4">
+                <div class="mb-3 card">
+                    <div class="card-header-tab card-header" id="item-4">
+                        <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+                            <i class="fa fa-check-square-o" aria-hidden="true"></i> Upcoming Tasks
+                            <!-- Alternate Icons: fa-calendar fa-hourglass-half fa-tasks  -->
+                        </div>
+                    </div>
+                    <div class="scrollit-4" id="style-1">
+                        <ul class="mat_list card scrollable">
+                            <li><a>RM - Delivery ETA is updated and sent</a></li>
+                            <li><a>RM - Inspection is complete</a></li>
+                            <li><a>RM - Vendor sheet is uploaded</a></li>
+                            <li><a>RM - Contract signing is complete and 30% payment is done</a></li>
+                            <li><a>RM - Customer PI is edited</a></li>
+                            <li><a>RM - Vendor sheet is uploaded</a></li>
+                            <li><a>RM - Inspection is complete</a></li>
+                            <li><a>RM - Contract signing is complete and 30% payment is done</a></li>
+                            <li><a>RM - Vendor sheet is uploaded</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item-5">                
+                <div class="mb-3 card">
+                    <div class="card-header-tab card-header" id="item-5">
+                        <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+                            <i class="fa fa-bell" aria-hidden="true"></i> Notifications
+                            <!-- Alternate Icons: fa-calendar fa-hourglass-half fa-tasks  -->
+                        </div>
+                    </div>
+                    <div class="scrollit-4" id="style-1">
+                        <ul class="mat_list card scrollable">
+                            <li><a>RM - Delivery ETA is updated and sent</a></li>
+                            <li><a>RM - Inspection is complete</a></li>
+                            <li><a>RM - Vendor sheet is uploaded</a></li>
+                            <li><a>RM - Contract signing is complete and 30% payment is done</a></li>
+                            <li><a>RM - Customer PI is edited</a></li>
+                            <li><a>RM - Vendor sheet is uploaded</a></li>
+                            <li><a>RM - Inspection is complete</a></li>
+                            <li><a>RM - Contract signing is complete and 30% payment is done</a></li>
+                            <li><a>RM - Vendor sheet is uploaded</a></li>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+    
 <!-- Only Company Names on List Pages -->
-        {% for each in object_list %}
+        <!-- {% for each in object_list %}
         {{each.pk}}
             <li>Customer:  <a href="{% url 'customer:main_customer-detail' each.id %}">  {{ each.customer_name }}</a></li>
             {% empty %}
             <li>No articles yet.</li>
-        {% endfor %}
+        {% endfor %} -->
 
     </body>
 </html>
