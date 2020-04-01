@@ -1,0 +1,188 @@
+{% load static %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css"/>
+   
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Document</title>
+    
+    <script>
+        $(document).ready(function(){
+          $(".startdate").datepicker();
+        });
+      </script>
+  
+</head>
+<body>
+
+    {% if shipment %}
+    <h1>ONE Shipment</h1>
+    <section class="sec-4" style="">
+        <!-- Button trigger modal -->
+                <button type="button" class="btn btn-success xoxo" data-toggle="modal" data-target="#exampleModal">
+                    Update Dilivery Date
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Debit Amount</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                          <form  method="post">
+                            {{id}}
+                            {% csrf_token %}
+                            {% bootstrap_form partShipmentForm %}
+                            <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                  <button class="btn btn-success" style=" display:block; margin:0px auto; padding:1% 30%;" type="submit" name="button">Submit</button>
+                            </div>
+                          </form>   
+                        </div>
+                        <!-- <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-success">Submit</button>
+                         -->
+                    </div>
+                    </div>
+                </div>         
+              </section>
+              <!-- follow me template -->
+              
+            <script>
+                $('#exampleModal').on('shown.bs.modal', function () {
+                $('#myInput').trigger('focus')
+                })
+            </script>
+        <table>
+            <thead>
+                <th>s_no</th>
+                <th>list_no</th>
+                <th>sub_list_no</th>
+                <th>company_name</th>
+                <th>model</th>
+                <th>photo</th>
+                <th>dimensions</th>
+                <th>manufacturing_days</th>
+                <th>shipment_number</th>
+                <th>tentative_dilivery_date</th>
+                <th>planned_inspection_date</th>
+            </thead>
+            <tbody>
+                
+                {% for i in vendor_queryset %}
+                <tr>
+                <td>{{i.s_no }} </td>
+                <td>{{i.list_no }} </td>
+                <td>{{i.sub_list_no }} </td>
+                <td>{{i.company_name }} </td>
+                <td>{{i.model }} </td>
+                <td> <img src="{{ i.photo.url }}" height="200px" width="200px" class="src"></td>
+                <td>{{i.dimensions }} </td>
+                <td>{{i.manufacturing_days }} </td>
+                <td>{{i.shipment_number }} </td>
+                <td>{{i.tentative_dilivery_date }} </td>
+                <td>{{i.planned_inspection_date }} pk= {{i.pk}} id={{id}}</td>
+        </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h3>Part Shipment</h3>
+        <table>
+            <thead>
+                <th>s_no</th>
+                <th>list_no</th>
+                <th>sub_list_no</th>
+                <th>company_name</th>
+                <th>model</th>
+                <th>photo</th>
+                <th>dimensions</th>
+                <th>manufacturing_days</th>
+                <th>shipment_number</th>
+                <th>tentative_dilivery_date</th>
+                <th>planned_inspection_date</th>
+                <th>UPDATE</th>
+            </thead>
+            <tbody>
+                
+                {% for i in vendor_queryset %}
+                <tr>
+                <td>{{i.s_no }} </td>
+                <td>{{i.list_no }} </td>
+                <td>{{i.sub_list_no }} </td>
+                <td>{{i.company_name }} </td>
+                <td>{{i.model }} </td>
+                <td> <img src="{{ i.photo.url }}" height="200px" width="200px" class="src"></td>
+                <td>{{i.dimensions }} </td>
+                <td>{{i.manufacturing_days }} </td>
+                <td>{{i.shipment_number }} </td>
+                <td>{{i.tentative_dilivery_date }} </td>
+                <td>{{i.planned_inspection_date }} pk= {{i.pk}} id={{id}}</td>
+                <td>
+                    <button type="button" class="btn btn-success xoxo" data-toggle="modal" data-target="#exampleModal{{i.pk}}" >
+                        Update
+                    </butaton>
+                </td>
+            
+            <div class="modal fade" id="exampleModal{{i.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Debit Amount</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    <form  method="post" action="{% url 'customer:updatedates' i.pk id %}">
+                        {{i.pk }} {{id}}
+                        {% csrf_token %}
+                        {% bootstrap_form partShipmentForm %}
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button class="btn btn-success" style=" display:block; margin:0px auto; padding:1% 30%;" type="submit" name="button">Submit</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+            </div> 
+        </tr>
+        <script>
+            $('#exampleModal{{i.pk}}').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+            })
+        </script>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    Update Shipment number and dilivery dates!        
+
+    <script>
+        // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+        $(window).on("load resize ", function() {
+        var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+        $('.tbl-header').css({'padding-right':scrollWidth});
+        }).resize();
+    </script>
+</body>
+</html>

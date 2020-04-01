@@ -2,11 +2,18 @@ from django.db import models
 
 # Create your models here.
 
+ENTRY_CHOICES = (
+    ('One Shipment','One Shipment'),
+    ('Part Shipments','Part Shipments'),
+)
+
+
 class Customer(models.Model):
     customer_name = models.CharField(max_length=30)
     customer_contact = models.IntegerField()
     customer_email = models.EmailField()
     customer_company = models.CharField(max_length=100)
+    shipment_type = models.CharField(max_length=50, choices=ENTRY_CHOICES, blank=True)
 
     def __str__(self):
         return self.customer_name
@@ -58,6 +65,10 @@ class Customer_Details(models.Model):
     gross_weight_kgs =models.IntegerField()
     net_weight_kgs =models.IntegerField()
 
+    shipment_number = models.IntegerField()
+    tentative_dilivery_date = models.DateField()
+    planned_inspection_date = models.DateField()
+ 
     def __str__(self):
         return "Vendor: " + self.company_name
     
@@ -70,7 +81,7 @@ class Inspection(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     vendor_company_name = models.ForeignKey(Customer_Details, on_delete=models.CASCADE)
     "INSPECTION DETAILS"
-    planned_inspection_date = models.DateField()
+   
     actual_inspection_date = models.DateField()
     inspection_done_by  = models.CharField(max_length=300)
     inspection_remarks = models.CharField(max_length=300)
