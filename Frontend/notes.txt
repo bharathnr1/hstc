@@ -1,0 +1,2 @@
+1. Once front end is integrated with back end, progress bar needs to be changed.
+A boolean value for 'stage complete' will be asked for from the admin and based on that we will trigger the progress bar width.
