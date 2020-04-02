@@ -16,46 +16,35 @@
 <!-- Excel Upload button should come here -->
 
 
+    <hr>
     <h1>Vendor List! </h1>
     <!-- Only Company Names on List Pages -->
-        {% for each in vendor_list %}
-                <h2>One way is we redirect to another page. </h2>
-                <li> <a href="{% url 'customer:customer-detail' each.id %}"> Vendor Company: {{ each.company_name }}</a></li>
-                <h2>Or we can have all in as below</h2>
-                <p>{{ each.customer_name }}</p>
-                <p>{{ each.customer_contact }}</p>
-                <p>{{ each.pk }}</p>
-                <p>edit this <a href="{% url 'customer:customer-edit' each.pk %}">Edit me</a> </p>
-                <p>Delete This: <a href="{% url 'customer:customer-delete' each.pk %}">Delete me</a> </p>
-                            {% empty %}
-                <li>No articles yet.</li>
-         {% endfor %}
-    
-    <h2>Customer PI View: </h2>
-    {% for CP in vendor_list %}
-        <p>{{CP.s_no }} </p>
-        <p>{{CP.list_no }} </p>
-        <p>{{CP.sub_list_no }} </p>
-        <p>{{CP.description}} </p>
-        <p>{{CP.model }} </p>
-        <p>{{CP.photo }} </p>
-        <p>{{CP.dimensions }} </p>
-        <p>{{CP.remarks }} </p>
-        <p>{{CP.unit }} </p>
-        <p>{{CP.unit_price }} </p>
-        <p>{{CP.qty}} </p>
-        <p>{{CP.customer_amount }} </p>
-        <p>{{CP.customer_amount_after_discount }} </p>
-        <p>{{CP.token_deposit_customer }} </p>
-        <p>{{CP.token_deposit_HSTC }} </p>
-        <p>{{CP.token_deposit_date}}  </p>
-        <p>{{CP.CBM_m3}}  </p>
-        <p>{{CP.ctns}} </p>
-        <p>{{CP.gross_weight_kgs}} </p>
-        <p>{{CP.net_weight_kgs}} </p>
-        <img src="{{ CP.photo.url }}" alt="" style="width: 200px; height: 200px;">
-    {% endfor %}
+    {% for each in vendor_list %}
+        <table style="border: solid 1px;">
+            <thead  style="border: solid 1px;">
+                <th style="border: solid 1px">Vendor Name</th>
+                <th style="border: solid 1px">Vendor Contact</th>
+                <th style="border: solid 1px">vedor pk</th>
+                <th style="border: solid 1px">Edit</th>
+                <th style="border: solid 1px">Delete</th>
+            </thead>
+            <tbody style="border: solid 1px;">
+                <tr>
+                    <td style="border: solid 1px">{{ each.company_name }}</td>
+                    <td style="border: solid 1px">{{ each.contact_no }}</td>
+                    <td style="border: solid 1px">{{ each.pk }}</td>
+                    <td style="border: solid 1px">edit this <a href="{% url 'customer:customer-edit' each.pk %}">Edit me</a> </td>
+                    <td style="border: solid 1px">Delete This: <a href="{% url 'customer:customer-delete' each.pk %}">Delete me</a> </td>
+                </tr>            
+            </tbody>
+        </table>
+    {% empty %}
+        <li>No articles yet.</li>    
+         <hr>
+         <a href="{% url 'customer:customer_pi_list' object.pk %}"><h2>Customer PI View: </h2> </a>
+         <hr>
 <P></P>
-    <a href="{% url 'customer:send_CPI' object.pk %}">Send Email</a>
+    <hr>
+    <a href="{% url 'customer:shipment_type' object.pk %}">Dilivery Dates</a>
 </body>
 </html>

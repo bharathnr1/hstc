@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Customer PI View: </h2> 
+    <table style="border: solid 1px;">
+        <thead  style="border: solid 1px;">
+            <th style="border: solid 1px">list_no</th>
+            <th style="border: solid 1px">sub_list_no</th>
+            <th style="border: solid 1px">description</th>
+            <th style="border: solid 1px">model</th>
+            <th style="border: solid 1px">photo</th>
+            <th style="border: solid 1px">dimensions</th>
+            <th style="border: solid 1px">remarks</th>
+            <th style="border: solid 1px">unit</th>
+            <th style="border: solid 1px">unit_price</th>
+            <th style="border: solid 1px">qty</th>
+            <th style="border: solid 1px">customer_amount</th>
+            <th style="border: solid 1px">customer_amount_after_discount</th>
+            <th style="border: solid 1px">token_deposit_customer</th>
+            <th style="border: solid 1px">token_deposit_HSTC</th>
+            <th style="border: solid 1px">token_deposit_date</th>
+            <th style="border: solid 1px">CBM_m3</th>
+            <th style="border: solid 1px">ctns</th>
+            <th style="border: solid 1px">gross_weight_kgs</th>
+            <th style="border: solid 1px">net_weight_kgs</th>
+            <th style="border: solid 1px">Image</th>
+            <th style="border: solid 1px">Update</th>
+            <th style="border: solid 1px">Delete</th>
+        </thead>
+        <tbody style="border: solid 1px;">
+            {% for CP in vendor_object %}
+            <tr>
+                <td style="border: solid 1px">{{CP.s_no }} </td>
+                <td style="border: solid 1px">{{CP.list_no }} </td>
+                <td style="border: solid 1px">{{CP.sub_list_no }} </td>
+                <td style="border: solid 1px">{{CP.description}} </td>
+                <td style="border: solid 1px">{{CP.model }} </td>
+                <td style="border: solid 1px">{{CP.photo }} </td>
+                <td style="border: solid 1px">{{CP.dimensions }} </td>
+                <td style="border: solid 1px">{{CP.remarks }} </td>
+                <td style="border: solid 1px">{{CP.unit }} </td>
+                <td style="border: solid 1px">{{CP.unit_price }} </td>
+                <td style="border: solid 1px">{{CP.qty}} </td>
+                <td style="border: solid 1px">{{CP.customer_amount }} </td>
+                <td style="border: solid 1px">{{CP.customer_amount_after_discount }} </td>
+                <td style="border: solid 1px">{{CP.token_deposit_customer }} </td>
+                <td style="border: solid 1px">{{CP.token_deposit_HSTC }} </td>
+                <td style="border: solid 1px">{{CP.token_deposit_date}}  </td>
+                <td style="border: solid 1px">{{CP.CBM_m3}}  </td>
+                <td style="border: solid 1px">{{CP.ctns}} </td>
+                <td style="border: solid 1px">{{CP.gross_weight_kgs}} </td>
+                <td style="border: solid 1px">{{CP.net_weight_kgs}} </td>
+                <td style="border: solid 1px"><img src="{{ CP.photo.url }}" alt="" style="width: 200px; height: 200px;"></td>
+                <td style="border: solid 1px"><a href="{% url 'customer:CustomerPI_Update' CP.pk %}">Update This Filed in Customer PI</a></td>
+                <td style="border: solid 1px"><a href="{% url 'customer:customer-delete' CP.pk %}">Delete this Field</a></td>
+            </tr>
+            {% endfor %}       
+         </tbody>
+    </table>
+
+    <a href="{% url 'customer:send_CPI' customer_object.pk %}">Send Email to Customer With PI</a>
+
+</body>
+</html>
