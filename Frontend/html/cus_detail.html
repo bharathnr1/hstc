@@ -5,14 +5,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Customer PI</title>
     
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <link rel="stylesheet" href="../css/cus_detail.css"> 
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/cus_detail.css"> 
     
     </head>
+<!-- Pending in this section
+1. Button to Upload vendor excel sheet
+2. Download table as excel file - needs to be done from the backend
+3. Email template to send contract -->
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="nav-link" href="./main.html">HSTC <span class="sr-only">(current)</span></a>
@@ -36,101 +42,390 @@
           </ul>
         </div>
     </nav>
+
 <br>
-    <div class="progress">
-      <div class="progress-bar"></div>
+
+<nav class="navbar navbar-light">
+  <div class="progress">
+    <div class="progress-bar"></div>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-light progressbar">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item">
+        <a href=""><button class="box7">Cust PI</button></a>
+      </li>
+      <li class="nav-item">
+        <a href=""><button class="spike1"></button></a>
+      </li>
+      <li class="nav-item">
+        <a href=""><button class="box2">Summary</button></a>
+      </li>
+      <li class="nav-item">
+        <button class="spike2"></button>
+      </li>
+      <li class="nav-item">
+        <button class="box3">Inspection</button>
+      </li>
+      <li class="nav-item">
+        <button class="spike3"></button>
+      </li>
+      <li class="nav-item">
+        <button class="box4">Shipment</button>
+      </li>
+      <li class="nav-item">
+        <button class="spike4"></button>
+      </li>
+      <li class="nav-item">
+        <button class="box5">Container</button>
+      </li>
+      <li class="nav-item">
+        <button class="spike5"></button>
+      </li>
+      <li class="nav-item">
+        <button class="box6">Delivery</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Table -->
+<div class="mb-3 card">
+  <div class="card-header-tab card-header">
+      <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+          <i class="fa fa-user" aria-hidden="true"></i> Customer PI  
+      </div>
+  </div>
+<div class="scrollit" id="style-1">
+  <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+    <thead>
+    <tr>
+      <th class="text-center" style="width: 3em;">SI No</th>
+      <th class="text-center" style="width: 3em;">L No</th>
+      <th class="text-center" style="width: 3em;">SL No</th>
+      <th class="text-center" style="width: 3em;">Description</th>
+      <th class="text-center" style="width: 3em;">Model</th>
+      <th class="text-center" style="width: 3em;">Photo</th>
+      <th class="text-center" style="width: 3em;">Dimensions</th>
+      <th class="text-center" style="width: 2em;">Remarks</th>
+      <th class="text-center" style="width: 3em;">Unit</th>
+      <th class="text-center" style="width: 3em;">Unit Price</th>
+      <th class="text-center" style="width: 3em;">Qty</th>
+      <th class="text-center" style="width: 3em;">Cu Amt</th>
+      <th class="text-center" style="width: 3em;">Discounted Amt</th>
+      <th class="text-center" style="width: 3em;">Token(HSTC)</th>
+      <th class="text-center" style="width: 3em;">Token(Cu)</th>
+      <th class="text-center" style="width: 3em;">Token Date</th>
+      <th class="text-center" style="width: 3em;">CBM</th>
+      <th class="text-center" style="width: 3em;">Ctns</th>
+      <th class="text-center" style="width: 3em;">Gross Wt</th>
+      <th class="text-center" style="width: 3em;">Net Wt</th>
+    </tr>
+    </thead>
+
+    <tbody>				
+
+      <tr>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">Bed</td>
+        <td class="text-center" style="width: 3em;">Teak Wood</td>
+        <!-- <td><img src="../images/a.JPG" alt="A picture" width="150px" height="150px"></td> -->
+        <td class="text-center" style="width: 3em;">70x70</td>
+        <td class="text-center" style="width: 2em;">Brown</td>
+        <td class="text-center" style="width: 3em;">pcs</td>
+        <td class="text-center" style="width: 3em;">8000</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">8000</td>
+        <td class="text-center" style="width: 3em;">7800</td>
+        <td class="text-center" style="width: 3em;">200</td>
+        <td class="text-center" style="width: 3em;">100</td>
+        <td class="text-center" style="width: 3em;">31/03/2020</td>
+        <td class="text-center" style="width: 3em;">20</td>
+        <td class="text-center" style="width: 3em;">5</td>
+        <td class="text-center" style="width: 3em;">300</td>
+        <td class="text-center" style="width: 3em;">330</td>
+      </tr>
+
+      <tr>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">Bed</td>
+        <td class="text-center" style="width: 3em;">Teak Wood</td>
+        <!-- <td><img src="../images/a.JPG" alt="A picture" width="150px" height="150px"></td> -->
+        <td class="text-center" style="width: 3em;">70x70</td>
+        <td class="text-center" style="width: 2em;">Brown</td>
+        <td class="text-center" style="width: 3em;">pcs</td>
+        <td class="text-center" style="width: 3em;">8000</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">8000</td>
+        <td class="text-center" style="width: 3em;">7800</td>
+        <td class="text-center" style="width: 3em;">200</td>
+        <td class="text-center" style="width: 3em;">100</td>
+        <td class="text-center" style="width: 3em;">31/03/2020</td>
+        <td class="text-center" style="width: 3em;">20</td>
+        <td class="text-center" style="width: 3em;">5</td>
+        <td class="text-center" style="width: 3em;">300</td>
+        <td class="text-center" style="width: 3em;">330</td>
+      </tr>
+
+      <tr>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">Bed</td>
+        <td class="text-center" style="width: 3em;">Teak Wood</td>
+        <!-- <td><img src="../images/a.JPG" alt="A picture" width="150px" height="150px"></td> -->
+        <td class="text-center" style="width: 3em;">70x70</td>
+        <td class="text-center" style="width: 2em;">Brown</td>
+        <td class="text-center" style="width: 3em;">pcs</td>
+        <td class="text-center" style="width: 3em;">8000</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">8000</td>
+        <td class="text-center" style="width: 3em;">7800</td>
+        <td class="text-center" style="width: 3em;">200</td>
+        <td class="text-center" style="width: 3em;">100</td>
+        <td class="text-center" style="width: 3em;">31/03/2020</td>
+        <td class="text-center" style="width: 3em;">20</td>
+        <td class="text-center" style="width: 3em;">5</td>
+        <td class="text-center" style="width: 3em;">300</td>
+        <td class="text-center" style="width: 3em;">330</td>
+      </tr>
+
+      <tr>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">Bed</td>
+        <td class="text-center" style="width: 3em;">Teak Wood</td>
+        <!-- <td><img src="../images/a.JPG" alt="A picture" width="150px" height="150px"></td> -->
+        <td class="text-center" style="width: 3em;">70x70</td>
+        <td class="text-center" style="width: 2em;">Brown</td>
+        <td class="text-center" style="width: 3em;">pcs</td>
+        <td class="text-center" style="width: 3em;">8000</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">8000</td>
+        <td class="text-center" style="width: 3em;">7800</td>
+        <td class="text-center" style="width: 3em;">200</td>
+        <td class="text-center" style="width: 3em;">100</td>
+        <td class="text-center" style="width: 3em;">31/03/2020</td>
+        <td class="text-center" style="width: 3em;">20</td>
+        <td class="text-center" style="width: 3em;">5</td>
+        <td class="text-center" style="width: 3em;">300</td>
+        <td class="text-center" style="width: 3em;">330</td>
+      </tr>
+
+      <tr>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">Bed</td>
+        <td class="text-center" style="width: 3em;">Teak Wood</td>
+        <td><img src="../images/a.JPG" alt="A picture" width="150px" height="150px"></td>
+        <td class="text-center" style="width: 3em;">70x70</td>
+        <td class="text-center" style="width: 2em;">Brown</td>
+        <td class="text-center" style="width: 3em;">pcs</td>
+        <td class="text-center" style="width: 3em;">8000</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">8000</td>
+        <td class="text-center" style="width: 3em;">7800</td>
+        <td class="text-center" style="width: 3em;">200</td>
+        <td class="text-center" style="width: 3em;">100</td>
+        <td class="text-center" style="width: 3em;">31/03/2020</td>
+        <td class="text-center" style="width: 3em;">20</td>
+        <td class="text-center" style="width: 3em;">5</td>
+        <td class="text-center" style="width: 3em;">300</td>
+        <td class="text-center" style="width: 3em;">330</td>
+      </tr>
+
+      <tr>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">Bed</td>
+        <td class="text-center" style="width: 3em;">Teak Wood</td>
+        <td><img src="../images/a.JPG" alt="A picture" width="150px" height="150px"></td>
+        <td class="text-center" style="width: 3em;">70x70</td>
+        <td class="text-center" style="width: 2em;">Brown</td>
+        <td class="text-center" style="width: 3em;">pcs</td>
+        <td class="text-center" style="width: 3em;">8000</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">8000</td>
+        <td class="text-center" style="width: 3em;">7800</td>
+        <td class="text-center" style="width: 3em;">200</td>
+        <td class="text-center" style="width: 3em;">100</td>
+        <td class="text-center" style="width: 3em;">31/03/2020</td>
+        <td class="text-center" style="width: 3em;">20</td>
+        <td class="text-center" style="width: 3em;">5</td>
+        <td class="text-center" style="width: 3em;">300</td>
+        <td class="text-center" style="width: 3em;">330</td>
+      </tr>
+
+      <tr>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">Bed</td>
+        <td class="text-center" style="width: 3em;">Teak Wood</td>
+        <td><img src="../images/a.JPG" alt="A picture" width="150px" height="150px"></td>
+        <td class="text-center" style="width: 3em;">70x70</td>
+        <td class="text-center" style="width: 2em;">Brown</td>
+        <td class="text-center" style="width: 3em;">pcs</td>
+        <td class="text-center" style="width: 3em;">8000</td>
+        <td class="text-center" style="width: 3em;">1</td>
+        <td class="text-center" style="width: 3em;">8000</td>
+        <td class="text-center" style="width: 3em;">7800</td>
+        <td class="text-center" style="width: 3em;">200</td>
+        <td class="text-center" style="width: 3em;">100</td>
+        <td class="text-center" style="width: 3em;">31/03/2020</td>
+        <td class="text-center" style="width: 3em;">20</td>
+        <td class="text-center" style="width: 3em;">5</td>
+        <td class="text-center" style="width: 3em;">300</td>
+        <td class="text-center" style="width: 3em;">330</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<!-- Navbar for Emails -->
+  <nav class="navbar navbar-expand-lg navbar-light emailnav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'customer:main_customer-create' %}"><button class="btn emailpi">Email with Pro forma invoice</button></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'customer:main_customer-create' %}"><button class="btn emailcon">Email with contract</button></a>
+        </li>
+      </ul>
+  </nav>  
+
+    <div class="container ptos">
+      <h4 style="text-align: center; width: 100%;">Did the customer return with the signed contract and advance payment? <br/> If yes, click the below button to proceed further.</h4>
+      <button class="btn stg-c-n"> <span><i class="fa fa-check" aria-hidden="true"></i></span> Mark Stage as complete</button>
+      <button class="btn stg-c-y"> <span><i class="fa fa-check" aria-hidden="true"></i></span> Stage Completed</button>
+      <a href="./order_summary.html"><button class="btn order-summary">Go to Order Summary  <span><i class="fa fa-forward" aria-hidden="true"></i></span></button></a>
+      <p>Click on the above button to undo the change</p>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active btn btn-success">
-            <a class="nav-link" href="./cus_detail.html"><button id="nav-button"> Customer PI &nbsp &nbsp</button></a>
-          </li>
-          <li class="nav-item btn btn-success">
-            <a class="nav-link" href="./order_summary.html"><button id="nav-button">Order Summary &nbsp &nbsp</button></a>
-          </li>
-          <li class="nav-item btn btn-success">
-            <a class="nav-link" href="./inspection.html"><button id="nav-button">Inspection Page &nbsp &nbsp</button></a>
-          </li>
-          <li class="nav-item btn btn-success">
-            <a class="nav-link" href="./shipment_marks.html"><button id="nav-button">Shipment Marks &nbsp &nbsp</button></a>
-          </li>
-          <li class="nav-item btn btn-success">
-            <a class="nav-link" href="./container_pics.html"><button id="nav-button">Container Loading Pics &nbsp &nbsp</button></a>
-          </li>
-          <li class="nav-item btn btn-success">
-            <a class="nav-link" href="./doorstep_grievance.html"><button id="nav-button">Delivery and Grievance &nbsp &nbsp</button></a>
-          </li>
-        </ul>
-      </div>
-  </nav>
-<br>
-    <div class="container item_list">
-        <table>
-            <tr>
-                <th>Serial No.</th>
-                <th>Photos</th>
-                <th>Description</th>
-                <th>Model</th>
-                <th>Color</th>
-                <th>Remarks</th>
-                <th>Quantity</th>
-                <th>Unit Price</th>
-                <th>Total Amount</th>
-                <th>Amount</th>
-                <th>Token Depost (HSTC)</th>
-                <th>Token Depost (Customer)</th>
-                <th>Advance Deposit %</th>
-                <th>Advance Amount</th>
-                <th>Advance Balance</th>
-                <th>Advance Balance Paid %</th>
-                <th>Final Balance</th>
-                <th>Final Balance Date</th>
-                <th>CBM (m3)</th>
-                <th>Cartons</th>
-                <th>Gross Weight</th>
-                <th>Net Weight</th>
-            </tr>
-            <tr>
-                <td><button class="btn btn-success">Edit</button></td>
-                <td><img src="../images/a.JPG" alt="A picture" width="150px" height="150px"></td>
-                <td>Bed</td>
-                <td>Teak Wood</td>
-                <td>SAS</td>
-                <td>Full Leather</td>
-                <td>1</td>
-                <td>18300</td>
-                <td>18300</td>
-                <td>7800</td>
-                <td>200</td>
-                <td>100</td>
-                <td>30</td>
-                <td>2340</td>
-                <td>2040</td>
-                <td>2000</td>
-                <td>5500</td>
-                <td>20/03/2020</td>
-                <td>100</td>
-                <td>4</td>
-                <td>2.2</td>
-                <td>2.5</td>
-            </tr>
-        </table>
-        <br><br>
-      <div class="container cus_email_links">
-        <button class="btn btn-success">Email with Pro forma invoice </button>
-        <button class="btn btn-success">Email with contract</button>
-      </div>
-    </div> 
-     <!-- End of Item list container -->
 
-    <button>Upload vendor excel sheet</button>
-    
 
-    <br><br><br>
-    <h3 style="text-align: center; width: 100%;">Did the customer return with the signed contract and advance payment? If yes, click the below button to proceed further.</h3>
-    <br><br><br>
-    <a href="./order_summary.html"><button class="btn btn-success" style="margin-left: 43%; font-size: 20px;">Go to Order Summary</button></a>
-    <br><br><br>
+    <script>
+      jQuery(document).ready(function(){
+      // Box7
+      jQuery('.box7').mouseover(function(){
+          jQuery('.box7').css('background-color',' #fff');
+          jQuery('.box7').css('color',' #63b0f2');
+          jQuery('.box7').css('font-size',' 22px');
+          jQuery('.spike1').css('border-left-color', '#fff');
+      });
+      jQuery('.box7').mouseout(function(){
+          jQuery('.box7').css('background-color',' #63b0f2');
+          jQuery('.box7').css('color',' #fff');
+          jQuery('.box7').css('font-size',' 20px');
+          jQuery('.spike1').css('border-left-color', '#63b0f2');
+      });
+  
+      // Box2
+      jQuery('.box2').mouseover(function(){
+          jQuery('.box2').css('background-color',' #fff');
+          jQuery('.box2').css('color',' #63b0f2');
+          jQuery('.box2').css('font-size',' 22px');
+          jQuery('.spike1').css('border-right-color', '#fff');
+          jQuery('.spike2').css('border-left-color', '#fff');
+      });
+      jQuery('.box2').mouseout(function(){
+          jQuery('.box2').css('background-color',' #63b0f2');
+          jQuery('.box2').css('color',' #fff');
+          jQuery('.box2').css('font-size',' 20px');
+          jQuery('.spike1').css('border-right-color', '#63b0f2');
+          jQuery('.spike2').css('border-left-color', '#63b0f2');
+      });
+  
+      // Box3
+      jQuery('.box3').mouseover(function(){
+            jQuery('.box3').css('background-color',' #fff');
+            jQuery('.box3').css('color',' #63b0f2');
+            jQuery('.box3').css('font-size',' 22px');
+            jQuery('.spike2').css('border-right-color', '#fff');
+            jQuery('.spike3').css('border-left-color', '#fff');
+        });
+        jQuery('.box3').mouseout(function(){
+            jQuery('.box3').css('background-color',' #63b0f2');
+            jQuery('.box3').css('color',' #fff');
+            jQuery('.box3').css('font-size',' 20px');
+            jQuery('.spike2').css('border-right-color', '#63b0f2');
+            jQuery('.spike3').css('border-left-color', '#63b0f2');
+        });
+
+       // Box4
+       jQuery('.box4').mouseover(function(){
+            jQuery('.box4').css('background-color',' #fff');
+            jQuery('.box4').css('color',' #63b0f2');
+            jQuery('.box4').css('font-size',' 22px');
+            jQuery('.spike3').css('border-right-color', '#fff');
+            jQuery('.spike4').css('border-left-color', '#fff');
+        });
+        jQuery('.box4').mouseout(function(){
+            jQuery('.box4').css('background-color',' #63b0f2');
+            jQuery('.box4').css('color',' #fff');
+            jQuery('.box4').css('font-size',' 20px');
+            jQuery('.spike3').css('border-right-color', '#63b0f2');
+            jQuery('.spike4').css('border-left-color', '#63b0f2');
+        }); 
+        
+         // Box5
+         jQuery('.box5').mouseover(function(){
+            jQuery('.box5').css('background-color',' #fff');
+            jQuery('.box5').css('color',' #63b0f2');
+            jQuery('.box5').css('font-size',' 22px');
+            jQuery('.spike4').css('border-right-color', '#fff');
+            jQuery('.spike5').css('border-left-color', '#fff');
+        });
+        jQuery('.box5').mouseout(function(){
+            jQuery('.box5').css('background-color',' #63b0f2');
+            jQuery('.box5').css('color',' #fff');
+            jQuery('.box5').css('font-size',' 20px');
+            jQuery('.spike4').css('border-right-color', '#63b0f2');
+            jQuery('.spike5').css('border-left-color', '#63b0f2');
+        }); 
+
+        // Box6
+        jQuery('.box6').mouseover(function(){
+            jQuery('.box6').css('background-color',' #fff');
+            jQuery('.box6').css('color',' #63b0f2');
+            jQuery('.box6').css('font-size',' 22px');
+            jQuery('.spike5').css('border-right-color', '#fff');
+        });
+        jQuery('.box6').mouseout(function(){
+            jQuery('.box6').css('background-color',' #63b0f2');
+            jQuery('.box6').css('color',' #fff');
+            jQuery('.box6').css('font-size',' 20px');
+            jQuery('.spike5').css('border-right-color', '#63b0f2');
+        });    
+
+        $('.stg-c-n').click(function(){
+          if($(this).hasClass("stg-c-n"))
+              $(".stg-c-n").css('display', 'none');
+              $(".stg-c-y").css('display', 'inline');
+              // $(".stg-c-n").removeClass("stg-c-n").addClass("stg-c-y");
+        });
+
+        $('.stg-c-y').click(function(){
+          if($(this).hasClass("stg-c-y"))
+              $(".stg-c-y").css('display', 'none');
+              $(".stg-c-n").css('display', 'inline');
+              // $(".stg-c-n").removeClass("stg-c-n").addClass("stg-c-y");
+        });
+
+  });
+  </script>
 </body>
 </html>

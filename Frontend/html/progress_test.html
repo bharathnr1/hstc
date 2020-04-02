@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Bar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="../css/progress_bar.css"> 
+
+</head>
+<body>
+<br><br>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item">
+        <a href=""><button class="box7">Customer PI</button></a>
+      </li>
+      <li class="nav-item">
+        <a href=""><button class="spike1"></button></a>
+      </li>
+      <li class="nav-item">
+        <a href=""><button class="box2">Summary</button></a>
+      </li>
+      <li class="nav-item">
+        <button class="spike2"></button>
+      </li>
+      <li class="nav-item">
+        <button class="box3">Inspection</button>
+      </li>
+      <li class="nav-item">
+        <button class="spike3"></button>
+      </li>
+      <li class="nav-item">
+        <button class="box4">Shipment</button>
+      </li>
+      <li class="nav-item">
+        <button class="spike4"></button>
+      </li>
+      <li class="nav-item">
+        <button class="box5">Container</button>
+      </li>
+      <li class="nav-item">
+        <button class="spike5"></button>
+      </li>
+      <li class="nav-item">
+        <button class="box6">Delivery</button>
+      </li>
+      <!-- <li class="nav-item">
+        <button class="spike6"></button>
+      </li> -->
+
+    </ul>
+  </div>
+</nav>
+<br><br>
+<script>
+    $(document).ready(function(){
+    
+    // $('.box7').mouseover(function(){
+    // $('.box3').css('background-color',' #fff');
+    // $('.spike3').css('border-left-color', '#fff');
+    // $('.spike2').css('background-color', '#fff');
+    // });
+    // $('.box3').mouseout(function(){
+    //     $('.box3').css('background-color',' #7352a4');
+    //     $('.spike3').css('border-left-color', '#7352a4');
+    //     $('.spike2').css('background-color', 'rgba(45, 12, 94, 0.8)');
+    // });
+
+    // Box2
+    $('.box2').mouseover(function(){
+        $('.box2').css('background-color',' #fff');
+        $('.spike2').css('border-left-color', '#fff');
+        $('.spike1').css('background-color', '#fff');
+        $('.spike1').css('background', 'linear-gradient(90deg, #fff, #fff)');
+        $('.box2').css('color', '#7352a4');
+    });
+    $('.box2').mouseout(function(){
+        $('.box2').css('background-color',' #7352a4');
+        $('.spike2').css('border-left-color', '#7352a4');
+        $('.spike1').css('background-color', 'rgba(45, 12, 94, 0.8)');
+        $('.spike1').css('background', 'linear-gradient(90deg, rgba(45,12,94,1) 18%, rgba(115,82,164,1) 100%)');
+        $('.box2').css('color', '#fff');
+    });
+
+    // Box3
+    $('.box3').mouseover(function(){
+        $('.box3').css('background-color',' #fff');
+        $('.spike3').css('border-left-color', '#fff');
+        $('.spike2').css('background-color', '#fff');
+        $('.spike2').css('background', 'linear-gradient(90deg, #fff, #fff)');
+        $('.box3').css('color', '#7352a4');
+    });
+    $('.box3').mouseout(function(){
+        $('.box3').css('background-color',' #7352a4');
+        $('.spike3').css('border-left-color', '#7352a4');
+        $('.spike2').css('background-color', 'rgba(45, 12, 94)');
+        $('.spike2').css('background', 'linear-gradient(90deg, rgba(45,12,94,1) 18%, rgba(115,82,164,1) 100%)');
+        $('.box3').css('color', '#fff');
+    });
+
+    // Box5
+    $('.box5').mouseover(function(){
+        $('.box5').css('background-color',' #fff');
+        $('.spike5').css('border-left-color', '#fff');
+        $('.spike4').css('background-color', '#fff');
+        $('.spike4').css('background', 'linear-gradient(90deg, #fff, #fff)');
+        $('.box5').css('color', '#7352a4');
+    });
+    $('.box5').mouseout(function(){
+        $('.box5').css('background-color',' #7352a4');
+        $('.spike5').css('border-left-color', '#7352a4');
+        $('.spike4').css('background-color', 'rgba(45, 12, 94)');
+        $('.spike4').css('background', 'linear-gradient(90deg, rgba(45,12,94,1) 18%, rgba(115,82,164,1) 100%)');
+        $('.box5').css('color', '#fff');
+    });
+
+});
+</script>
+</body>
+</html>

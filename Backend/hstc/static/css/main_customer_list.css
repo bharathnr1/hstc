@@ -138,7 +138,7 @@ p,a, h1{
 }
 
 #item-2{
-    background-color: rgb(154, 205, 50, 0.88);
+    background-color: #9acd32e0;
     color: white;
     font-weight: 900;
 }
@@ -303,7 +303,7 @@ p,a, h1{
 .table thead th,
 .table th {
     font-weight: bold;
-    background-color: rgba(221, 212, 212, 0.622);
+    background-color: #fff;
     font-size: 18px;
 }
 
@@ -334,24 +334,36 @@ p,a, h1{
     border: 1px solid #e6e6f2;
 }
 
+.table tbody tr td{
+    height: 30px;
+    padding: 0 !important;
+}
 .table > tbody > tr > td >a{
     text-decoration: none;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 600;
     color: rgba(22, 18, 18, 0.753);
 }
 
-.table thead tr th{
-    /* background-color: rgba(221, 212, 212, 0.622); */
-    /* color: white; */
+.table tbody tr:nth-child(even){
+    background-color: rgb(240, 229, 229) !important;
 }
 
-.table tbody tr:nth-child(even){
-    background-color: rgb(221, 212, 212, 0.322) !important;
-    
+.table tbody tr:nth-child(odd){
+    background-color: #fff !important;  
 }
 
 .table tbody tr td a{
     text-decoration: none;
 }
 
+/* Add Customer */
+.add_cus{
+    font-weight: 600;
+    color: #F5F5F5;
+    letter-spacing: 0.3px;
+    background-color: #FBA90A;
+}
+.add_cus:hover{
+    color: black;
+}

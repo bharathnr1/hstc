@@ -56,6 +56,23 @@
             </div>
         </nav>
 
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+    
+              <!-- Right Aligned -->
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'customer:main_customer-create' %}"><button class="btn btn-warning add_cus"> Add Customer</button></a>
+                </li>
+              </ul>
+              
+            </div>
+        </nav>        
+        
         <div class="grid">
             <div class="item-1">
                 <div class="mb-3 card">
@@ -105,8 +122,8 @@
                         </article><!-- /card-three -->
                     </section>  
                 </div>
-
             </div>
+            
             <div class="item-2">
                 <div class="mb-3 card">
                     <div class="card-header-tab card-header" id="item-2">
