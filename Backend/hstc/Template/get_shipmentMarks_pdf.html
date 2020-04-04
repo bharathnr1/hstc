@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% for shpmnt in vendor_obj %}
+    <table style="border: solid black 1px;">
+        <thead style="border: solid black 1px;">
+            <th style="border: solid black 1px;">Customer</th>
+            <th style="border: solid black 1px;">Model</th>
+            <th style="border: solid black 1px;">Product Discription</th>
+            <th style="border: solid black 1px;">Product Number</th>
+            <th style="border: solid black 1px;">Image</th>
+        </thead>
+        <tbody style="border: solid black 1px;">
+            <tr style="border: solid black 1px;">
+                <td style="border: solid black 1px;">{{ shpmnt.customer.customer_name}}</td>
+                <td style="border: solid black 1px;">{{ shpmnt.model }}</td>
+                <td style="border: solid black 1px;">{{ shpmnt.description }}</td>
+                <td style="border: solid black 1px;">{{ shpmnt.customer.customer_name}} {{shpmnt.s_no}} {{shpmnt.list_no}} {{shpmnt.sub_list_no}} {{shpmnt.ctns}} </td>
+                <td style="border: solid black 1px;"> <img src="{{ shpmnt.photo.url }}"> </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    {% endfor %}
+</body>
+</html>
