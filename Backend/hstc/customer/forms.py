@@ -10,6 +10,9 @@ class main_customer_form(forms.ModelForm):
     class Meta:
         model=Customer
         fields = '__all__'
+        widgets = {
+            'customer_name': forms.TextInput(attrs={'class':'edit_cus'}), 
+            }
 
 class shipment_selection(forms.ModelForm):
     class Meta:
@@ -22,7 +25,7 @@ class dilivery_selection(forms.ModelForm):
         fields = ["shipment_type",]
 
 class oneshipment_form(forms.Form):
-    dilivery_date = forms.DateField(label='Select the Dilivery Date')
+    dilivery_date = forms.DateField(label='Select the Delivery Date')
 
 
 class partShipmentForm(forms.ModelForm):

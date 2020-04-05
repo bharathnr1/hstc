@@ -133,25 +133,28 @@ p,a, h1{
 }
 
 #item-1{
-    background-color: rgba(48, 17, 160, 0.733);
+    /* background-color: rgba(48, 17, 160, 0.733); */
+    /* background-color: #da251c; */
+    background-color: rgb(243, 119, 10);
     color: white;
 }
 
 #item-2{
-    background-color: #9acd32e0;
+    /* background-color: #9acd32e0; */
+    background-color: #bd1911;
     color: white;
     font-weight: 900;
 }
 
 #item-4{
-    background-color: rgba(226, 54, 31, 0.932);
-    /* background-color: rgb(159, 44, 182, 0.66); */
+    /* background-color: rgba(226, 54, 31, 0.932); */
+    background-color: #eb2e25;
     color: white;
 }
 
 #item-5{
-    /* background-color: rgb(159, 44, 182, 0.66); */
-    background-color: rgb(143, 106, 211);
+    /* background-color: rgb(143, 106, 211); */
+    background-color: #eb2e25;
     color: white;
 }
 
@@ -346,7 +349,11 @@ p,a, h1{
 }
 
 .table tbody tr:nth-child(even){
-    background-color: rgb(240, 229, 229) !important;
+    background-color: rgba(245, 238, 238, 0.904) !important;
+}
+
+.table tbody tr:nth-child(even):hover{
+    background-color: rgba(235, 227, 227, 0.904) !important;
 }
 
 .table tbody tr:nth-child(odd){
@@ -360,10 +367,7 @@ p,a, h1{
 /* Add Customer */
 .add_cus{
     font-weight: 600;
-    color: #F5F5F5;
+    color: #fff;
     letter-spacing: 0.3px;
-    background-color: #FBA90A;
-}
-.add_cus:hover{
-    color: black;
+    /* background-color: #FBA90A; */
 }

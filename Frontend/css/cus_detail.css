@@ -641,6 +641,7 @@ page h3{
     background-color: #0a4376 !important;
 }
 
+/* Next stage box at the bottom */
 .ptos{
     margin-top: 5em;
     margin-bottom: 3em;
@@ -684,3 +685,5 @@ page h3{
     background-color: white;
     display: none;
 }
+
+/* Next stage box end */
