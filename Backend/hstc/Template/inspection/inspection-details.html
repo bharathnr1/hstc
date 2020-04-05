@@ -1,0 +1,90 @@
+{% load static %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css"/>
+   
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <title>Document</title>
+</head>
+<body>
+    Inspection Detils: 
+    <table style="border: solid black 1px;">
+        <thead style="border: solid black 1px;">
+            <th style="border: solid black 1px;">    customer</th>
+            <th style="border: solid black 1px;">   vendor_company_name</th>
+            <th style="border: solid black 1px;">    actual_inspection_date</th>
+            <th style="border: solid black 1px;">    inspection_done_by</th>
+            <th style="border: solid black 1px;">    inspection_remarks</th>
+            <th style="border: solid black 1px;">    inspection_photo_1</th>
+            <th style="border: solid black 1px;">    inspection_photo_2</th>        
+            <th style="border: solid black 1px;">    UPDATE</th>        
+        </thead>
+        <tbody>
+        {% for i in inspection_obj %}
+            <tr>
+                <td style="border: solid black 1px;">    {{i.customer}}</td>
+                <td style="border: solid black 1px;">    {{i.vendor_company_name}}</td>
+                <td style="border: solid black 1px;">    {{i.actual_inspection_date}}</td>
+                <td style="border: solid black 1px;">    {{i.inspection_done_by}}</td>
+                <td style="border: solid black 1px;">    {{i.inspection_remarks}}</td>
+                <td style="border: solid black 1px;"> <img src="{{ i.inspection_photo_1.url }}" alt="Inspection Picture 1" style="width: 200px; height: 200px;"></td>
+                <td style="border: solid black 1px;"> <img src="{{ i.inspection_photo_2.url }}" alt="Inspection Picture 2" style="width: 200px; height: 200px;"></td>
+                <td>
+                    <button type="button" class="btn btn-success xoxo" data-toggle="modal" data-target="#exampleModal{{i.pk}}" >
+                        Update
+                    </butaton>
+                </td>
+            
+            <div class="modal fade" id="exampleModal{{i.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Debit Amount</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    <form  method="post" enctype="multipart/form-data"  action="{% url 'customer:update_inspection' i.pk id %}">
+                        {{i.pk }} {{id}}
+                        {% csrf_token %}
+                        {% bootstrap_form inspection_form %}
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button class="btn btn-success" style=" display:block; margin:0px auto; padding:1% 30%;" type="submit" name="button">Submit</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+            </div> 
+        </tr>
+        <script>
+            $('#exampleModal{{i.pk}}').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+            })
+        </script>
+        {% endfor %}
+        </tbody>
+    </table>
+    <script>
+        // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+        $(window).on("load resize ", function() {
+        var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+        $('.tbl-header').css({'padding-right':scrollWidth});
+        }).resize();
+    </script>
+</body>
+</html>

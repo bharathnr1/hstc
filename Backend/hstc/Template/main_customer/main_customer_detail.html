@@ -216,13 +216,18 @@
                 <th style="border: solid 1px">Delete</th>
             </thead>
             <tbody style="border: solid 1px;">
+                {% for each in vendor_list %}
+
                 <tr>
                     <td style="border: solid 1px">{{ each.company_name }}</td>
                     <td style="border: solid 1px">{{ each.contact_no }}</td>
                     <td style="border: solid 1px">{{ each.pk }}</td>
                     <td style="border: solid 1px">edit this <a href="{% url 'customer:customer-edit' each.pk %}">Edit me</a> </td>
                     <td style="border: solid 1px">Delete This: <a href="{% url 'customer:customer-delete' each.pk %}">Delete me</a> </td>
-                </tr>            
+                </tr>   
+                {% empty %}
+                <li>No articles yet.</li>            
+                {% endfor %}
             </tbody>
         </table>
      {% empty %}

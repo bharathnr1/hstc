@@ -1,7 +1,7 @@
 #Template Redirects
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
 #Importing Generic Views
 from django.views.generic.detail import DetailView
@@ -9,8 +9,8 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, FormView, UpdateView, DeleteView
 
 #My Imports
-from .forms import customer_form, main_customer_form, shipment_selection, oneshipment_form, partShipmentForm
-from .models import Customer_Details, Customer
+from .forms import customer_form, main_customer_form, shipment_selection, oneshipment_form, partShipmentForm, Inspection_Form
+from .models import Customer_Details, Customer, Inspection
 from django.conf import settings
 
 #Email Modules
@@ -22,6 +22,12 @@ import xlwt, os, datetime
 
 #Retrieve Objects
 from django.shortcuts import get_object_or_404
+
+#PDF Modules
+from io import BytesIO
+from xhtml2pdf import pisa   
+from django.template.loader import get_template 
+from django.core.files.base import ContentFile
 
 #CUSTOMER CRUD APPS
 
@@ -205,11 +211,6 @@ class CustomerPI_Update(UpdateView):
             'gross_weight_kgs',
             'net_weight_kgs',]
     template_name = 'customer_PI/Customer_PI_details_form.html'
-# Customer PI Requirements: 
-# 1. Create Customer PI forms
-# 2. Create a View for Customer PI
-# 3. provide Edit, Delete Buttons for it
-
 # small form of customer
 # customer created
 # uploading vendor sheet excell button
@@ -274,3 +275,115 @@ def updatedates(request, pk, id):
             print(x.tentative_dilivery_date)
             x.save()
     return HttpResponseRedirect(reverse('customer:dilivery_dates',args=[id]))
+
+#Inspection Detail Page will have vendor list, Vendor list will have Update inspection,
+
+def create_inspection(request, pk):
+    customer_object = get_object_or_404(Customer, pk=pk)
+    vendor_queryset = Customer_Details.objects.filter(customer=customer_object).all()
+    for i in vendor_queryset:
+        inspection_field = Inspection.objects.create(
+                                                    customer = customer_object,
+                                                    vendor_company_name = i)
+        inspection_field.save()
+    return HttpResponseRedirect(reverse('customer:display_inspection',args=[pk]))
+
+def display_inspection(request, pk):
+    customer_object = get_object_or_404(Customer, pk=pk)
+    inspection_obj = Inspection.objects.filter(customer=customer_object).all()
+    inspection_form = Inspection_Form()
+    return render(request, "inspection/inspection-details.html", {"inspection_obj":inspection_obj, "inspection_form":Inspection_Form, "id":pk})
+    
+
+def update_inspection( request, pk, id):
+    if request.method == "POST":
+        form = Inspection_Form(request.POST, request.FILES)
+        if form.is_valid():
+            x=get_object_or_404(Inspection, pk=pk)
+            try:
+                form.cleaned_data["inspection_done_by"]
+                x.inspection_done_by = form.cleaned_data["inspection_done_by"]
+            except:
+                pass
+
+            try:
+                form.cleaned_data["inspection_remarks"]
+                x.inspection_remarks = form.cleaned_data["inspection_remarks"]
+            except:
+                pass
+
+            try:
+                request.FILES['inspection_photo_1']
+                x.inspection_photo_1 = request.FILES['inspection_photo_1']
+            except:
+                pass
+
+            try:
+                request.FILES['inspection_photo_2']
+                x.inspection_photo_2 = request.FILES['inspection_photo_2']
+            except:
+                pass
+
+            try:
+                form.cleaned_data["actual_inspection_date"]
+                x.actual_inspection_date = form.cleaned_data["actual_inspection_date"]
+            except:
+                pass
+
+            x.save()
+    return HttpResponseRedirect(reverse('customer:display_inspection',args=[id]))
+
+#Use to convert the image url to absolute URL 
+def link_callback(uri, rel):
+    """
+    Convert HTML URIs to absolute system paths so xhtml2pdf can access those
+    resources
+    """
+    # use short variable names
+    sUrl = settings.STATIC_URL      # Typically /static/
+    sRoot = settings.STATIC_ROOT    # Typically /home/userX/project_static/
+    mUrl = settings.MEDIA_URL       # Typically /static/media/
+    mRoot = settings.MEDIA_ROOT     # Typically /home/userX/project_static/media/
+
+    # convert URIs to absolute system paths
+    if uri.startswith(mUrl):
+        path = os.path.join(mRoot, uri.replace(mUrl, ""))
+    elif uri.startswith(sUrl):
+        path = os.path.join(sRoot, uri.replace(sUrl, ""))
+    else:
+        return uri  # handle absolute uri (ie: http://some.tld/foo.png)
+
+    # make sure that file exists
+    if not os.path.isfile(path):
+            raise Exception(
+                'media URI must start with %s or %s' % (sUrl, mUrl)
+            )
+    return path         
+
+def getShipmentMarks(request, pk):
+    customer_object = get_object_or_404(Customer, pk=pk)
+    vendor_obj = Customer_Details.objects.filter(customer=customer_object).all()    
+    data = {"vendor_obj":vendor_obj}
+    template = get_template("get_shipmentMarks_pdf.html")
+    html = template.render(data)
+    response = BytesIO()
+    x=str(settings.MEDIA_ROOT).replace("\\","/")
+    x=x+"/mypdf.pdf"
+    output = open(x, 'wb+')
+    pdfPage = pisa.CreatePDF(html, dest=response, link_callback=link_callback)
+    output.write(response.getvalue())
+    output.close()
+    email = EmailMessage(
+            'Hello',
+            'Body goes here',
+            settings.EMAIL_HOST_USER,
+            ["asisbagga@gmail.com"],
+            ['asissingh.g@gmail.com'],
+            headers={'Message-ID': 'foo'},)
+    email.attach_file(x)
+    email.send()
+    os.remove(x)
+    if not pdfPage.err:
+       return HttpResponse(response.getvalue(), content_type="application/pdf")
+    else:
+        return HttpResponse("Oops got an Error, Try again!")

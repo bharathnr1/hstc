@@ -27,7 +27,7 @@ urlpatterns = [
     path('update-customer-PI/<int:pk>', views.CustomerPI_Update.as_view(), name="CustomerPI_Update"),
     path('customer_pi_list/<int:pk>', views.customer_pi_list, name="customer_pi_list"),
 
-#DiliveryDates:
+#DiliveryDates Paths:
     path('shipment-type/<int:pk>', views.shipment_type, name="shipment_type"),
     path('dilivery-dates/<int:pk>', views.dilivery_dates, name="dilivery_dates"),
     path('updatedates/<int:pk>/<int:id>', views.updatedates, name="updatedates"),
@@ -37,5 +37,11 @@ urlpatterns = [
     # path('vendor-edit/<int:pk>', views.Vendor_Update.as_view(), name='vendor-edit'),
     # path('vendor-delete/<int:pk>', views.Vendorr_Delete.as_view(), name="vendor-delete")
 
+#Inspection Paths:
+
+    path("inspection/<int:pk>", views.create_inspection, name="create_inspection"),
+    path("inspection-details/<int:pk>", views.display_inspection, name="display_inspection"),
+    path("update_inspection/<int:pk>/<int:id>", views.update_inspection, name="update_inspection"),
+    path("getShipmentMarks/<int:pk>", views.getShipmentMarks, name="getShipmentMarks"),
 
 ]
