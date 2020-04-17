@@ -29,12 +29,15 @@ class Customer_Details(models.Model):
     s_no = 	models.IntegerField(blank=True, null=True)
     list_no = models.IntegerField(blank=True, null=True)
     sub_list_no =models.IntegerField(blank=True, null=True)
+    
     company_name= models.CharField(max_length=100,blank=True, null=True)
     contact_no=models.IntegerField(blank=True, null=True)
     email =models.EmailField(blank=True, null=True)
     wechat =models.IntegerField(blank=True, null=True)
+    
     invoice_date =models.DateField(blank=True, null=True)
     invoice_no =models.IntegerField(blank=True, null=True)
+    
     description =models.CharField(max_length=200,blank=True, null=True)
     model =models.CharField(max_length=100,blank=True, null=True)
     photo =models.ImageField(blank=True, null=True)
@@ -43,6 +46,7 @@ class Customer_Details(models.Model):
     unit =models.CharField(max_length=100,blank=True, null=True)
     unit_price =models.IntegerField(blank=True, null=True)
     qty=models.IntegerField(blank=True, null=True)
+    
     customer_amount =models.IntegerField(blank=True, null=True)
     customer_amount_after_discount =models.IntegerField(blank=True, null=True)
     commission =models.IntegerField(blank=True, null=True)
@@ -57,7 +61,9 @@ class Customer_Details(models.Model):
     advance_balance_date =models.DateField(blank=True, null=True)
     vendor_final_balance =models.IntegerField(blank=True, null=True)
     vendor_final_balance_date =models.DateField(blank=True, null=True)
+    
     account_details =models.CharField(max_length=200,blank=True, null=True)
+    
     manufacturing_days =models.IntegerField(blank=True, null=True)
 
     CBM_m3 =models.IntegerField(blank=True, null=True)

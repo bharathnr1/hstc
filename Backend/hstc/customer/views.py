@@ -9,8 +9,8 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, FormView, UpdateView, DeleteView
 
 #My Imports
-from .forms import customer_form, main_customer_form, shipment_selection, oneshipment_form, partShipmentForm, Inspection_Form
-from .models import Customer_Details, Customer, Inspection
+from .forms import customer_form, main_customer_form, shipment_selection, oneshipment_form, partShipmentForm, Inspection_Form, ContainerLoadingForm
+from .models import Customer_Details, Customer, Inspection, Container_loading
 from django.conf import settings
 
 #Email Modules
@@ -388,3 +388,58 @@ def getShipmentMarks(request, pk):
     else:
         return HttpResponse("Oops got an Error, Try again!")
 
+###############################CONTAINER LOADING STAGE#######################################
+
+
+def create_cont_load(request, pk):
+    customer_object = get_object_or_404(Customer, pk=pk)
+    vendor_queryset = Customer_Details.objects.filter(customer=customer_object).all()
+    for i in vendor_queryset:
+        container_field = Container_loading.objects.create(
+                                                    customer = customer_object,
+                                                    vendor_company_name = i)
+        container_field.save()
+    return HttpResponseRedirect(reverse('customer:container_loading_list',args=[pk]))
+
+def container_loading_list(request, pk):
+    customer_object = get_object_or_404(Customer, pk=pk)
+    Container_loading_obj = Container_loading.objects.filter(customer=customer_object).all()
+    Container_loading_form = ContainerLoadingForm()
+    return render(request, "container-loading/container-loading-details.html", { "Container_loading_obj":Container_loading_obj, "Container_loading_form":Container_loading_form, "id":pk })
+
+def update_container_loading(request, pk, id):
+    if request.method == "POST":
+        form = ContainerLoadingForm(request.POST, request.FILES)
+        if form.is_valid():
+            x=get_object_or_404(Container_loading, pk=pk)
+            try:
+                form.cleaned_data["PortDetails1"]
+                x.PortDetails1 = form.cleaned_data["PortDetails1"]
+            except:
+                pass
+
+            try:
+                form.cleaned_data["PortDetails2"]
+                x.PortDetails2 = form.cleaned_data["PortDetails2"]
+            except:
+                pass
+
+            try:
+                request.FILES['photo1']
+                x.photo1 = request.FILES['photo1']
+            except:
+                pass
+
+            try:
+                request.FILES['photo2']
+                x.photo2 = request.FILES['photo2']
+            except:
+                pass
+
+            try:
+                request.FILES['photo3']
+                x.photo3 = request.FILES['photo3']
+            except:
+                pass
+            x.save()
+    return HttpResponseRedirect(reverse('customer:container_loading_list',args=[id]))

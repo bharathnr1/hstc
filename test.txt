@@ -1,2 +1,13 @@
 Creating this test file to initialize git
 HSTC project commences!
+>Inecption Delete one field
+ Inspection Add new field. button required, 
+ Go create vendor feild > then come create so he will et a drop down to seletc for which venfor/prduct he wants to create the inepction for.
+ 
+> Sipment marks per vendors we need to create. 
+
+> Inspection page when you get shipmnt makrs then display should  be per shipment numbers. 
+
+> Size of the email is going above teh threshold for bigger images, need to fix image size or email size. 
+check for max_size
+
