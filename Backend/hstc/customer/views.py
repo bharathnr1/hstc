@@ -387,3 +387,4 @@ def getShipmentMarks(request, pk):
        return HttpResponse(response.getvalue(), content_type="application/pdf")
     else:
         return HttpResponse("Oops got an Error, Try again!")
+

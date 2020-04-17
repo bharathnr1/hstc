@@ -93,6 +93,20 @@ class Inspection(models.Model):
         return str(self.vendor_company_name)
 
 
+class Container_loading(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    vendor_company_name = models.ForeignKey(Customer_Details, on_delete=models.CASCADE)
+
+    photo1 = models.ImageField(blank=True, null=True)
+    photo2 = models.ImageField(blank=True, null=True)
+    photo3 = models.ImageField(blank=True, null=True)
+
+    PortDetails1 = models.CharField(max_length=200,blank=True, null=True)
+    PortDetails2 = models.CharField(max_length=200,blank=True, null=True)
+
+    def __str__(self):
+        return str(self.vendor_company_name)
+
 """" Remove Customer PI in model, create form for edits, and hide  """
 class Customer_PI(models.Model):
 
