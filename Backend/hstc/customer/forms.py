@@ -1,7 +1,9 @@
 from django import forms
-from .models import Customer_Details, Customer, Inspection
+from .models import Customer_Details, Customer, Inspection, Container_loading
 from django.utils.translation import gettext_lazy as _
 
+
+# CUSTOMER FORMS
 class customer_form(forms.ModelForm):
     class Meta:
         model=Customer_Details
@@ -14,6 +16,8 @@ class main_customer_form(forms.ModelForm):
         widgets = {
             'customer_name': forms.TextInput(attrs={'class':'edit_cus'}), 
             }
+
+# Dilivery Dates FORMS
 
 class shipment_selection(forms.ModelForm):
     class Meta:
@@ -28,7 +32,6 @@ class dilivery_selection(forms.ModelForm):
 class oneshipment_form(forms.Form):
     dilivery_date = forms.DateField(label='Select the Delivery Date')
 
-
 class partShipmentForm(forms.ModelForm):
     class Meta:
         model = Customer_Details
@@ -38,6 +41,8 @@ class partShipmentForm(forms.ModelForm):
             'manufacturing_days': forms.TextInput(attrs={'class':'form-control'}),        
             'shipment_number': forms.TextInput(attrs={'class':'form-control'}),        
             }
+
+# Inspection FORMS
 
 class Inspection_Form(forms.ModelForm):
     class Meta:
@@ -60,3 +65,19 @@ class Inspection_Form(forms.ModelForm):
             'actual_inspection_date': forms.TextInput(attrs={'class':'form-control'}),        
             }
         
+# CONTAINER LOADING FORMS
+
+class ContainerLoadingForm(forms.ModelForm):
+    class Meta:
+        model = Container_loading
+        fields = (
+            'photo1',
+            'photo2',
+            'photo3',
+            'PortDetails1',
+            'PortDetails2',
+        )
+        widgets = {
+            'PortDetails1': forms.TextInput(attrs={'class':'form-control'}),                
+            'PortDetails2': forms.TextInput(attrs={'class':'form-control'}),        
+            }

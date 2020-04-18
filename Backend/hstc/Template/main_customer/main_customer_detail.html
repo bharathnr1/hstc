@@ -275,4 +275,18 @@
       });
     </script>
   </body>
+<P></P>
+    <hr>
+    <a href="{% url 'customer:shipment_type' object.pk %}">Dilivery Dates</a>
+    
+    <hr>
+    <a href="{% url 'customer:create_inspection' object.pk %}">create_inspection</a> This should only be clicked once, otherwise it will create mutiple field on secondd click
+    <a href="{% url 'customer:display_inspection' object.pk %}">View Inspection Details</a>
+    <hr>
+    <a href="{% url 'customer:getShipmentMarks' object.pk %}">Sends Email and Create Shipment Marks</a>
+    <hr>
+    <a href="{% url 'customer:create_cont_load'  object.pk %}">Create Customer Loading Objects</a>
+    <hr>
+    <a href="{% url 'customer:container_loading_list'  object.pk %}">View Customer Loading Objects</a>
+</body>
 </html>

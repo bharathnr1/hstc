@@ -29,12 +29,15 @@ class Customer_Details(models.Model):
     s_no = 	models.IntegerField(blank=True, null=True)
     list_no = models.IntegerField(blank=True, null=True)
     sub_list_no =models.IntegerField(blank=True, null=True)
+    
     company_name= models.CharField(max_length=100,blank=True, null=True)
     contact_no=models.IntegerField(blank=True, null=True)
     email =models.EmailField(blank=True, null=True)
     wechat =models.IntegerField(blank=True, null=True)
+    
     invoice_date =models.DateField(blank=True, null=True)
     invoice_no =models.IntegerField(blank=True, null=True)
+    
     description =models.CharField(max_length=200,blank=True, null=True)
     model =models.CharField(max_length=100,blank=True, null=True)
     photo =models.ImageField(blank=True, null=True)
@@ -43,6 +46,7 @@ class Customer_Details(models.Model):
     unit =models.CharField(max_length=100,blank=True, null=True)
     unit_price =models.IntegerField(blank=True, null=True)
     qty=models.IntegerField(blank=True, null=True)
+    
     customer_amount =models.IntegerField(blank=True, null=True)
     customer_amount_after_discount =models.IntegerField(blank=True, null=True)
     commission =models.IntegerField(blank=True, null=True)
@@ -57,7 +61,9 @@ class Customer_Details(models.Model):
     advance_balance_date =models.DateField(blank=True, null=True)
     vendor_final_balance =models.IntegerField(blank=True, null=True)
     vendor_final_balance_date =models.DateField(blank=True, null=True)
+    
     account_details =models.CharField(max_length=200,blank=True, null=True)
+    
     manufacturing_days =models.IntegerField(blank=True, null=True)
 
     CBM_m3 =models.IntegerField(blank=True, null=True)
@@ -92,6 +98,20 @@ class Inspection(models.Model):
     def __str__(self):
         return str(self.vendor_company_name)
 
+
+class Container_loading(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    vendor_company_name = models.ForeignKey(Customer_Details, on_delete=models.CASCADE)
+
+    photo1 = models.ImageField(blank=True, null=True)
+    photo2 = models.ImageField(blank=True, null=True)
+    photo3 = models.ImageField(blank=True, null=True)
+
+    PortDetails1 = models.CharField(max_length=200,blank=True, null=True)
+    PortDetails2 = models.CharField(max_length=200,blank=True, null=True)
+
+    def __str__(self):
+        return str(self.vendor_company_name)
 
 """" Remove Customer PI in model, create form for edits, and hide  """
 class Customer_PI(models.Model):
