@@ -21,7 +21,9 @@
                 <td style="border: solid black 1px;">{{ shpmnt.model }}</td>
                 <td style="border: solid black 1px;">{{ shpmnt.description }}</td>
                 <td style="border: solid black 1px;">{{ shpmnt.customer.customer_name}} {{shpmnt.s_no}} {{shpmnt.list_no}} {{shpmnt.sub_list_no}} {{shpmnt.ctns}} </td>
+                {% if shpmnt.photo %}
                 <td style="border: solid black 1px;"> <img src="{{ shpmnt.photo.url }}"> </td>
+                {% endif %}
             </tr>
         </tbody>
     </table>

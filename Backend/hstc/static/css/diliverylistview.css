@@ -60,6 +60,15 @@
 	}
 }
 
+.excel-down{
+    width: 80px; 
+    color: white; 
+    font-size: 14px; 
+    font-weight: 600; 
+    background-color: #ff4d44 !important; 
+    background: linear-gradient(-45deg, #ee1b0f, #d42d24, #b91209 90%);">
+}
+
 .table td,
 .table th {
     vertical-align: middle;
@@ -76,10 +85,6 @@
     margin: 0.2em;
 }
 
-.table thead tr{
-    background: linear-gradient(-90deg, #ff4d44, #da251c, #9b0b03 90%);
-}
-
 .table thead th {
     vertical-align: bottom;
     border-bottom: 2px solid #9b0b03;
@@ -89,6 +94,7 @@
 .table th {
     font-weight: 600;
     background-color: #ff4d44;
+    background: linear-gradient(-45deg, #fc1004, #da251c, #9b0b03 90%);
     font-size: 18px;
     color: white;
 }
@@ -168,3 +174,66 @@
  }
 
 /* End of Table  */
+
+
+ /* Next stage box at the bottom */
+ .ptos{
+    margin-top: 5em;
+    margin-bottom: 3em;
+    padding: 1em;
+    text-align: center;
+	background: linear-gradient(-45deg, #23a6d5, #23d5ab);
+	/* background-size: 400% 400%; */
+    /* animation: gradient 5s ease infinite; */
+    color: white;
+    border-radius: 4px;
+}
+.ptos a{
+    margin: 0 auto;
+    text-decoration: none;
+}
+.ptos h4{
+    margin-bottom: 1em;
+}
+
+.goto_inspection{
+    border: 1px solid white;
+    color: white;
+}
+.goto_inspection:hover{
+    background-color: white;
+    color: black;
+}
+
+.create_inspection{
+    border: 1px solid white;
+    color: white;
+}
+.create_inspection:hover{
+    background-color: white;
+    color: black;
+}
+
+
+.stg-c-n{
+    border: 1px solid white;
+    color: white;
+    display: inline;
+}
+.stg-c-n:hover{
+    background-color: white;
+    color: black;
+}
+
+.stg-c-y{
+    border: 1px solid white;
+    color: black;
+    background-color: white;
+    display: none;
+}
+
+.sugg{
+    display: none;
+}
+
+/* Next stage box end */

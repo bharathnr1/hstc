@@ -13,3 +13,11 @@ The html is oneshipment.html
    it should not ask him to select shipment type again.
 
 4. Order Summary Page - Total amount for all the vendors/products should be shown at the end of the page.
+
+5. Instead of putting if photo condition in jinga, add attribute to model field - 'default_pic'.
+   If there is no picture, it should take the default picture.
+
+6. In Update modal for Inspection, populate the fields with the existing data. Right now, a empty form is coming up in the modal.
+
+7. Need to ask him on the design of shipment mark generation - what to print is clear but the size, spacing and way to print them needs to be discussed.
+   Drawing on pen and paper would give us a good idea.

@@ -170,7 +170,9 @@
                     <td class="text-center" >{{ each.invoice_no }}</td>
                     <td class="text-center" >{{ each.description }}</td>
                     <td class="text-center" >{{ each.model }}</td>
+                    {% if each.photo %}
                     <td><img src="{{ each.photo.url }}" alt="A picture" width="100px" height="100px"></td>
+                    {% endif %}
                     <td class="text-center">{{ each.dimensions }}</td>
                     <td class="text-center">{{ each.remarks }}</td>
                     <td class="text-center">{{ each.unit }}</td>
@@ -241,17 +243,19 @@
       <h4 style="text-align: center; width: 100%;">Has the vendor/s returned with the manufacturing dates? <br/> If yes, click the below button to proceed further.</h4>
       <button class="btn stg-c-n"> <span><i class="fa fa-check" aria-hidden="true"></i></span> Mark Stage as complete</button>
       <button class="btn stg-c-y"> <span><i class="fa fa-check" aria-hidden="true"></i></span> Stage Completed</button>
-      <a href="{% url 'customer:shipment_type' object.pk %}"><button class="btn order-summary">Go to Delivery Dates  <span><i class="fa fa-forward" aria-hidden="true"></i></span></button></a>
-      <a href="{% url 'customer:customer_pi_list' object.pk %}"><button class="btn order-summary">Generate Customer PI  <span><i class="fa fa-file-contract" aria-hidden="true"></i></span></button></a>
-      <p>Click on the above button to undo the change</p>
+      <a href="{% url 'customer:shipment_type' object.pk %}"><button class="btn order-summary">Go to Delivery Dates  <span><i class="fa fa-calendar-check" aria-hidden="true"></i></span></button></a>
+      <a href="{% url 'customer:customer_pi_list' object.pk %}" target="blank"><button class="btn order-summary">Generate Customer PI  <span><i class="fa fa-file-contract" aria-hidden="true"></i></span></button></a>
+      <br>
+      <p class="sugg">Click on the button again to undo the change</p>
     </div>
-    <!-- <a href="{% url 'customer:shipment_type' object.pk %}">Delivery Dates</a> -->
+
   <script>
       jQuery(document).ready(function(){
         $('.stg-c-n').click(function(){
           if($(this).hasClass("stg-c-n"))
               $(".stg-c-n").css('display', 'none');
               $(".stg-c-y").css('display', 'inline');
+              $(".sugg").css('display', 'inline');
               // $(".stg-c-n").removeClass("stg-c-n").addClass("stg-c-y");
         });
 
@@ -259,6 +263,7 @@
           if($(this).hasClass("stg-c-y"))
               $(".stg-c-y").css('display', 'none');
               $(".stg-c-n").css('display', 'inline');
+              $(".sugg").css('display', 'none');
               // $(".stg-c-n").removeClass("stg-c-n").addClass("stg-c-y");
         });
 

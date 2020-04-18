@@ -243,10 +243,6 @@
     padding: 0.2em;
 }
 
-.table thead tr{
-    background: linear-gradient(-90deg, #ff4d44, #da251c, #9b0b03 90%);
-}
-
 .table thead th {
     vertical-align: bottom;
     border-bottom: 2px solid #dd281e;
@@ -254,7 +250,10 @@
 
 .table thead th,
 .table th {
+    font-weight: 600;
     background-color: #ff4d44;
+    background: linear-gradient(0deg, #fc1004, #da251c, #9b0b03 90%);
+    font-size: 18px;
     color: white;
 }
 
@@ -377,6 +376,10 @@
     border: 1px solid white;
     color: black;
     background-color: white;
+    display: none;
+}
+
+.sugg{
     display: none;
 }
 

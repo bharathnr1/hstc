@@ -10,6 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
@@ -49,8 +50,8 @@
 <!-- Table -->
 <div class="mb-3 card">
     <div class="card-header-buttons">
-      <button class="btn btn-danger"><span><i class="fa fa-download" aria-hidden="true"></i></span>&nbsp Download Excel</button>
-      <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"><span><i class="fa fa-edit"></i></span> Update Delivery Date</button>
+      <button class="btn btn-danger excel-down"><span><i class="fa fa-download" aria-hidden="true"></i></span>&nbspExcel</button>
+      <button class="btn btn-danger excel-down" style="width: 180px;" data-toggle="modal" data-target="#exampleModal"><span><i class="fa fa-edit"></i></span>&nbsp Update Delivery Date</button>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -109,7 +110,9 @@
             <td class="text-center">{{i.company_name }}</td>
             <td class="text-center">{{i.description }}</td>
             <td class="text-center">{{i.model }}</td>
-            <!-- <td> <img src="{{ i.photo.url }}" height="100px" width="100px" class="src"></td> -->
+            {% if i.photo %}
+            <td> <img src="{{ i.photo.url }}" height="100px" width="100px" class="src"></td>
+            {% endif %}
             <td>{{i.dimensions }} </td>
             <td>{{i.manufacturing_days }} </td>
             <td>{{i.shipment_number }} </td>
@@ -129,7 +132,7 @@
         </div>
     </div> -->
   <div class="card-header-buttons">
-      <button class="btn btn-danger"><span><i class="fa fa-download" aria-hidden="true"></i></span>&nbsp Download Excel</button>
+    <button class="btn btn-danger excel-down"><span><i class="fa fa-download" aria-hidden="true"></i></span>&nbspExcel</button>
   </div>
   <div class="scrollit" id="style-1">
     <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
@@ -157,11 +160,11 @@
         <tr>
             <td>
               <button type="button" 
-                      class="btn btn-danger" 
+                      class="btn" 
                       data-toggle="modal" 
                       data-target="#exampleModal{{i.pk}}" 
-                      style="background-color: #ff4d44 !important; font-size: 13px;">
-                  Update
+                      style="background-color: #ff4d44 !important; color: white; background: linear-gradient(-45deg, #ee1b0f, #d42d24, #b91209 90%);">
+                      Update
               </button>
             </td>
             <td class="text-center">{{i.s_no }}</td>
@@ -170,7 +173,9 @@
             <td class="text-center">{{i.company_name }}</td>
             <td class="text-center">{{i.description }}</td>
             <td class="text-center">{{i.model }}</td>
-            <!-- <td> <img src="{{ i.photo.url }}" height="100px" width="100px" class="src"></td> -->
+            {% if i.photo %}
+            <td> <img src="{{ i.photo.url }}" height="100px" width="100px" class="src"></td>
+            {% endif %}
             <td>{{i.dimensions }} </td>
             <td>{{i.manufacturing_days }} </td>
             <td>{{i.shipment_number }} </td>
@@ -207,9 +212,27 @@
     </table>
   </div>
   </div>
-{% endif %}
+  {% endif %}
+  <div class="container ptos">
+    <h4 style="text-align: center; width: 100%;">Has the vendor/s returned with the manufacturing dates? <br/> If yes, click the below button to proceed further.</h4>
+    <button class="btn stg-c-n"> <span><i class="fa fa-check" aria-hidden="true"></i></span> Mark Stage as complete</button>
+    <button class="btn stg-c-y"> <span><i class="fa fa-check" aria-hidden="true"></i></span> Stage Completed</button>
+    
+    {% if inspection_obj %}
+    <a href="{% url 'customer:display_inspection' id %}"><button class="btn goto_inspection">Go to Inspection  <span><i class="fas fa-clipboard-list" aria-hidden="true"></i></span></button></a>
+    {% else %}
+    <a href="{% url 'customer:create_inspection' id %}"><button class="btn create_inspection">Go to Inspection  <span><i class="fas fa-clipboard-list" aria-hidden="true"></i></span></button></a>
+    {% endif %}
+    <br>
+    <p class="sugg">Click on the button again to undo the change</p>
+  </div>
+
 
     <script>
+        if (sessionStorage.getItem("Page2Visited")) {
+          sessionStorage.removeItem("Page2Visited");
+          window.location.reload(true); // force refresh page1
+        }
         // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
         $(window).on("load resize ", function() {
         var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
@@ -227,6 +250,22 @@
         $('#exampleModal{{i.pk}}').on('shown.bs.modal', function () {
         $('#myInput').trigger('focus')
         })
+
+        $('.stg-c-n').click(function(){
+          if($(this).hasClass("stg-c-n"))
+              $(".stg-c-n").css('display', 'none');
+              $(".stg-c-y").css('display', 'inline');
+              $(".sugg").css('display', 'inline');
+              // $(".stg-c-n").removeClass("stg-c-n").addClass("stg-c-y");
+        });
+
+        $('.stg-c-y').click(function(){
+          if($(this).hasClass("stg-c-y"))
+              $(".stg-c-y").css('display', 'none');
+              $(".stg-c-n").css('display', 'inline');
+              $(".sugg").css('display', 'none');
+              // $(".stg-c-n").removeClass("stg-c-n").addClass("stg-c-y");
+        });
     </script>
 </body>
 </html>
