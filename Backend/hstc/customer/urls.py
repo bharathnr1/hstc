@@ -10,9 +10,10 @@ urlpatterns = [
 
     path('', views.main_Customer_List.as_view(), name='main_customer-list'),
     path('main_customer-forms/', views.main_Customer_Create, name='main_customer-create'),
-    path('main_customer-details/<int:pk>/', views.main_Customer_Detail.as_view(), name='main_customer-detail'),
+    path('main_customer-details/<int:pk>/', views.main_Customer_Detail, name='main_customer-detail'),
     path('main_edit/<int:pk>', views.main_Customer_Update.as_view(), name='main_customer-edit'),
     path('main_delete/<int:pk>', views.main_Customer_Delete.as_view(), name="main_customer-delete"),
+    path('uploadfile/<int:pk>', views.uplaod_file, name="uploadfile"),
 
 # Customer Paths
 

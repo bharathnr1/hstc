@@ -15,6 +15,7 @@ class Customer(models.Model):
     customer_company = models.CharField(max_length=100)
     shipment_type = models.CharField(max_length=50, choices=ENTRY_CHOICES, blank=True, null=True)
     shipment_file = models.FileField(blank=True, null=True)
+
     def __str__(self):
         return self.customer_name
 
@@ -114,6 +115,7 @@ class Container_loading(models.Model):
         return str(self.vendor_company_name)
 
 """" Remove Customer PI in model, create form for edits, and hide  """
+
 class Customer_PI(models.Model):
 
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)

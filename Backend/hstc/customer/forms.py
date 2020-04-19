@@ -78,3 +78,8 @@ class ContainerLoadingForm(forms.ModelForm):
             'PortDetails1': forms.TextInput(attrs={'class':'form-control'}),                
             'PortDetails2': forms.TextInput(attrs={'class':'form-control'}),        
             }
+
+class UploadFileForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ("shipment_file",)

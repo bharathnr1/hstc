@@ -9,7 +9,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, FormView, UpdateView, DeleteView
 
 #My Imports
-from .forms import customer_form, main_customer_form, shipment_selection, oneshipment_form, partShipmentForm, Inspection_Form, ContainerLoadingForm
+from .forms import customer_form, main_customer_form, shipment_selection, oneshipment_form, partShipmentForm, Inspection_Form, ContainerLoadingForm, UploadFileForm
 from .models import Customer_Details, Customer, Inspection, Container_loading
 from django.conf import settings
 
@@ -18,7 +18,7 @@ from django.core.mail import send_mail, send_mass_mail
 from django.core.mail import EmailMessage
 
 #Python Modules
-import xlwt, os, datetime
+import xlwt, os, datetime, xlrd
 
 #Retrieve Objects
 from django.shortcuts import get_object_or_404
@@ -53,20 +53,50 @@ class main_Customer_List(ListView):
         context = super().get_context_data(**kwargs)
         return context
 
-class main_Customer_Detail(DetailView):
-    model = Customer
-    template_name='main_customer/main_customer_detail.html'
+def main_Customer_Detail(request, pk):
+    object = get_object_or_404(Customer, pk=pk)
+    vendor_object = Customer_Details.objects.filter(customer=object).all()
+    return render(request, "main_customer/main_customer_detail.html", {"vendor_list":vendor_object,"object":object})
+
+def uplaod_file(request, pk):
+    object = get_object_or_404(Customer, pk=pk)
+    form = UploadFileForm()
+    if request.method == "POST":
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            object.shipment_file = request.FILES['shipment_file']
+            object.save()
+            media_path = str(settings.MEDIA_ROOT).replace("\\","/")
+            media_path = media_path.replace("/media", "")
+            media_path = media_path + str(object.shipment_file.url)
+            wb = xlrd.open_workbook(media_path)
+            sheet = wb.sheet_by_index(0) 
+            # Extrating number of rows
+            print(sheet.nrows) 
+            # Extracting number of columns 
+            print(sheet.ncols) 
+            # Extracting first collumn
+            for i in range(sheet.ncols):
+                j=0
+                for j in range(sheet.nrows):
+                    print(f"ij = {i}{j} + DATA= ",  sheet.cell_value(j, i))
+            return HttpResponseRedirect(reverse('customer:main_customer-detail',args=[pk]))
+    return render(request, 'main_customer/uploadfile.html', {"form":form})
+
+# class main_Customer_Detail(DetailView):
+#     model = Customer
+#     template_name='main_customer/main_customer_detail.html'
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        """" The queryset is filtered as per the customer object, 
-        if there is two object for the same customer then we need to make sure
-        the older is object is coming with a value hence we need to add
-        avoid_duplication as a integer value and same value should be 
-        stored in Customer object as a reffernce of comparision, maybe we can store customer_details pk value as integer in customer
-        As of now i am going with assumption that there is only one customer"""
-        context["vendor_list"] = Customer_Details.objects.filter(customer=self.object).all()
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         """" The queryset is filtered as per the customer object, 
+#         if there is two object for the same customer then we need to make sure
+#         the older is object is coming with a value hence we need to add
+#         avoid_duplication as a integer value and same value should be 
+#         stored in Customer object as a reffernce of comparision, maybe we can store customer_details pk value as integer in customer
+#         As of now i am going with assumption that there is only one customer"""
+#         context["vendor_list"] = Customer_Details.objects.filter(customer=self.object).all()
+#         return context
 
 class main_Customer_Update(UpdateView):
     model = Customer
@@ -291,7 +321,7 @@ def create_inspection(request, pk):
 def display_inspection(request, pk):
     customer_object = get_object_or_404(Customer, pk=pk)
     inspection_obj = Inspection.objects.filter(customer=customer_object).all()
-    inspection_form = Inspection_Form()
+    inspection_form = Inspection_Form(inspection_obj)
     return render(request, "inspection/inspection-details.html", {"inspection_obj":inspection_obj, "inspection_form":Inspection_Form, "id":pk})
     
 
@@ -300,11 +330,11 @@ def update_inspection( request, pk, id):
         form = Inspection_Form(request.POST, request.FILES)
         if form.is_valid():
             x=get_object_or_404(Inspection, pk=pk)
-            try:
-                form.cleaned_data["inspection_done_by"]
+            if (form.cleaned_data["inspection_done_by"]):
+                print(form.cleaned_data["inspection_done_by"])
                 x.inspection_done_by = form.cleaned_data["inspection_done_by"]
-            except:
-                pass
+            else:
+                print("Else worked")
 
             try:
                 form.cleaned_data["inspection_remarks"]
@@ -407,6 +437,7 @@ def container_loading_list(request, pk):
     Container_loading_form = ContainerLoadingForm()
     return render(request, "container-loading/container-loading-details.html", { "Container_loading_obj":Container_loading_obj, "Container_loading_form":Container_loading_form, "id":pk })
 
+#Insted of try do if
 def update_container_loading(request, pk, id):
     if request.method == "POST":
         form = ContainerLoadingForm(request.POST, request.FILES)
