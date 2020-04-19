@@ -1,69 +1,115 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Customer PI</title>
+
+  <!-- JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static '/css/customer_pi_list.css' %}"> 
+  
 </head>
 <body>
-    <h2>Customer PI View: </h2> 
-    <table style="border: solid 1px;">
-        <thead  style="border: solid 1px;">
-            <th style="border: solid 1px">list_no</th>
-            <th style="border: solid 1px">sub_list_no</th>
-            <th style="border: solid 1px">description</th>
-            <th style="border: solid 1px">model</th>
-            <th style="border: solid 1px">photo</th>
-            <th style="border: solid 1px">dimensions</th>
-            <th style="border: solid 1px">remarks</th>
-            <th style="border: solid 1px">unit</th>
-            <th style="border: solid 1px">unit_price</th>
-            <th style="border: solid 1px">qty</th>
-            <th style="border: solid 1px">customer_amount</th>
-            <th style="border: solid 1px">customer_amount_after_discount</th>
-            <th style="border: solid 1px">token_deposit_customer</th>
-            <th style="border: solid 1px">token_deposit_HSTC</th>
-            <th style="border: solid 1px">token_deposit_date</th>
-            <th style="border: solid 1px">CBM_m3</th>
-            <th style="border: solid 1px">ctns</th>
-            <th style="border: solid 1px">gross_weight_kgs</th>
-            <th style="border: solid 1px">net_weight_kgs</th>
-            <th style="border: solid 1px">Image</th>
-            <th style="border: solid 1px">Update</th>
-            <th style="border: solid 1px">Delete</th>
-        </thead>
-        <tbody style="border: solid 1px;">
-            {% for CP in vendor_object %}
-            <tr>
-                <td style="border: solid 1px">{{CP.s_no }} </td>
-                <td style="border: solid 1px">{{CP.list_no }} </td>
-                <td style="border: solid 1px">{{CP.sub_list_no }} </td>
-                <td style="border: solid 1px">{{CP.description}} </td>
-                <td style="border: solid 1px">{{CP.model }} </td>
-                <td style="border: solid 1px">{{CP.photo }} </td>
-                <td style="border: solid 1px">{{CP.dimensions }} </td>
-                <td style="border: solid 1px">{{CP.remarks }} </td>
-                <td style="border: solid 1px">{{CP.unit }} </td>
-                <td style="border: solid 1px">{{CP.unit_price }} </td>
-                <td style="border: solid 1px">{{CP.qty}} </td>
-                <td style="border: solid 1px">{{CP.customer_amount }} </td>
-                <td style="border: solid 1px">{{CP.customer_amount_after_discount }} </td>
-                <td style="border: solid 1px">{{CP.token_deposit_customer }} </td>
-                <td style="border: solid 1px">{{CP.token_deposit_HSTC }} </td>
-                <td style="border: solid 1px">{{CP.token_deposit_date}}  </td>
-                <td style="border: solid 1px">{{CP.CBM_m3}}  </td>
-                <td style="border: solid 1px">{{CP.ctns}} </td>
-                <td style="border: solid 1px">{{CP.gross_weight_kgs}} </td>
-                <td style="border: solid 1px">{{CP.net_weight_kgs}} </td>
-                <td style="border: solid 1px"><img src="{{ CP.photo.url }}" alt="" style="width: 200px; height: 200px;"></td>
-                <td style="border: solid 1px"><a href="{% url 'customer:CustomerPI_Update' CP.pk %}">Update This Filed in Customer PI</a></td>
-                <td style="border: solid 1px"><a href="{% url 'customer:customer-delete' CP.pk %}">Delete this Field</a></td>
-            </tr>
-            {% endfor %}       
-         </tbody>
+
+    <!-- Table -->
+<div class="mb-3 card">
+    <div class="card-header-buttons">
+        <button class="btn btn-primary"><span><i class="fa fa-download" aria-hidden="true"></i></span>&nbsp Download Excel</button>
+        <button class="btn btn-primary"><span>&nbsp<i class="fa fa-envelope" aria-hidden="true"></i></span>&nbsp Email Contract</button>
+        <a href="{% url 'customer:send_CPI' customer_object.pk %}">        
+            <button class="btn btn-primary">&nbsp<span><i class="fa fa-envelope-open" aria-hidden="true"></i></span>&nbsp Email Customer PI</button>
+        </a>
+
+    </div>
+    <div class="card-header-tab card-header">
+        <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+            <i class="fa fa-user" aria-hidden="true"></i> Customer PI  
+        </div>
+    </div>
+
+  <div class="scrollit" id="style-1">
+    <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+      <thead>
+      <tr>
+        <th class="text-center">Edit</th>
+        <th class="text-center">Delete</th>
+        <th class="text-center">SI No</th>
+        <th class="text-center">L No</th>
+        <th class="text-center">SL No</th>
+        <th class="text-center">Description</th>
+        <th class="text-center">Model</th>
+        <th class="text-center">Photo</th>
+        <th class="text-center">Dimensions</th>
+        <th class="text-center">Remarks</th>
+        <th class="text-center">Unit</th>
+        <th class="text-center">Unit Price</th>
+        <th class="text-center">Qty</th>
+        <th class="text-center">Cu Amt</th>
+        <th class="text-center">Discounted Amt</th>
+        <th class="text-center">Token(HSTC)</th>
+        <th class="text-center">Token(Cu)</th>
+        <th class="text-center">Token Date</th>
+        <th class="text-center">CBM</th>
+        <th class="text-center">Ctns</th>
+        <th class="text-center">Gross Wt</th>
+        <th class="text-center">Net Wt</th>
+      </tr>
+      </thead>
+  
+      <tbody>
+        {% for CP in vendor_object %}
+        <tr>
+          <td class="text-center"><a href="{% url 'customer:CustomerPI_Update' CP.pk %}">
+            <button type="button" 
+            class="btn btn-primary" 
+            style="background-color: #3169c2 !important;">
+                Edit
+            </button>
+          </a></td>
+          <td class="text-center"><a href="{% url 'customer:customer-delete' CP.pk %}">
+            <button type="button" 
+            class="btn btn-primary" 
+            style="background-color: #3169c2 !important;">
+                Delete
+            </button>
+          </a></td>
+          <td class="text-center">{{CP.s_no }}</td>
+          <td class="text-center">{{CP.list_no }}</td>
+          <td class="text-center">{{CP.sub_list_no }}</td>
+          <td class="text-center">{{CP.description}}</td>
+          <td class="text-center">{{CP.model }}</td>
+          {% if CP.photo %}
+          <td><img src="{{ CP.photo.url }}" alt="A picture" width="150px" height="150px"></td>
+          {% else %}
+          <td><img src="{% static '/images/hstc_logo.jpeg' %}" alt="A picture" width="100px" height="100px"></td>
+          {% endif %}
+          <td class="text-center">{{CP.dimensions }}</td>
+          <td class="text-center">{{CP.remarks }}</td>
+          <td class="text-center">{{CP.unit }}</td>
+          <td class="text-center">{{CP.unit_price }}</td>
+          <td class="text-center">{{CP.qty}}</td>
+          <td class="text-center">{{CP.customer_amount }}</td>
+          <td class="text-center">{{CP.customer_amount_after_discount }}</td>
+          <td class="text-center">{{CP.token_deposit_HSTC }} </td>
+          <td class="text-center">{{CP.token_deposit_customer }}</td>
+          <td class="text-center">{{CP.token_deposit_date}}</td>
+          <td class="text-center">{{CP.CBM_m3}}</td>
+          <td class="text-center">{{CP.ctns}}</td>
+          <td class="text-center">{{CP.gross_weight_kgs}}</td>
+          <td class="text-center">{{CP.net_weight_kgs}}</td>
+        </tr>
+        {% endfor %}       
+      </tbody>
     </table>
-
-    <a href="{% url 'customer:send_CPI' customer_object.pk %}">Send Email to Customer With PI</a>
-
+  </div>
+  </div>
 </body>
 </html>

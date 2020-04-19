@@ -1,15 +1,36 @@
+{% load bootstrap4 %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Delete Customer</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        .delete{
+            border: 1px solid black;
+            width: 25em;
+            height: 7em;
+            padding: 1em;
+            margin: 0 auto;
+            text-align: center;
+            margin-top: 14em;
+        }    
+        
+    </style>
 </head>
 <body>
     <form method="post">
         {% csrf_token %}
-        <p>Are you sure you want to delete "{{ object }}"?</p>
-        <input type="submit" value="Confirm">
+        <div class="delete">
+            <p>Are you sure you want to delete <strong>{{ object }}</strong>?</p>
+            <input class="btn btn-danger" type="submit" value="Confirm">
+            <input class="btn btn-success" type="reset" value="Cancel">
+        </div>
+    
     </form>   
 </body>
 </html>

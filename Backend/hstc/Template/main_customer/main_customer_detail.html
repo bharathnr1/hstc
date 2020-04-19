@@ -3,27 +3,250 @@
 <head>{% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Order Summary</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static '/css/main_customer_detail.css' %}"> 
+
 </head>
 <body>
-    <h1>Main Customer Details! </h1>
-    <h2>{{ object.customer_name }}</h2>
-    <h2>{{ object.customer_contact }}</h2>
-    <h2>{{ object.pk }}</h2>
-    <h2>edit this <a href="{% url 'customer:main_customer-edit' object.pk %}">Edit me</a> </h2>
-    <h2>Delete This: <a href="{% url 'customer:main_customer-delete' object.pk %}">Delete me</a> </h2>
-    <h2>Add Vendor: <a href="{% url 'customer:customer-create' object.pk %}">Add me</a> </h2>
-<!-- Excel Upload button should come here -->
+  
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- <a class="nav-link" href="./main.html">HSTC <span class="sr-only">(current)</span></a> -->
+    <a class="navbar-brand" href="{% url 'customer:main_customer-list' %}">
+        <img src="{% static '/images/hstc_logo.jpeg' %}" width="30" height="30" class="d-inline-block align-top" alt="Logo">
+        &nbsp HSTC
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Right Aligned -->
+      <ul class="navbar-nav ml-auto">
+        <!-- <li class="nav-item">
+            <a class="nav-link" href="#">Notifications</a>
+        </li> -->
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-4 btn-success" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        <li class="nav-item dropdown active user">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+            <span><i class="fa fa-user"></i></span>&nbsp User
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#"><span><i class="fa fa-user-lock"></i></span>&nbsp Manage Access</a>
+            <a class="dropdown-item" href="#"><span><i class="fa fa-sign-out-alt"></i></span>&nbsp Logout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+</nav>
 
+    <br>
+    <nav class="navbar navbar-light bg-light">
+      <div class="progress">
+        <div class="progress-bar"></div>
+      </div>
+    </nav>
+            <!-- Progress Bar Start -->
+            <nav class="navbar navbar-expand-lg navbar-light progress_bar">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                  <li class="nav-item active stage">
+                      <a class="nav-link" href="#">Order Summary</a>
+                  </li>
+                  <li class="nav-item active stage">
+                      <a class="nav-link" href="#">Delivery Dates</a>
+                  </li>
+                  <li class="nav-item active stage">
+                    <a class="nav-link" href="#">Customer PI</a>
+                  </li>
+                  <li class="nav-item active stage">
+                      <a class="nav-link" href="#">Inspection Details</a>
+                  </li>
+                  <li class="nav-item active stage">
+                    <a class="nav-link" href="#">Shipment Marks</a>
+                  </li>
+                  <li class="nav-item active stage">
+                      <a class="nav-link" href="#">Container Loading Pics</a>
+                  </li>
+                  <li class="nav-item active stage">
+                      <a class="nav-link" href="#">Doorstep Delivery ETA</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          <!-- Progress Bar End -->
 
-    <hr>
-    <h1>Vendor List! </h1>
-    <!-- Only Company Names on List Pages -->
+<!-- Customer Details -->
+<div class="container cus_details">
+    <!-- <table class="top_cus_detail1">
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ object.customer_company }}</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    
+    <table class="top_cus_detail2">
+        <tr>
+            <td>{{ object.customer_name }} </td>
+            <td>|</td>
+            <td>{{ object.customer_contact }} </td>
+            <td>|</td>
+            <td>{{ object.customer_email }}</td>
+        </tr>
+    </table> -->
+    <button class="btn top_cus_detail1">{{ object.customer_company }}</button>
+    <br>
+    <button class="btn top_cus_detail2">{{ object.customer_name }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|</button>
+    <button class="btn top_cus_detail2">{{ object.customer_contact }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|</button>
+    <button class="btn top_cus_detail2">{{ object.customer_email }}</button>
+  
+    <h4 style="text-align: center; width: 100%;"><hr class="hr"></h4>
+    
+    <button class="btn edit_cus"> <span><i class="fa fa-edit" aria-hidden="true"></i></span> <a href="{% url 'customer:main_customer-edit' object.pk %}">Edit Customer</a></button>
+    <button class="btn delete_cus"> <span><i class="fa fa-trash" aria-hidden="true"></i></span><a href="{% url 'customer:main_customer-delete' object.pk %}">&nbspDelete Customer</a> </button>
+    <button class="btn add_vendor"> <span><i class="fa fa-plus" aria-hidden="true"></i></span> <a href="{% url 'customer:customer-create' object.pk %}">Add Vendor</a> </button>
+    <p></p>
+    <button class="btn upload_excel"><span><i class="fa fa-file-excel"></i></span> &nbspUpload Excel Sheet</button>
+  </div>
+<hr>
+<!-- Vendor List -->    
+    <!-- ----------- -->
+    <div class="vendor_list">
+      <h2 style="text-align: center;">Order Summary</h2>
+      <p style="text-align: center;">Click on the vendors to view complete information</p>
+      <button class="expand" type="button" data-toggle="collapse" data-target=".panel-collapse" aria-expanded="false" aria-controls=".panel-collapse">
+        <!-- <span><i class="fa fa-angle-double-right"></i></span> -->
+        Expand All
+      </button>
+      <p>&nbsp</p>
+      {% for each in vendor_list %}      
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">              
+              <a data-toggle="collapse" href="#{{each.company_name}}" class="vendor_name">
+                <span><i class="fa fa-angle-right arrow_right"></i></span>&nbsp{{ each.company_name }} - {{ each.contact_no}}
+              </a>
+            </h4>
+          </div>
+          <div id="{{each.company_name}}" class="panel-collapse collapse">
+            <div class="mb-3 card">
+            <div class="scrollit" id="style-1">
+              <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+                <thead>
+                <tr>
+                  <th class="text-center">SI No</th>
+                  <th class="text-center">L No</th>
+                  <th class="text-center">SL No</th>
+                  <th class="text-center">Company Name</th>
+                  <th class="text-center">Contact Number</th>
+                  <th class="text-center">Email</th>
+                  <th class="text-center">WeChat</th>
+                  <th class="text-center">Account</th>
+                  <th class="text-center">Invoice Date</th>
+                  <th class="text-center">Invoice No</th>
+                  <th class="text-center">Description</th>
+                  <th class="text-center">Model</th>
+                  <th class="text-center">Photo</th>
+                  <th class="text-center">Dimensions</th>
+                  <th class="text-center">Remarks</th>
+                  <th class="text-center">Unit</th>
+                  <th class="text-center">Unit Price</th>
+                  <th class="text-center">Qty</th>
+                  <th class="text-center">Cu Amt</th>
+                  <th class="text-center">Discounted Amt</th>
+                  <th class="text-center">Commission %</th>
+                  <th class="text-center">Actual Vendor Amt</th>
+                  <th class="text-center">Vendor Deposit %</th>
+                  <th class="text-center">Vendor Adv Depo Amt</th>
+                  <th class="text-center">Token(HSTC)</th>
+                  <th class="text-center">Token(Cu)</th>
+                  <th class="text-center">Token Date</th>
+                  <th class="text-center">Vendor Adv Balance</th>
+                  <th class="text-center">Vendor Adv Balance Paid</th>
+                  <th class="text-center">Adv Balance Date</th>
+                  <th class="text-center">Vendor Final Balance</th>
+                  <th class="text-center">Vendor Final Balance Date</th>
+                  <th class="text-center">CBM</th>
+                  <th class="text-center">Ctns</th>
+                  <th class="text-center">Gross Wt</th>
+                  <th class="text-center">Net Wt</th>
+                </tr>
+                </thead>
+            
+                <tbody>
+                  <tr>
+                    <td class="text-center" >{{ each.s_no }}</td>
+                    <td class="text-center" >{{ each.list_no }}</td>
+                    <td class="text-center" >{{ each.sub_list_no }}</td>
+                    <td class="text-center" >{{ each.company_name }}</td>
+                    <td class="text-center" >{{ each.contact_no }}</td>
+                    <td class="text-center" >{{ each.email }}</td>
+                    <td class="text-center" >{{ each.wechat }}</td>
+                    <td class="text-center" >{{ each.account_details }}</td>
+                    <td class="text-center" >{{ each.invoice_date }}</td>
+                    <td class="text-center" >{{ each.invoice_no }}</td>
+                    <td class="text-center" >{{ each.description }}</td>
+                    <td class="text-center" >{{ each.model }}</td>
+                    {% if each.photo %}
+                    <td><img src="{{ each.photo.url }}" alt="A picture" width="100px" height="100px"></td>
+                    {% endif %}
+                    <td class="text-center">{{ each.dimensions }}</td>
+                    <td class="text-center">{{ each.remarks }}</td>
+                    <td class="text-center">{{ each.unit }}</td>
+                    <td class="text-center">{{ each.unit_price }}</td>
+                    <td class="text-center">{{ each.qty }}</td>
+                    <td class="text-center">{{ each.customer_amount }}</td>
+                    <td class="text-center">{{ each.customer_amount_after_discount }}</td>
+                    <td class="text-center">{{ each.commission }}</td>
+                    <td class="text-center">{{ each.actual_vendor_amount }}</td>
+                    <td class="text-center">{{ each.vendor_deposit_persentage }}</td>
+                    <td class="text-center">{{ each.vendor_advance_deposit_amount }}</td>
+                    <td class="text-center">{{ each.token_deposit_customer }}</td>
+                    <td class="text-center">{{ each.token_deposit_HSTC }}</td>
+                    <td class="text-center">{{ each.token_deposit_date }}</td>
+                    <td class="text-center">{{ each.vendor_advance_balance }}</td>
+                    <td class="text-center">{{ each.vendor_advance_balance_paid }}</td>
+                    <td class="text-center">{{ each.advance_balance_date }}</td>
+                    <td class="text-center">{{ each.vendor_advance_balance_paid }}</td>
+                    <td class="text-center">{{ each.vendor_final_balance_date }}</td>
+                    <td class="text-center">{{ each.CBM_m3 }}</td>
+                    <td class="text-center">{{ each.ctns }}</td>
+                    <td class="text-center">{{ each.gross_weight_kgs }}</td>
+                    <td class="text-center">{{ each.net_weight_kgs }}</td>
+                  </tr>      
+                </tbody>
+              </table>
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      
+      <br><br>
+    <!-- -----------
+    {% for each in vendor_list %}
         <table style="border: solid 1px;">
             <thead  style="border: solid 1px;">
                 <th style="border: solid 1px">Vendor Name</th>
                 <th style="border: solid 1px">Vendor Contact</th>
-                <th style="border: solid 1px">vedor pk</th>
+                <th style="border: solid 1px">Vendor pk</th>
                 <th style="border: solid 1px">Edit</th>
                 <th style="border: solid 1px">Delete</th>
             </thead>
@@ -42,10 +265,49 @@
                 {% endfor %}
             </tbody>
         </table>
- 
+     {% empty %}
+        <li>No articles yet.</li>
          <hr>
          <a href="{% url 'customer:customer_pi_list' object.pk %}"><h2>Customer PI View: </h2> </a>
          <hr>
+    {% endfor %} -->
+  
+    <div class="container ptos">
+      <h4 style="text-align: center; width: 100%;">Has the vendor/s returned with the manufacturing dates? <br/> If yes, click the below button to proceed further.</h4>
+      <button class="btn stg-c-n"> <span><i class="fa fa-check" aria-hidden="true"></i></span> Mark Stage as complete</button>
+      <button class="btn stg-c-y"> <span><i class="fa fa-check" aria-hidden="true"></i></span> Stage Completed</button>
+      <a href="{% url 'customer:shipment_type' object.pk %}"><button class="btn order-summary">Go to Delivery Dates  <span><i class="fa fa-calendar-check" aria-hidden="true"></i></span></button></a>
+      <a href="{% url 'customer:customer_pi_list' object.pk %}" target="blank"><button class="btn order-summary">Generate Customer PI  <span><i class="fa fa-file-contract" aria-hidden="true"></i></span></button></a>
+      <br>
+      <p class="sugg">Click on the button again to undo the change</p>
+    </div>
+
+  <script>
+      jQuery(document).ready(function(){
+        $('.stg-c-n').click(function(){
+          if($(this).hasClass("stg-c-n"))
+              $(".stg-c-n").css('display', 'none');
+              $(".stg-c-y").css('display', 'inline');
+              $(".sugg").css('display', 'inline');
+              // $(".stg-c-n").removeClass("stg-c-n").addClass("stg-c-y");
+        });
+
+        $('.stg-c-y').click(function(){
+          if($(this).hasClass("stg-c-y"))
+              $(".stg-c-y").css('display', 'none');
+              $(".stg-c-n").css('display', 'inline');
+              $(".sugg").css('display', 'none');
+              // $(".stg-c-n").removeClass("stg-c-n").addClass("stg-c-y");
+        });
+
+        $('.expand').click(function(){
+          
+            $(this).text($(this).text() == 'Collapse All' ? 'Expand All' : 'Collapse All');
+        
+        });
+      });
+    </script>
+  </body>
 <P></P>
     <hr>
     <a href="{% url 'customer:shipment_type' object.pk %}">Dilivery Dates</a>

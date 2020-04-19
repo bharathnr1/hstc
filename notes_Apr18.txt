@@ -1,0 +1,3 @@
+1. Image in generate shipment marks
+
+2. Update modal is not updating pictures - both inspection and container loading - it is updating text only.

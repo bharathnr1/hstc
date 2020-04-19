@@ -1,16 +1,31 @@
+{% load bootstrap4 %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Shipment Type</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        .shipment{
+            margin: 0 auto; 
+            margin-top: 3em;
+            border: 3px solid #555555;
+            padding: 1.5em;
+        }
+    </style>
 </head>
     <body>
-        <h1>What type Shipment is required? </h1>
-        <form method="post" enctype="multipart/form-data" >
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Submit" />
-        </form>
+        <div class="container shipment">
+        <h2>What type of Shipment is required? </h2>
+            <form method="post" enctype="multipart/form-data" >
+                {% csrf_token %}
+                <!-- {{ form.as_p }} -->
+                {% bootstrap_form form %}
+                <input class="btn btn-success" type="submit" value="Submit" />
+            </form>
+        </div>
     </body>
 </html>

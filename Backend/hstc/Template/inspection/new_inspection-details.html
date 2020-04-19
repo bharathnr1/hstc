@@ -1,0 +1,174 @@
+{% load static %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css"/>
+   
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static '/css/inspection-details.css' %}">
+    
+    <title>Inspection Details</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="nav-link" href="./main.html">HSTC <span class="sr-only">(current)</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Customers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Vendors</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+
+    <!-- Table -->
+<div class="mb-3 card">
+    <div class="card-header-buttons">
+      <button class="btn btn-danger"><span><i class="fa fa-download" aria-hidden="true"></i></span>&nbsp Download Excel</button>
+    </div>
+  <div class="scrollit" id="style-1">
+    <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+      <thead>
+      <tr>
+        <th class="text-center">Customer</th>
+        <th class="text-center">Vendor Company Name</th>
+        <th class="text-center">Acutal Inspection Date</th>
+        <th class="text-center">Inspection Done By</th>
+        <th class="text-center">Inspection Remarks</th>
+        <th class="text-center">Inspection Photo 1</th>
+        <th class="text-center">Inspection Photo 2</th>
+        <th class="text-center">Update</th>
+      </tr>
+      </thead>
+  
+      <tbody>				
+  
+        {% for i in inspection_obj %}
+        <tr>
+            <td class="text-center">{{i.customer}}</td>
+            <td class="text-center">{{i.vendor_company_name}}</td>
+            <td class="text-center">{{i.actual_inspection_date}}</td>
+            <td class="text-center">{{i.inspection_done_by}}</td>
+            <td class="text-center">{{i.inspection_remarks}}</td>
+            <td> <img src="{{ i.inspection_photo_1.url }}" alt="Inspection Picture 1" height="100px" width="100px" class="src"></td>
+            <td> <img src="{{ i.inspection_photo_2.url }}" alt="Inspection Picture 2" height="100px" width="100px" class="src"></td>
+            <td>
+                <button type="button" 
+                        class="btn btn-danger" 
+                        data-toggle="modal" 
+                        data-target="#exampleModal{{i.pk}}" 
+                        style="background-color: #ff4d44 !important; font-size: 13px;">
+                    Update
+                </button>
+              </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  </div>
+<br><hr><br>
+    Inspection Detils: 
+    <table style="border: solid black 1px;">
+        <thead style="border: solid black 1px;">
+            <th style="border: solid black 1px;">    customer</th>
+            <th style="border: solid black 1px;">   vendor_company_name</th>
+            <th style="border: solid black 1px;">    actual_inspection_date</th>
+            <th style="border: solid black 1px;">    inspection_done_by</th>
+            <th style="border: solid black 1px;">    inspection_remarks</th>
+            <th style="border: solid black 1px;">    inspection_photo_1</th>
+            <th style="border: solid black 1px;">    inspection_photo_2</th>        
+            <th style="border: solid black 1px;">    UPDATE</th>        
+        </thead>
+        <tbody>
+        {% for i in inspection_obj %}
+            <tr>
+                <td style="border: solid black 1px;">    {{i.customer}}</td>
+                <td style="border: solid black 1px;">    {{i.vendor_company_name}}</td>
+                <td style="border: solid black 1px;">    {{i.actual_inspection_date}}</td>
+                <td style="border: solid black 1px;">    {{i.inspection_done_by}}</td>
+                <td style="border: solid black 1px;">    {{i.inspection_remarks}}</td>
+                <td style="border: solid black 1px;"> <img src="{{ i.inspection_photo_1.url }}" alt="Inspection Picture 1" style="width: 200px; height: 200px;"></td>
+                <td style="border: solid black 1px;"> <img src="{{ i.inspection_photo_2.url }}" alt="Inspection Picture 2" style="width: 200px; height: 200px;"></td>
+                <td>
+                    <button type="button" class="btn btn-success xoxo" data-toggle="modal" data-target="#exampleModal{{i.pk}}" >
+                        Update
+                    </butaton>
+                </td>
+
+                <div class="modal fade" id="exampleModal{{i.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Debit Amount</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                        <form  method="post" enctype="multipart/form-data"  action="{% url 'customer:update_inspection' i.pk id %}">
+                            {{i.pk }} {{id}}
+                            {% csrf_token %}
+                            {% bootstrap_form inspection_form %}
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button class="btn btn-success" style=" display:block; margin:0px auto; padding:1% 30%;" type="submit" name="button">Submit</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                    </div>
+                </div> 
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="container ptos">
+      <h4 style="text-align: center; width: 100%;">Has the vendor/s returned with the manufacturing dates? <br/> If yes, click the below button to proceed further.</h4>
+      <button class="btn stg-c-n"> <span><i class="fa fa-check" aria-hidden="true"></i></span> Mark Stage as complete</button>
+      <button class="btn stg-c-y"> <span><i class="fa fa-check" aria-hidden="true"></i></span> Stage Completed</button>
+      
+      <a href="{% url 'customer:display_inspection' id %}"><button class="btn inspection">Go to Shipment Marks  <span><i class="fa fa-people-carry" aria-hidden="true"></i></span></button></a>
+  
+      <p>Click on the above button to undo the change</p>
+  </div>
+
+    <script>
+        sessionStorage.setItem("Page2Visited", "True");
+        // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+        $(window).on("load resize ", function() {
+        var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+        $('.tbl-header').css({'padding-right':scrollWidth});
+        }).resize();
+
+        $('#exampleModal{{i.pk}}').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+            })
+    </script>
+</body>
+</html>

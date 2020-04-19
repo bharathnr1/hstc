@@ -1,2 +1,23 @@
-1. Once front end is integrated with back end, progress bar needs to be changed.
-A boolean value for 'stage complete' will be asked for from the admin and based on that we will trigger the progress bar width.
+April 3rd
+
+1. http://127.0.0.1:8000/customer/dilivery-dates/5
+Datetime input box has to be given. 
+The html is oneshipment.html
+
+2. Delivery Dates page - order by company name to group the items from the same company together.
+
+3. In Delivery Page, once you select the shipment type and click submit, 
+   when you click back, it should directly go previous stage (order summary).
+   Right now, if you click back, it is going to the page where you select shipment type again.
+   Similarly, once shipment type is selected, when customer clicks on proceed to delivery from order summary,
+   it should not ask him to select shipment type again.
+
+4. Order Summary Page - Total amount for all the vendors/products should be shown at the end of the page.
+
+5. Instead of putting if photo condition in jinga, add attribute to model field - 'default_pic'.
+   If there is no picture, it should take the default picture.
+
+6. In Update modal for Inspection, populate the fields with the existing data. Right now, a empty form is coming up in the modal.
+
+7. Need to ask him on the design of shipment mark generation - what to print is clear but the size, spacing and way to print them needs to be discussed.
+   Drawing on pen and paper would give us a good idea.

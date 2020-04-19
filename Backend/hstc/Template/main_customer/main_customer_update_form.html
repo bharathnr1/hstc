@@ -1,16 +1,41 @@
+{% load bootstrap4 %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Customer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        /* .edit_cus{
+            width: 33%;
+        }
+
+        .form-control{
+            width: 33%;
+            margin: 0 auto;
+        }
+
+        .form-group{
+            margin: 0 auto;
+        } */
+    </style>
 </head>
     <body>
-        <h1>Customer Form! </h1>
-        <form method="post" enctype="multipart/form-data" >
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Submit" />
-        </form>
+        <div class="container" style="margin: 0 auto; margin-top: 3em;">
+            <h1>Edit Customer Form! </h1>
+            <h5>Please enter the changes you would like to make and click submit.</h5>
+            <form method="post" enctype="multipart/form-data" >
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                
+                <!-- {{ form.as_p }} -->
+
+                <input class="btn btn-success" type="submit" value="Submit" />
+            </form>
+        </div>  
     </body>
 </html>

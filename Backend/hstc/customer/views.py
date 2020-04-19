@@ -271,6 +271,10 @@ def dilivery_dates(request, pk):
     customer_object = get_object_or_404(Customer, pk=pk)
     vendor_queryset = Customer_Details.objects.filter(customer=customer_object).all()
     y= partShipmentForm()
+
+    inspection_obj = Inspection.objects.filter(customer=customer_object).all()
+    print("Inspection data inside delivery function")
+    print(inspection_obj)
     if customer_object.shipment_type == "One Shipment":
         x=oneshipment_form()
         if request.method == "POST":
@@ -285,7 +289,7 @@ def dilivery_dates(request, pk):
                 return render(request, "dilivery/DiliveryListView.html", {"vendor_queryset":vendor_queryset, "partShipmentForm":x,"id":pk, "shipment":customer_object.shipment_type})        
         return render(request, "dilivery/oneshipment.html", { "x":x })
     elif customer_object.shipment_type == "Part Shipments":
-        return render(request, "dilivery/DiliveryListView.html", {"vendor_queryset" : vendor_queryset, "partShipmentForm":y, "id":pk, "shipment": None})            
+        return render(request, "dilivery/DiliveryListView.html", {"vendor_queryset" : vendor_queryset, "partShipmentForm":y, "id":pk, "shipment": None, 'inspection_obj': inspection_obj})            
 
 def updatedates(request, pk, id):
     print("ID: ",id)
@@ -321,8 +325,17 @@ def create_inspection(request, pk):
 def display_inspection(request, pk):
     customer_object = get_object_or_404(Customer, pk=pk)
     inspection_obj = Inspection.objects.filter(customer=customer_object).all()
-    inspection_form = Inspection_Form(inspection_obj)
-    return render(request, "inspection/inspection-details.html", {"inspection_obj":inspection_obj, "inspection_form":Inspection_Form, "id":pk})
+# <<<<<<< HEAD
+#     inspection_form = Inspection_Form(inspection_obj)
+#     return render(request, "inspection/inspection-details.html", {"inspection_obj":inspection_obj, "inspection_form":Inspection_Form, "id":pk})
+# =======
+    inspection_form = Inspection_Form()
+
+    Container_loading_obj = Container_loading.objects.filter(customer=customer_object).all()
+    print("Inspection display: ")
+    print(customer_object.id)
+    return render(request, "inspection/inspection-details.html", {"inspection_obj":inspection_obj, "inspection_form":Inspection_Form, "id":pk, "Container_loading_obj": Container_loading_obj})
+# >>>>>>> e748b7bf184dd57342434278a5ed26d068f464fd
     
 
 def update_inspection( request, pk, id):

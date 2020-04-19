@@ -9,6 +9,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        
 
         <link rel="stylesheet" href="../css/order_summary.css"> 
     
@@ -38,35 +39,62 @@
     </nav>
 
     <br><br>
-    <div class="progress">
-      <div class="progress-bar"></div>
-    </div>
+    <nav class="navbar navbar-light bg-light">
+      <div class="progress">
+        <div class="progress-bar"></div>
+      </div>
+    </nav>
+    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item btn btn-success">
-            <a class="nav-link" href="./cus_detail.html"><button id="nav-button">Customer PI &nbsp &nbsp</button></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a href=""><button class="box7">Cust PI</button></a>
           </li>
-          <li class="nav-item active btn btn-success">
-            <a class="nav-link" href="./order_summary.html"><button id="nav-button">Order Summary &nbsp &nbsp</button></a>
+          <li class="nav-item">
+            <a href=""><button class="spike1"></button></a>
           </li>
-          <li class="nav-item btn btn-success">
-            <a class="nav-link" href="./inspection.html"><button id="nav-button">Inspection Page &nbsp &nbsp</button></a>
+          <li class="nav-item">
+            <a href=""><button class="box2">Summary</button></a>
           </li>
-          <li class="nav-item btn btn-success">
-            <a class="nav-link" href="./shipment_marks.html"><button id="nav-button">Shipment Marks &nbsp &nbsp</button></a>
+          <li class="nav-item">
+            <button class="spike2"></button>
           </li>
-          <li class="nav-item btn btn-success">
-            <a class="nav-link" href="./container_pics.html"><button id="nav-button">Container Loading Pics &nbsp &nbsp</button></a>
+          <li class="nav-item">
+            <button class="box3">Inspection</button>
           </li>
-          <li class="nav-item btn btn-success">
-            <a class="nav-link" href="./doorstep_grievance.html"><button id="nav-button">Delivery and Grievance &nbsp &nbsp</button></a>
+          <li class="nav-item">
+            <button class="spike3"></button>
+          </li>
+          <li class="nav-item">
+            <button class="box4">Shipment</button>
+          </li>
+          <li class="nav-item">
+            <button class="spike4"></button>
+          </li>
+          <li class="nav-item">
+            <button class="box5">Container</button>
+          </li>
+          <li class="nav-item">
+            <button class="spike5"></button>
+          </li>
+          <li class="nav-item">
+            <button class="box6">Delivery</button>
           </li>
         </ul>
       </div>
-  </nav>
-
-<br>
+    </nav>
+<br><br>
+<!-- Main Customer Details -->
+    <div class="container">
+      <h2>Customer Details</h2>
+    </div>
+<br><br>
+<!-- Vendor List and table expand -->
     <div class="vendor_list">
         <h2 style="text-align: center;">Order Summary based on Vendors</h2>
         <p style="text-align: center;">Click on the vendors to view complete information</p>
@@ -78,7 +106,6 @@
                 <a data-toggle="collapse" href="#collapse1">
                   Elegancy 高泽美家	- S0539416 0000409052 - Dressing table + Side table + TV Cabinet"
                 </a>
-                <span style="margin: 95%;"> <button class="btn btn-success">Edit</button></span>
               </h4>
             </div>
             <div id="collapse1" class="panel-collapse collapse">
@@ -86,26 +113,26 @@
                 <tr>
                     <th>Photos</th>
                     <th>Description</th>
-                    <th>Model</th>
-                    <th>Color</th>
-                    <th>Remarks</th>
                     <th>Quantity</th>
-                    <th>Unit Price</th>
-                    <th>Manufacturing Date</th>
-                    <th>Inspection Date</th>
-                    <th>Shipment Number</th>
+                    <th>Advance Balance Date</th>
+                    <th>Manufacturing Days</th>
+                    <th>Delivery Date</th>
+                    <th>Inspection Date(Planned)</th>
+                    <th></th>
                 </tr>
                 <tr>
-                  <th><img src="../images/a.JPG" alt="A picture" width="150px" height="150px"></th>
+                  <td><img src="../images/a.JPG" alt="A picture" width="150px" height="150px"></td>
                   <td>Bed</td>
-                  <td>Teak Wood</td>
-                  <td>SAS</td>
-                  <td>Full Leather</td>
                   <td>1</td>
-                  <td>18300</td>
+                  <td>1 April 2020</td>
                   <td>20</td>
-                  <td>11 April 2020</td>
-                  <td>2</td>
+                  <td>20 April 2020</td>
+                  <td>21 April 2020</td>
+                  <td>
+                    <button class="save">Save</button>
+                    <button class="edit">Edit</button>
+                    <button class="delete">Delete</button>
+                  </td>                
                 </tr>
               </table>
             </div>
@@ -119,46 +146,46 @@
                 <a data-toggle="collapse" href="#collapse2">
                   DaiFenDi 黛分迪 -	0001415	- Sofa + Dining Set + Center Table
                 </a>
-                <span style="margin: 95%;"> <button class="btn btn-success">Edit</button></span>
               </h4>
             </div>
             <div id="collapse2" class="panel-collapse collapse">
               <table>
                 <tr>
-                    <th>Photos</th>
-                    <th>Description</th>
-                    <th>Model</th>
-                    <th>Color</th>
-                    <th>Remarks</th>
-                    <th>Quantity</th>
-                    <th>Unit Price</th>
-                    <th>Manufacturing Dates</th>
-                    <th>Inspection Date</th>
-                    <th>Shipment Number</th>
+                  <th>Photos</th>
+                  <th>Description</th>
+                  <th>Quantity</th>
+                  <th>Advance Balance Date</th>
+                  <th>Manufacturing Days</th>
+                  <th>Delivery Date</th>
+                  <th>Inspection Date(Planned)</th>
+                  <th></th>
                 </tr>
                 <tr>
-                  <th><img src="../images/b.JPG" alt="A picture" width="150px" height="150px"></th>
+                  <td><img src="../images/b.JPG" alt="A picture" width="150px" height="150px"></td>
                   <td>Bed</td>
-                  <td>Teak Wood</td>
-                  <td>SAS</td>
-                  <td>Full Leather</td>
                   <td>1</td>
-                  <td>18300</td>
-                  <td>15</td>
-                  <td>06 April 2020</td>
-                  <td>1</td>
-                </tr>
+                  <td>1 April 2020</td>
+                  <td>20</td>
+                  <td>20 April 2020</td>
+                  <td>21 April 2020</td>
+                  <td>
+                    <button class="save">Save</button>
+                    <button class="edit">Edit</button>
+                    <button class="delete">Delete</button>
+                  </td>                </tr>
                 <tr>
-                  <th><img src="../images/d.JPG" alt="A picture" width="150px" height="150px"></th>
+                  <td><img src="../images/d.JPG" alt="A picture" width="150px" height="150px"></td>
                   <td>Bed</td>
-                  <td>Teak Wood</td>
-                  <td>SAS</td>
-                  <td>Full Leather</td>
                   <td>1</td>
-                  <td>18300</td>
-                  <td>25</td>
-                  <td>16 April 2020</td>
-                  <td>3</td>
+                  <td>1 April 2020</td>
+                  <td>20</td>
+                  <td>20 April 2020</td>
+                  <td>21 April 2020</td>
+                  <td>
+                    <button class="save">Save</button>
+                    <button class="edit">Edit</button>
+                    <button class="delete">Delete</button>
+                  </td>                
                 </tr>
               </table>
             </div>
@@ -172,34 +199,33 @@
                 <a data-toggle="collapse" href="#collapse3">
                   Cayman 卡宴 - 0000857 Sofa + Center Table + Leisure Chair + Decoration Shelf
                 </a>
-                <span style="margin: 95%;"> <button class="btn btn-success">Edit</button></span>
               </h4>
             </div>
             <div id="collapse3" class="panel-collapse collapse">
               <table>
                 <tr>
-                    <th>Photos</th>
-                    <th>Description</th>
-                    <th>Model</th>
-                    <th>Color</th>
-                    <th>Remarks</th>
-                    <th>Quantity</th>
-                    <th>Unit Price</th>
-                    <th>Manufacturing Dates</th>
-                    <th>Inspection Date</th>
-                    <th>Shipment Number</th>
+                  <th>Photos</th>
+                  <th>Description</th>
+                  <th>Quantity</th>
+                  <th>Advance Balance Date</th>
+                  <th>Manufacturing Days</th>
+                  <th>Delivery Date</th>
+                  <th>Inspection Date(Planned)</th>
+                  <th></th>
                 </tr>
                 <tr>
-                  <th><img src="../images/c.JPG" alt="A picture" width="150px" height="150px"></th>
+                  <td><img src="../images/c.JPG" alt="A picture" width="150px" height="150px"></td>
                   <td>Bed</td>
-                  <td>Teak Wood</td>
-                  <td>SAS</td>
-                  <td>Full Leather</td>
                   <td>1</td>
-                  <td>18300</td>
-                  <td>25</td>
-                  <td>16 April 2020</td>
-                  <td>3</td>
+                  <td>1 April 2020</td>
+                  <td>20</td>
+                  <td>20 April 2020</td>
+                  <td>21 April 2020</td>
+                  <td>
+                    <button class="save">Save</button>
+                    <button class="edit">Edit</button>
+                    <button class="delete">Delete</button>
+                  </td>
                 </tr>
               </table>
             </div>
@@ -211,14 +237,13 @@
         </div>
         <br><br>
      
-  
+  <!-- ------------------------------------------------------ -->
       
         <div class="panel-group">
           <div class="panel panel-default shipments">
             <div class="panel-heading">
               <h4 class="panel-title">
                 <a data-toggle="collapse" href="#shipment1">Shipment 1 </a>
-                <span style="margin: 95%;"> <button class="btn btn-success">Edit</button></span>
               </h4>
             </div>
             <div id="shipment1" class="panel-collapse collapse">
@@ -246,6 +271,7 @@
                   <td>15</td>
                   <td>06 April 2020</td>
                   <td>1</td>
+                  <td><button class="edit">Edit</button></td>
                 </tr>
               </table>
             </div>
@@ -257,7 +283,6 @@
             <div class="panel-heading">
               <h4 class="panel-title">
                 <a data-toggle="collapse" href="#shipment2">Shipment 2</a>
-                <span style="margin: 95%;"> <button class="btn btn-success">Edit</button></span>
               </h4>
             </div>
             <div id="shipment2" class="panel-collapse collapse">
@@ -285,6 +310,7 @@
                   <td>20</td>
                   <td>11 April 2020</td>
                   <td>2</td>
+                  <td><button class="edit">Edit</button></td>
                 </tr>
               </table>
             </div>
@@ -296,7 +322,6 @@
             <div class="panel-heading">
               <h4 class="panel-title">
                 <a data-toggle="collapse" href="#shipment3">Shipment 3</a>
-                <span style="margin: 95%;"> <button class="btn btn-success">Edit</button></span>
               </h4>
             </div>
             <div id="shipment3" class="panel-collapse collapse">
@@ -324,6 +349,7 @@
                   <td>25</td>
                   <td>16 April 2020</td>
                   <td>3</td>
+                  <td><button class="edit">Edit</button></td>
                 </tr>
                 <tr>
                   <th><img src="../images/d.JPG" alt="A picture" width="150px" height="150px"></th>
@@ -336,6 +362,7 @@
                   <td>25</td>
                   <td>16 April 2020</td>
                   <td>3</td>
+                  <td><button class="edit">Edit</button></td>
                 </tr>
               </table>
             </div>
@@ -355,5 +382,129 @@
       <br><br><br>
       <a href="./inspection.html"><button class="btn btn-success" style="margin-left: 43%; font-size: 20px;">Go to Inspection</button></a>
       <br><br><br>
+      <script>
+        $(document).ready(function(){  
+        // Box7
+        $('.box7').mouseover(function(){
+            $('.box7').css('background-color',' #fff');
+            $('.box7').css('color',' #7352a4');
+            $('.box7').css('font-size',' 22px');
+            $('.spike1').css('border-left-color', '#fff');
+        });
+        $('.box7').mouseout(function(){
+            $('.box7').css('background-color',' #7352a4');
+            $('.box7').css('color',' #fff');
+            $('.box7').css('font-size',' 20px');
+            $('.spike1').css('border-left-color', '#7352a4');
+        });
+    
+        // Box2
+        $('.box2').mouseover(function(){
+            $('.box2').css('background-color',' #fff');
+            $('.box2').css('color',' #7352a4');
+            $('.box2').css('font-size',' 22px');
+            $('.spike1').css('border-right-color', '#fff');
+            $('.spike2').css('border-left-color', '#fff');
+        });
+        $('.box2').mouseout(function(){
+            $('.box2').css('background-color',' #7352a4');
+            $('.box2').css('color',' #fff');
+            $('.box2').css('font-size',' 20px');
+            $('.spike1').css('border-right-color', '#7352a4');
+            $('.spike2').css('border-left-color', '#7352a4');
+        });
+    
+        // Box3
+        $('.box3').mouseover(function(){
+              $('.box3').css('background-color',' #fff');
+              $('.box3').css('color',' #7352a4');
+              $('.box3').css('font-size',' 22px');
+              $('.spike2').css('border-right-color', '#fff');
+              $('.spike3').css('border-left-color', '#fff');
+          });
+          $('.box3').mouseout(function(){
+              $('.box3').css('background-color',' #7352a4');
+              $('.box3').css('color',' #fff');
+              $('.box3').css('font-size',' 20px');
+              $('.spike2').css('border-right-color', '#7352a4');
+              $('.spike3').css('border-left-color', '#7352a4');
+          });
+  
+         // Box4
+         $('.box4').mouseover(function(){
+              $('.box4').css('background-color',' #fff');
+              $('.box4').css('color',' #7352a4');
+              $('.box4').css('font-size',' 22px');
+              $('.spike3').css('border-right-color', '#fff');
+              $('.spike4').css('border-left-color', '#fff');
+          });
+          $('.box4').mouseout(function(){
+              $('.box4').css('background-color',' #7352a4');
+              $('.box4').css('color',' #fff');
+              $('.box4').css('font-size',' 20px');
+              $('.spike3').css('border-right-color', '#7352a4');
+              $('.spike4').css('border-left-color', '#7352a4');
+          }); 
+          
+           // Box5
+           $('.box5').mouseover(function(){
+              $('.box5').css('background-color',' #fff');
+              $('.box5').css('color',' #7352a4');
+              $('.box5').css('font-size',' 22px');
+              $('.spike4').css('border-right-color', '#fff');
+              $('.spike5').css('border-left-color', '#fff');
+          });
+          $('.box5').mouseout(function(){
+              $('.box5').css('background-color',' #7352a4');
+              $('.box5').css('color',' #fff');
+              $('.box5').css('font-size',' 20px');
+              $('.spike4').css('border-right-color', '#7352a4');
+              $('.spike5').css('border-left-color', '#7352a4');
+          }); 
+  
+          // Box6
+          $('.box6').mouseover(function(){
+                $('.box6').css('background-color',' #fff');
+                $('.box6').css('color',' #7352a4');
+                $('.box6').css('font-size',' 22px');
+                $('.spike5').css('border-right-color', '#fff');
+            });
+            $('.box6').mouseout(function(){
+                $('.box6').css('background-color',' #7352a4');
+                $('.box6').css('color',' #fff');
+                $('.box6').css('font-size',' 20px');
+                $('.spike5').css('border-right-color', '#7352a4');
+            });          
+    });
+
+    $(document).on('click', '.edit', function() {
+  $(this).parent().siblings('td').each(function() {
+    var content = $(this).html();
+    $(this).html('<input value="' + content + '" />');
+  });
+  
+  $(this).siblings('.save').show();
+  $(this).siblings('.delete').hide();
+  $(this).hide();
+});
+
+$(document).on('click', '.save', function() {
+  
+  $('input').each(function() {
+    var content = $(this).val();
+    $(this).html(content);
+    $(this).contents().unwrap();
+  });
+  $(this).siblings('.edit').show();
+  $(this).siblings('.delete').show();
+  $(this).hide();
+  
+});
+
+$(document).on('click', '.delete', function() {
+  $(this).parents('tr').remove();
+});
+  
+  </script>
 </body>
 </html>
