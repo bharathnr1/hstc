@@ -6,14 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HSTC</title>
 
-    <!-- JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+   <!-- FontAwesome CSS -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Cormorant Garamond' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Libre Baskerville' rel='stylesheet'>
@@ -23,42 +21,37 @@
 
 </head>
     <body>
+        
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <!-- <a class="nav-link" href="./main.html">HSTC <span class="sr-only">(current)</span></a> -->
-            <a class="navbar-brand" href="{% url 'customer:main_customer-list' %}" style="font-family: 'Montserrat';font-size: 22px; font-weight: 600; letter-spacing: 1px;">
-                <img src="{% static '/images/hstc_logo.jpeg' %}" width="30" height="30" class="d-inline-block align-top" alt="">
-                HSTC
-            </a>
-            <a class="navbar-brand" href="{% url 'customer:main_customer-list' %}" style="font-family: 'Cormorant Garamond';font-size: 24px; font-weight: 600; letter-spacing: 1px;">
-                <img src="{% static '/images/hstc_logo.jpeg' %}" width="30" height="30" class="d-inline-block align-top" alt="">
-                HSTC
-            </a>
-            <a class="navbar-brand" href="{% url 'customer:main_customer-list' %}" style="font-family: 'Libre Baskerville';font-size: 22px; font-weight: 500; letter-spacing: 1px;">
-                <img src="{% static '/images/hstc_logo.jpeg' %}" width="30" height="30" class="d-inline-block align-top" alt="">
-                HSTC
+            <a class="navbar-brand" href="{% url 'customer:main_customer-list' %}">
+                <img src="{% static '/images/hstc_logo.jpeg' %}" width="30" height="30" class="d-inline-block align-top" alt="Logo">
+                &nbsp HSTC
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-              <!-- Center Aligned -->
-              <ul class="navbar-nav ml-auto">
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-4" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-              </ul>
-
               <!-- Right Aligned -->
               <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="#">Notifications</a>
-                  </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">User</a>
+                </li> -->
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-4 btn-success" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+                <li class="nav-item dropdown active user">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+                    <span><i class="fa fa-user"></i></span>&nbsp User
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#"><span><i class="fa fa-user-lock"></i></span>&nbsp Manage Access</a>
+                    <a class="dropdown-item" href="#"><span><i class="fa fa-sign-out-alt"></i></span>&nbsp Logout</a>
+                  </div>
                 </li>
               </ul>
-              
             </div>
         </nav>
 
@@ -300,5 +293,10 @@
             <li>No articles yet.</li>
         {% endfor %} -->
 
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.min.js"></script>
+            
     </body>
 </html>

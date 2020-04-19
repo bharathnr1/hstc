@@ -32,16 +32,7 @@
     color: white;
 }
 
-.btn-danger:hover{
-    float: right;
-    margin-right: 0.4em;
-    margin-bottom: 0.2em;
-    margin-top: 0.3em;
-    background-color: #d3241b !important;
-    font-size: 14px;
-    padding: 0.3em;
-    color: white;
-}
+
 
 .card-header-buttons{
     background-color: rgba(233, 229, 229, 0.753) !important;
@@ -195,11 +186,29 @@
     margin-bottom: 1em;
 }
 
-.inspection{
+.shipment_marks{
     border: 1px solid white;
     color: white;
 }
-.inspection:hover{
+.shipment_marks:hover{
+    background-color: white;
+    color: black;
+}
+
+.goto_cont_loading_list{
+    border: 1px solid white;
+    color: white;
+}
+.goto_cont_loading_list:hover{
+    background-color: white;
+    color: black;
+}
+
+.create_cont_load{
+    border: 1px solid white;
+    color: white;
+}
+.create_cont_load:hover{
     background-color: white;
     color: black;
 }

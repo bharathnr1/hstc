@@ -1,3 +1,48 @@
+/* Navbar start */
+
+.navbar{
+    padding: 0;
+}
+
+.navbar-brand{
+    font-family: 'Libre Baskerville';
+    font-size: 22px; 
+    font-weight: 500; 
+    letter-spacing: 1px;
+    margin-left: 10px;
+}
+
+.user{
+    padding: .5rem 1rem;
+    border-left: 1px solid #ececec;    
+}
+
+.user:hover{
+    background-color: #ececec;
+}
+
+.form-inline{
+    padding-right: 0.5em;
+}
+
+.mr-sm-4, .mx-sm-4{
+    margin-right: 0 !important;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: white !important;
+}
+
+.mr-sm-4:focus{
+    outline: 0 !important;
+}
+
+.my-2{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* Navbar end */
+
 .grid{
     display: grid;
 
@@ -368,5 +413,6 @@ p,a, h1{
     font-weight: 600;
     color: #fff;
     letter-spacing: 0.3px;
+    margin-right: 0.8em;
     /* background-color: #FBA90A; */
 }

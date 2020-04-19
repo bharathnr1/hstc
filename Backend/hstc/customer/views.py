@@ -296,9 +296,11 @@ def display_inspection(request, pk):
     customer_object = get_object_or_404(Customer, pk=pk)
     inspection_obj = Inspection.objects.filter(customer=customer_object).all()
     inspection_form = Inspection_Form()
+
+    Container_loading_obj = Container_loading.objects.filter(customer=customer_object).all()
     print("Inspection display: ")
     print(customer_object.id)
-    return render(request, "inspection/inspection-details.html", {"inspection_obj":inspection_obj, "inspection_form":Inspection_Form, "id":pk})
+    return render(request, "inspection/inspection-details.html", {"inspection_obj":inspection_obj, "inspection_form":Inspection_Form, "id":pk, "Container_loading_obj": Container_loading_obj})
     
 
 def update_inspection( request, pk, id):
