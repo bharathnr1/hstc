@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'customer', 
     'bootstrap4',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -117,7 +118,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-#EMAIL SETTINGS
+# EXCEL Settings
+
+FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
+                        "django_excel.TemporaryExcelFileUploadHandler")
+
+# EMAIL SETTINGS
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp-mail.outlook.com'

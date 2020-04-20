@@ -306,5 +306,11 @@
     <a href="{% url 'customer:create_cont_load'  object.pk %}">Create Customer Loading Objects</a>
     <hr>
     <a href="{% url 'customer:container_loading_list'  object.pk %}">View Customer Loading Objects</a> -->
+    <a href="{% url 'customer:container_loading_list'  object.pk %}">View Customer Loading Objects</a>
+    <hr>
+    <a href="{{ object.shipment_file.url }}">download file</a>
+    <br>
+    <a href="{% url 'customer:uploadfile' object.pk %}">upload file</a>
+
 </body>
 </html>
