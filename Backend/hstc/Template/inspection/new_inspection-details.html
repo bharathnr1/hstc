@@ -131,7 +131,7 @@
                         </div>
                         <div class="modal-body">
                         <form  method="post" enctype="multipart/form-data"  action="{% url 'customer:update_inspection' i.pk id %}">
-                            {{i.pk }} {{id}}
+                      
                             {% csrf_token %}
                             {% bootstrap_form inspection_form %}
                             <div class="modal-footer">
