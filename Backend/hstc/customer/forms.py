@@ -62,7 +62,7 @@ class Inspection_Form(forms.ModelForm):
         widgets = {
             'inspection_done_by': forms.TextInput(attrs={'class':'form-control'}),        
             'inspection_remarks': forms.TextInput(attrs={'class':'form-control'}),                
-            'actual_inspection_date': forms.TextInput(attrs={'class':'form-control'}),        
+            'actual_inspection_date': forms.DateInput(attrs={'class':'datepicker'}),        
             }
         
 # CONTAINER LOADING FORMS
