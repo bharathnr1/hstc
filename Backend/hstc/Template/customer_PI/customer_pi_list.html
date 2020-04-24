@@ -73,7 +73,7 @@
                     <a class="nav-link" href="{% url 'customer:customer_pi_list' customer_object.pk %}">Customer PI</a>
                   </li>
                   <li class="nav-item active stage">
-                      <a class="nav-link" href="{% url 'customer:shipment_type' customer_object.pk %}">Delivery Dates</a>
+                    <a class="nav-link" href="{% url 'customer:dilivery_dates' customer_object.pk %}">Delivery Dates</a>
                   </li>
                   <li class="nav-item active stage">
                     <a class="nav-link" href="{% url 'customer:display_inspection' customer_object.pk %}">Inspection Details</a>
@@ -159,7 +159,7 @@
           <td class="text-center">{{CP.description}}</td>
           <td class="text-center">{{CP.model }}</td>
           {% if CP.photo %}
-          <td><img src="{{ CP.photo.url }}" alt="A picture" width="150px" height="150px"></td>
+          <td><img src="{{ CP.photo.url }}" alt="A picture" width="100px" height="100px"></td>
           {% else %}
           <td><img src="{% static '/images/hstc_logo.jpeg' %}" alt="A picture" width="100px" height="100px"></td>
           {% endif %}

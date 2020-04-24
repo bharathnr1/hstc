@@ -7,22 +7,22 @@
 </head>
 <body>
     {% for shpmnt in vendor_obj %}
-    <table style="border: solid black 1px;">
-        <thead style="border: solid black 1px;">
-            <th style="border: solid black 1px;">Customer</th>
-            <th style="border: solid black 1px;">Model</th>
-            <th style="border: solid black 1px;">Product Discription</th>
-            <th style="border: solid black 1px;">Product Number</th>
-            <th style="border: solid black 1px;">Image</th>
+    <table style="border: solid black 1px; text-align: center; margin-top: 1em;">
+        <thead style="border: solid black 1px; padding-top: 0.5em ;">
+            <th style="border: solid black 1px;padding-top: 0.5em ;">Customer</th>
+            <th style="border: solid black 1px;padding-top: 0.5em ;">Model</th>
+            <th style="border: solid black 1px;padding-top: 0.5em ;">Product Description</th>
+            <th style="border: solid black 1px;padding-top: 0.5em ;">Product Number</th>
+            <th style="border: solid black 1px;padding-top: 0.5em ;">Image</th>
         </thead>
-        <tbody style="border: solid black 1px;">
+        <tbody style="border: solid black 1px; padding-top: 0.5em ;">
             <tr style="border: solid black 1px;">
-                <td style="border: solid black 1px;">{{ shpmnt.customer.customer_name}}</td>
-                <td style="border: solid black 1px;">{{ shpmnt.model }}</td>
-                <td style="border: solid black 1px;">{{ shpmnt.description }}</td>
-                <td style="border: solid black 1px;">{{ shpmnt.customer.customer_name}} {{shpmnt.s_no}} {{shpmnt.list_no}} {{shpmnt.sub_list_no}} {{shpmnt.ctns}} </td>
+                <td style="border: solid black 1px;padding-top: 0.5em ;">{{ shpmnt.customer.customer_name}}</td>
+                <td style="border: solid black 1px;padding-top: 0.5em ;">{{ shpmnt.model }}</td>
+                <td style="border: solid black 1px;padding-top: 0.5em ;">{{ shpmnt.description }}</td>
+                <td style="border: solid black 1px;padding-top: 0.5em ;">{{ shpmnt.customer.customer_name}} {{shpmnt.s_no}} {{shpmnt.list_no}} {{shpmnt.sub_list_no}} {{shpmnt.ctns}} </td>
                 {% if shpmnt.photo %}
-                <td style="border: solid black 1px;"> <img src="{{ shpmnt.photo.url }}"> </td>
+                <td style="border: solid black 1px; text-align: center;"> <img src="{{ shpmnt.photo.url }}" height="100px" width="100px"> </td>
                 {% endif %}
             </tr>
         </tbody>

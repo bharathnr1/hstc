@@ -57,6 +57,7 @@ def main_Customer_Detail(request, pk):
     object = get_object_or_404(Customer, pk=pk)
     vendor_object = Customer_Details.objects.filter(customer=object).all()
     ss=shipment_selection()
+    upload_form = UploadFileForm()
     print("ss created and settings")
     if request.method == "POST":
         form = shipment_selection(request.POST)
@@ -70,7 +71,7 @@ def main_Customer_Detail(request, pk):
             ix.update(shipment_type=temp.shipment_type)
             print("Rendring to dilivery dates.")
             return HttpResponseRedirect(reverse('customer:dilivery_dates',args=[pk]))
-    return render(request, "main_customer/main_customer_detail.html", {"vendor_list":vendor_object,"object":object, "form":ss})
+    return render(request, "main_customer/main_customer_detail.html", {"vendor_list":vendor_object,"object":object, "form":ss, "upload_form":upload_form})
 
 def uplaod_file(request, pk):
 # We need to check with bharath that is there any kind of dependancy on expand feature on customer detail page for expanding one vendor detail.
@@ -352,7 +353,6 @@ def dilivery_dates(request, pk):
     customer_object = get_object_or_404(Customer, pk=pk)
     vendor_queryset = Customer_Details.objects.filter(customer=customer_object).all()
     y= partShipmentForm()
-
     inspection_obj = Inspection.objects.filter(customer=customer_object).all()
     print("Inspection data inside delivery function")
     print(inspection_obj)

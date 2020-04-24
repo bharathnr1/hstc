@@ -103,7 +103,8 @@
     animation: gradient 5s ease infinite; */
     color: white;
     background-color: #da251c;
-    background: linear-gradient(-90deg, #ff4d44, #da251c, #9b0b03 90%);
+    /* background: linear-gradient(-90deg, #ff4d44, #da251c, #9b0b03 90%); */
+    background: linear-gradient(-90deg, #d9463f, #ce261d, #9b0b03 90%);
     border: 1px solid white;
     border-radius: 8px;
 
@@ -170,6 +171,7 @@
     width: 200px;
     height: 60px;
     margin-left: 1.2em;
+    font-size: 18px;
 }
 
 .upload_excel:focus{
@@ -204,6 +206,9 @@
 .hr{
     border-top: 0.33px solid white;
     background-color: white;
+    text-align: center;
+    width: 100%;
+    opacity: 0.6;
 }
 
 
