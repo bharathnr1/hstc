@@ -68,7 +68,7 @@ class Customer_Details(models.Model):
     planned_inspection_date = models.DateField(blank=True, null=True)
  
     def __str__(self):
-        return self.company_name
+        return str(self.company_name)
     
     def get_absolute_url(self):
         x= self.customer.pk

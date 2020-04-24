@@ -18,34 +18,85 @@
     
      <!-- CSS -->
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-     <link rel="stylesheet" href="{% static '/css/inspection-details.css' %}">
+     <link rel="stylesheet" href="{% static '/css/container-loading-details.css' %}">
      
        <title>Container Loading Pics</title>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="nav-link" href="./main.html">HSTC <span class="sr-only">(current)</span></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Customers</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Vendors</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- <a class="nav-link" href="./main.html">HSTC <span class="sr-only">(current)</span></a> -->
+    <a class="navbar-brand" href="{% url 'customer:main_customer-list' %}">
+        <img src="{% static '/images/hstc_logo.jpeg' %}" width="30" height="30" class="d-inline-block align-top" alt="Logo">
+        &nbsp HSTC
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Right Aligned -->
+      <ul class="navbar-nav ml-auto">
+        <!-- <li class="nav-item">
+            <a class="nav-link" href="#">Notifications</a>
+        </li> -->
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-4 btn-success" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        <li class="nav-item dropdown active user">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+            <span><i class="fa fa-user"></i></span>&nbsp User
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#"><span><i class="fa fa-user-lock"></i></span>&nbsp Manage Access</a>
+            <a class="dropdown-item" href="#"><span><i class="fa fa-sign-out-alt"></i></span>&nbsp&nbsp Logout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+</nav>
+
+    <br>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="progress">
+          <div class="progress-bar"></div>
         </div>
+      </div>
     </nav>
+            <!-- Progress Bar Start -->
+            <nav class="navbar navbar-expand-lg navbar-light progress_bar">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                  <li class="nav-item active stage">
+                      <a class="nav-link" href="{% url 'customer:main_customer-detail' id %}">Order Summary</a>
+                  </li>
+                  <li class="nav-item active stage">
+                    <a class="nav-link" href="{% url 'customer:customer_pi_list' id %}">Customer PI</a>
+                  </li>
+                  <li class="nav-item active stage">
+                      <a class="nav-link" href="{% url 'customer:shipment_type' id %}">Delivery Dates</a>
+                  </li>
+                  <li class="nav-item active stage">
+                    <a class="nav-link" href="{% url 'customer:display_inspection' id %}">Inspection Details</a>
+                </li>
+                <li class="nav-item active stage">
+                  <a class="nav-link" href="{% url 'customer:getShipmentMarks' id %}" target="blank">Shipment Marks</a>
+                </li>
+                <li class="nav-item active stage">
+                    <a class="nav-link" href="{% url 'customer:container_loading_list' id %}">Container Loading Pics</a>
+                </li>
+                <li class="nav-item active stage">
+                    <a class="nav-link" href="#">Doorstep Delivery ETA</a>
+                </li>
+                </ul>
+              </div>
+            </nav>
+          <!-- Progress Bar End -->
 
     <!-- Container Loading Detils: 
     <table style="border: solid black 1px;">
@@ -229,6 +280,17 @@
   </div>
   </div>
 
+  <div class="container ptos">
+    <h4 style="text-align: center; width: 100%;">Has the vendor/s returned with the manufacturing dates? <br/> If yes, click the below button to proceed further.</h4>
+    <button class="btn stg-c-n"> <span><i class="fa fa-check" aria-hidden="true"></i></span> Mark Stage as complete</button>
+    <button class="btn stg-c-y"> <span><i class="fa fa-check" aria-hidden="true"></i></span> Stage Completed</button>
+    
+    <a href="{% url 'customer:getShipmentMarks' id %}" target="blank"><button class="btn shipment_marks">Go to Doorstep Delivery ETA  <span><i class="fas fa-truck" aria-hidden="true"></i></span></button></a>
+
+    <br>
+    <p class="sugg">Click on the button again to undo the change</p>
+
+  </div>
 
     <script>
         sessionStorage.setItem("ContainerPageVisited", "True");
@@ -238,6 +300,25 @@
         var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
         $('.tbl-header').css({'padding-right':scrollWidth});
         }).resize();
+
+
+        jQuery(document).ready(function(){
+        $('.stg-c-n').click(function(){
+          if($(this).hasClass("stg-c-n"))
+              $(".stg-c-n").css('display', 'none');
+              $(".stg-c-y").css('display', 'inline');
+              $(".sugg").css('display', 'inline');
+             // $(".stg-c-n").removeClass("stg-c-n").addClass("stg-c-y");
+        });
+
+        $('.stg-c-y').click(function(){
+          if($(this).hasClass("stg-c-y"))
+              $(".stg-c-y").css('display', 'none');
+              $(".stg-c-n").css('display', 'inline');
+              $(".sugg").css('display', 'none');
+            // $(".stg-c-n").removeClass("stg-c-n").addClass("stg-c-y");
+        });
+      });
     </script>
 </body>
 </html>

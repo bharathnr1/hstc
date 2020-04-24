@@ -57,8 +57,9 @@
 
 
 .progress > .progress-bar{
-    width: 37.217%;
-    background-color: #ffd24d;
+    width: 82.88%;
+    background-color: #66ff33;
+    /* background-color: #00cc00;  - this is for doorstep delivery*/
 }
 
 .progress{
@@ -271,30 +272,37 @@
 }
 .ptos a{
     margin: 0 auto;
-    text-decoration: none;
 }
 .ptos h4{
     margin-bottom: 1em;
 }
 
-.goto_inspection{
+.shipment_marks{
     border: 1px solid white;
     color: white;
 }
-.goto_inspection:hover{
+.shipment_marks:hover{
     background-color: white;
     color: black;
 }
 
-.create_inspection{
+.goto_cont_loading_list{
     border: 1px solid white;
     color: white;
 }
-.create_inspection:hover{
+.goto_cont_loading_list:hover{
     background-color: white;
     color: black;
 }
 
+.create_cont_load{
+    border: 1px solid white;
+    color: white;
+}
+.create_cont_load:hover{
+    background-color: white;
+    color: black;
+}
 
 .stg-c-n{
     border: 1px solid white;
@@ -316,5 +324,4 @@
 .sugg{
     display: none;
 }
-
 /* Next stage box end */

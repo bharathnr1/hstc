@@ -44,7 +44,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="#"><span><i class="fa fa-user-lock"></i></span>&nbsp Manage Access</a>
-            <a class="dropdown-item" href="#"><span><i class="fa fa-sign-out-alt"></i></span>&nbsp Logout</a>
+            <a class="dropdown-item" href="#"><span><i class="fa fa-sign-out-alt"></i></span>&nbsp&nbsp Logout</a>
           </div>
         </li>
       </ul>
@@ -52,9 +52,11 @@
 </nav>
 
     <br>
-    <nav class="navbar navbar-light bg-light">
-      <div class="progress">
-        <div class="progress-bar"></div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="progress">
+          <div class="progress-bar"></div>
+        </div>
       </div>
     </nav>
             <!-- Progress Bar Start -->
@@ -65,22 +67,22 @@
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                   <li class="nav-item active stage">
-                      <a class="nav-link" href="#">Order Summary</a>
+                      <a class="nav-link" href="{% url 'customer:main_customer-detail' object.id %}">Order Summary</a>
                   </li>
                   <li class="nav-item active stage">
-                      <a class="nav-link" href="#">Delivery Dates</a>
+                    <a class="nav-link" href="{% url 'customer:customer_pi_list' object.pk %}">Customer PI</a>
                   </li>
                   <li class="nav-item active stage">
-                    <a class="nav-link" href="#">Customer PI</a>
+                      <a class="nav-link" href="{% url 'customer:shipment_type' object.pk %}">Delivery Dates</a>
                   </li>
                   <li class="nav-item active stage">
-                      <a class="nav-link" href="#">Inspection Details</a>
+                      <a class="nav-link" href="{% url 'customer:display_inspection' object.pk %}">Inspection Details</a>
                   </li>
                   <li class="nav-item active stage">
-                    <a class="nav-link" href="#">Shipment Marks</a>
+                    <a class="nav-link" href="{% url 'customer:getShipmentMarks' object.pk %}" target="blank">Shipment Marks</a>
                   </li>
                   <li class="nav-item active stage">
-                      <a class="nav-link" href="#">Container Loading Pics</a>
+                      <a class="nav-link" href="{% url 'customer:container_loading_list' object.pk %}">Container Loading Pics</a>
                   </li>
                   <li class="nav-item active stage">
                       <a class="nav-link" href="#">Doorstep Delivery ETA</a>
@@ -92,31 +94,14 @@
 
 <!-- Customer Details -->
 <div class="container cus_details">
-    <!-- <table class="top_cus_detail1">
-        <tr>
-            <td></td>
-            <td></td>
-            <td>{{ object.customer_company }}</td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-    
-    <table class="top_cus_detail2">
-        <tr>
-            <td>{{ object.customer_name }} </td>
-            <td>|</td>
-            <td>{{ object.customer_contact }} </td>
-            <td>|</td>
-            <td>{{ object.customer_email }}</td>
-        </tr>
-    </table> -->
-    <button class="btn top_cus_detail1">{{ object.customer_company }}</button>
+    <!-- <button class="btn top_cus_detail1">{{ object.customer_company }}</button>
     <br>
     <button class="btn top_cus_detail2">{{ object.customer_name }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|</button>
     <button class="btn top_cus_detail2">{{ object.customer_contact }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|</button>
     <button class="btn top_cus_detail2">{{ object.customer_email }}</button>
-  
+   -->
+    <h2>{{ object.customer_company }}</h2>
+    <h5>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ object.customer_name }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ object.customer_contact }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ object.customer_email }}</h5>
     <h4 style="text-align: center; width: 100%;"><hr class="hr"></h4>
     
     <button class="btn edit_cus"> <span><i class="fa fa-edit" aria-hidden="true"></i></span> <a href="{% url 'customer:main_customer-edit' object.pk %}">Edit Customer</a></button>
@@ -337,9 +322,9 @@
       });
     </script>
   </body>
-<P></P>
+<!-- <P></P>
     <hr>
-    <!-- <a href="{% url 'customer:shipment_type' object.pk %}">Dilivery Dates</a> -->
+      <a href="{% url 'customer:shipment_type' object.pk %}">Dilivery Dates</a> -->
 
 
     
@@ -387,6 +372,7 @@
     <hr>
     <a href="{% url 'customer:create_cont_load'  object.pk %}">Create Customer Loading Objects</a>
     <hr>
+    <a href="{% url 'customer:container_loading_list'  object.pk %}">View Customer Loading Objects</a> -->
     <a href="{% url 'customer:container_loading_list'  object.pk %}">View Customer Loading Objects</a>
     <hr>
     {% if object.shipment_file.url != None %}
