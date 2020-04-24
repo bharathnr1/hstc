@@ -60,12 +60,8 @@
         <th class="text-center">Actual Inspection Date</th>
         <th class="text-center">Inspection Done By</th>
         <th class="text-center">Inspection Remarks</th>
-        {% if i.inspection_photo_1 %}
         <th class="text-center">Inspection Photo 1</th>
-        {% endif %}
-        {% if i.inspection_photo_2 %}
         <th class="text-center">Inspection Photo 2</th>
-        {% endif %}
         <th class="text-center">Update</th>
       </tr>
       </thead>
@@ -81,9 +77,13 @@
             <td class="text-center">{{i.inspection_remarks}}</td>
             {% if i.inspection_photo_1 %}
             <td style="border: solid black 1px;"> <img src="{{ i.inspection_photo_1.url }}" alt="Inspection Picture 1" style="width: 200px; height: 200px;"></td>
+            {% else %}
+            <td style="border: solid black 1px;"> No pics to display </td>
             {% endif %}
-            {% if i.inspection_photo_1 %}
+            {% if i.inspection_photo_2 %}
             <td style="border: solid black 1px;"> <img src="{{ i.inspection_photo_2.url }}" alt="Inspection Picture 2" style="width: 200px; height: 200px;"></td>
+            {% else %}
+            <td style="border: solid black 1px;"> No pics to display </td>
             {% endif %}
             <td>
                 <button type="button" 
@@ -104,7 +104,7 @@
                       </button>
                   </div>
                   <div class="modal-body">
-                      <form  method="post" action="{% url 'customer:update_inspection' i.pk id %}">
+                      <form  method="post" enctype='multipart/form-data' action="{% url 'customer:update_inspection' i.pk id %}">
                           <!-- {{i.pk }} {{id}} -->
                           {% csrf_token %}
                           {% bootstrap_form inspection_form %}

@@ -29,7 +29,7 @@ from xhtml2pdf import pisa
 from django.template.loader import get_template 
 from django.core.files.base import ContentFile
 
-#CUSTOMER CRUD APPS
+########################################################CUSTOMER########################################################
 
 def main_Customer_Create(request):
     info_form=main_customer_form()
@@ -56,9 +56,24 @@ class main_Customer_List(ListView):
 def main_Customer_Detail(request, pk):
     object = get_object_or_404(Customer, pk=pk)
     vendor_object = Customer_Details.objects.filter(customer=object).all()
-    return render(request, "main_customer/main_customer_detail.html", {"vendor_list":vendor_object,"object":object})
+    ss=shipment_selection()
+    print("ss created and settings")
+    if request.method == "POST":
+        form = shipment_selection(request.POST)
+        print("request confirmed")
+        print(form.errors)
+        if form.is_valid():
+            print("forms valid")
+            temp = form.save(commit=False)
+            ix = Customer.objects.filter(id=pk)
+            print(pk)
+            ix.update(shipment_type=temp.shipment_type)
+            print("Rendring to dilivery dates.")
+            return HttpResponseRedirect(reverse('customer:dilivery_dates',args=[pk]))
+    return render(request, "main_customer/main_customer_detail.html", {"vendor_list":vendor_object,"object":object, "form":ss})
 
 def uplaod_file(request, pk):
+# We need to check with bharath that is there any kind of dependancy on expand feature on customer detail page for expanding one vendor detail.
     object = get_object_or_404(Customer, pk=pk)
     form = UploadFileForm()
     if request.method == "POST":
@@ -71,32 +86,112 @@ def uplaod_file(request, pk):
             media_path = media_path + str(object.shipment_file.url)
             wb = xlrd.open_workbook(media_path)
             sheet = wb.sheet_by_index(0) 
-            # Extrating number of rows
-            print(sheet.nrows) 
-            # Extracting number of columns 
-            print(sheet.ncols) 
-            # Extracting first collumn
-            for i in range(sheet.ncols):
-                j=0
-                for j in range(sheet.nrows):
-                    print(f"ij = {i}{j} + DATA= ",  sheet.cell_value(j, i))
-            return HttpResponseRedirect(reverse('customer:main_customer-detail',args=[pk]))
-    return render(request, 'main_customer/uploadfile.html', {"form":form})
+#Below is for the format Validation
+            if(     (sheet.cell_value(0 , 0)).lower().replace(' ', '') ==  "sno." 
+                and (sheet.cell_value(0 , 1)).lower().replace(' ', '') ==  "listno." 
+                and (sheet.cell_value(0 , 2)).lower().replace(' ', '') ==  "sub-listno." 
+                and (sheet.cell_value(0 , 3)).lower().replace(' ', '') ==  "companyname" 
+                and (sheet.cell_value(0 , 4)).lower().replace(' ', '') ==  "contactno." 
+                and (sheet.cell_value(0 , 5)).lower().replace(' ', '') ==  "email" 
+                and (sheet.cell_value(0 , 6)).lower().replace(' ', '') ==  "wechat" 
+                and (sheet.cell_value(0 , 7)).lower().replace(' ', '') ==  "accountdetails"
+                and (sheet.cell_value(0 , 8)).lower().replace(' ', '') ==  "invoicedate" 
+                and (sheet.cell_value(0 , 9)).lower().replace(' ', '') ==  "invoiceno." 
+                and (sheet.cell_value (0, 10)).lower().replace(' ', '') ==  "description" 
+                and (sheet.cell_value (0, 11)).lower().replace(' ', '') ==  "model"  
+                and (sheet.cell_value (0, 12)).lower().replace(' ', '') ==  "photo" 
+                and (sheet.cell_value (0, 13)).lower().replace(' ', '') ==  "dimensions" 
+                and (sheet.cell_value (0, 14)).lower().replace(' ', '') ==  "remarks" 
+                and (sheet.cell_value (0, 15)).lower().replace(' ', '') ==  "unit" 
+                and (sheet.cell_value (0, 16)).lower().replace(' ', '') ==  "unitprice" 
+                and (sheet.cell_value (0, 17)).lower().replace(' ', '') ==  "qty"
+                and (sheet.cell_value(0,18)).lower().replace(' ', '') == "customeramount" 
+                and (sheet.cell_value(0,19)).lower().replace(' ', '') == "customeramountafterdiscount" 
+                and (sheet.cell_value(0,20)).lower().replace(' ', '') == "commission%" 
+                and (sheet.cell_value(0,21)).lower().replace(' ', '') == "commissionrmb" 
+                and (sheet.cell_value(0,22)).lower().replace(' ', '') == "actualvendoramount" 
+                and (sheet.cell_value(0,23)).lower().replace(' ', '') == "vendordeposit%" 
+                and (sheet.cell_value(0,24)).lower().replace(' ', '') == "vendoradvancedepositamount" 
+                and (sheet.cell_value(0,25)).lower().replace(' ', '') == "tokendeposit(customer)" 
+                and (sheet.cell_value(0,26)).lower().replace(' ', '') == "tokendeposit(hstc)"
+                and (sheet.cell_value(0,27)).lower().replace(' ', '') == "tokendepositdate"
+                and (sheet.cell_value(0,28)).lower().replace(' ', '') == "vendoradvancebalance"
+                and (sheet.cell_value(0,29)).lower().replace(' ', '') == "vendoradvancebalancepaid" 
+                and (sheet.cell_value(0,30)).lower().replace(' ', '') == "advancebalancedate" 
+                and (sheet.cell_value(0,31)).lower().replace(' ', '') == "vendorfinalbalance"
+                and (sheet.cell_value(0,32)).lower().replace(' ', '') == "vendorfinalbalancedate" 
+                and (sheet.cell_value(0,33)).lower().replace(' ', '') == "manufacturingdays"
+                and (sheet.cell_value(0,34)).lower().replace(' ', '') == "plannedinspectiondate" 
+                and (sheet.cell_value(0,35)).lower().replace(' ', '') == "actualinspectiondate" 
+                and (sheet.cell_value(0,36)).lower().replace(' ', '') == "inspectiondoneby"
+                and (sheet.cell_value(0,37)).lower().replace(' ', '') == "inspectionremarks" 
+                and (sheet.cell_value(0,38)).lower().replace(' ', '') == "cbm(m3)" 
+                and (sheet.cell_value(0,39)).lower().replace(' ', '') == "ctns" 
+                and (sheet.cell_value(0,40)).lower().replace(' ', '') == "grossweight(kgs)" 
+                and (sheet.cell_value(0,41)).lower().replace(' ', '') == "netweight(kgs)" ):
+                print("Ready2")
+#Below is for creating objects off the excell sheet
+                for i in range(1, sheet.nrows):
+                    print(True if type(sheet.cell_value(i , 1)) == type(1.0) else "Nope")
+                    vendor_list = Customer_Details.objects.create( 
+                                                                    customer = object,    
+                                                                    s_no = int(sheet.cell_value(i , 0)) if type(sheet.cell_value(i , 0))  == type(1.0)  else None, 
+                                                                    list_no     = int(sheet.cell_value(i , 1)) if type(sheet.cell_value(i , 1))  == type(1.0)  else None ,
+                                                                    sub_list_no     = int(sheet.cell_value(i , 2)) if type(sheet.cell_value(i , 2))  == type(1.0)  else None ,
+                                                                    company_name     = sheet.cell_value(i , 3) ,
+                                                                    contact_no     = int(sheet.cell_value(i , 4)) if type(sheet.cell_value(i , 4)) == type(1.0) else None, 
+                                                                    email     = sheet.cell_value(i , 5) if type(sheet.cell_value(i , 5))  == type(1.0)  else None, 
+                                                                    wechat     = int(sheet.cell_value(i , 6)) if type(sheet.cell_value(i , 6))  == type(1.0)  else None, 
+                                                                    account_details     = sheet.cell_value(i , 7),
+                                                                    invoice_date     = datetime.datetime(*xlrd.xldate_as_tuple(sheet.cell_value(i,8), wb.datemode)) if type(sheet.cell_value(i , 8))  == type(1.0)  else None ,
+                                                                    invoice_no     = int(sheet.cell_value(i , 9) ) if type(sheet.cell_value(i , 9))  == type(1.0)  else None, 
+                                                                    description     = sheet.cell_value(i, 10),
+                                                                    model     = sheet.cell_value(i, 11),
+                                                                    photo     = sheet.cell_value(i, 12),
+                                                                    dimensions     = sheet.cell_value(i, 13),
+                                                                    remarks     = sheet.cell_value(i, 14) ,
+                                                                    unit     = sheet.cell_value(i, 15),
+                                                                    unit_price     = int(sheet.cell_value(i, 16)) if type(sheet.cell_value(i , 16)) == type(1.0)   else None, 
+                                                                    qty     = int(sheet.cell_value(i, 17)) if type(sheet.cell_value(i , 17)) == type(1.0)   else None, 
+                                                                    customer_amount     = int(sheet.cell_value(i,18)) if type(sheet.cell_value(i , 18)) == type(1.0)   else None, 
+                                                                    customer_amount_after_discount     = int(sheet.cell_value(i,19)) if type(sheet.cell_value(i , 19))  == type(1.0)  else None, 
+                                                                    commission_persentage     = sheet.cell_value(i,20),
+                                                                    commission_rmb          = sheet.cell_value(i, 21),
 
-# class main_Customer_Detail(DetailView):
-#     model = Customer
-#     template_name='main_customer/main_customer_detail.html'
-    
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         """" The queryset is filtered as per the customer object, 
-#         if there is two object for the same customer then we need to make sure
-#         the older is object is coming with a value hence we need to add
-#         avoid_duplication as a integer value and same value should be 
-#         stored in Customer object as a reffernce of comparision, maybe we can store customer_details pk value as integer in customer
-#         As of now i am going with assumption that there is only one customer"""
-#         context["vendor_list"] = Customer_Details.objects.filter(customer=self.object).all()
-#         return context
+                                                                    actual_vendor_amount    = int(sheet.cell_value(i,22)) if type(sheet.cell_value(i , 22))  == type(1.0)  else None,
+                                                                    vendor_deposit_persentage    = int(sheet.cell_value(i,23)) if type(sheet.cell_value(i , 23))  == type(1.0)  else None,
+                                                                    vendor_advance_deposit_amount    = int(sheet.cell_value(i,24)) if type(sheet.cell_value(i , 24))  == type(1.0)  else None,
+                                                                    token_deposit_customer    = int(sheet.cell_value(i,25)) if type(sheet.cell_value(i , 25))  == type(1.0)  else None,
+                                                                    token_deposit_HSTC    = int(sheet.cell_value(i,26)) if type(sheet.cell_value(i , 26))  == type(1.0)  else None,
+                                                                    token_deposit_date    = datetime.datetime(*xlrd.xldate_as_tuple(sheet.cell_value(i,27), wb.datemode)) if type(sheet.cell_value(i , 27))  == type(1.0)  else None,
+                                                                    vendor_advance_balance    = int(sheet.cell_value(i,28)) if type(sheet.cell_value(i , 28))  == type(1.0)  else None,
+                                                                    vendor_advance_balance_paid    = int(sheet.cell_value(i,29)) if type(sheet.cell_value(i , 29))  == type(1.0)  else None,
+                                                                    advance_balance_date    = datetime.datetime(*xlrd.xldate_as_tuple(sheet.cell_value(i,30), wb.datemode)) if type(sheet.cell_value(i , 30))  == type(1.0)  else None,
+                                                                    vendor_final_balance    = int(sheet.cell_value(i,31)) if type(sheet.cell_value(i , 31))  == type(1.0)  else None,
+                                                                    vendor_final_balance_date    = datetime.datetime(*xlrd.xldate_as_tuple(sheet.cell_value(i,32), wb.datemode) ) if type(sheet.cell_value(i , 32))  == type(1.0)  else None,
+                                                                    manufacturing_days    = int(sheet.cell_value(i,33)) if type(sheet.cell_value(i , 33))  == type(1.0)  else None,
+                                                                    CBM_m3    = int(sheet.cell_value(i,38)) if type(sheet.cell_value(i , 38))  == type(1.0)  else None,
+                                                                    ctns    = int(sheet.cell_value(i,39)) if type(sheet.cell_value(i , 39))  == type(1.0)  else None,
+                                                                    gross_weight_kgs    = int(sheet.cell_value(i,40)) if type(sheet.cell_value(i , 40))  == type(1.0)  else None,
+                                                                    net_weight_kgs    = int(sheet.cell_value(i,41)) if type(sheet.cell_value(i , 41))  == type(1.0)  else None,
+                                                                )
+                    vendor_list.save()
+                    print(type(sheet.cell_value(i,35)))
+#Since we are setting up inspection while uploading the excell sheet, we need to setup a validation initially, and then crate the incpection model for which it doesnt exist.
+                for i in range(1, sheet.nrows):
+                    inspection_field = Inspection.objects.create(
+                                                                customer = object,
+                                                                vendor_company_name = get_object_or_404(Customer_Details, pk=vendor_list.pk),
+                                                                actual_inspection_date = datetime.datetime(*xlrd.xldate_as_tuple(sheet.cell_value(i,35), wb.datemode)) if type(sheet.cell_value(i , 35))  == type(1.0)  else None,
+                                                                inspection_done_by = sheet.cell_value(i,36),
+                                                                inspection_remarks = sheet.cell_value(i,37),
+                                                                planned_inspection_date = datetime.datetime(*xlrd.xldate_as_tuple(sheet.cell_value(i,34), wb.datemode)) if type(sheet.cell_value(i , 34))  == type(1.0)  else None,
+                                                                )
+                    inspection_field.save()
+            else:
+                return HttpResponse('The file format of uploaded file in not correct. Please use the excel format given as donwload in the portal.')       
+        return HttpResponseRedirect(reverse('customer:main_customer-detail',args=[pk]))
+    return render(request, 'main_customer/uploadfile.html', {"form":form})
 
 class main_Customer_Update(UpdateView):
     model = Customer
@@ -109,7 +204,7 @@ class main_Customer_Delete(DeleteView):
     success_url = reverse_lazy('customer:main_customer-list')
 
 
-#Vendor CRUD Applications
+########################################################Vendors CRUD one by one########################################################
 
 def Customer_Create(request, pk):
     info_form=customer_form()
@@ -125,11 +220,8 @@ def Customer_Create(request, pk):
             print("Form is Saved and you are redirected to list page")
             return HttpResponseRedirect(reverse('customer:main_customer-detail', args=[pk]))
     return render(request, "customer/customer_details_form.html", {"form":info_form})
-""" UPload and download button for Excell Sheets needs to be added. 
-    Change form for creation
-    put formulae for fields
-"""
-    
+
+
 def customer_pi_list(request, pk):
     customer_object = get_object_or_404(Customer, pk=pk)
     vendor_object = Customer_Details.objects.filter(customer=customer_object).all()
@@ -144,16 +236,23 @@ class Customer_Delete(DeleteView):
     model=Customer_Details
     success_url = reverse_lazy('customer:main_customer-list')
 
+########################################################CUSTOMER PI########################################################
+
 def send_CPI(request, pk):
     customer_object = get_object_or_404(Customer, pk=pk)
     vendor_object = Customer_Details.objects.filter(customer=customer_object).all()
+    """
+    Creating Excell File for Customer PI and saving in Database then sending it across to customer and deleteing it from Database itself.
 
-    # """Creating Excell File for Customer PI and saving in Database then sending it across to customer and deleteing it from Database itself."""
-
+    """
+# We need to find out a way to import the images in excel sheets. 
     style0 = xlwt.easyxf('font: name Times New Roman, bold on')
     style1 = xlwt.easyxf(num_format_str='D-MMM-YY')
     style2 = xlwt.easyxf('font: name Times New Roman')
-    """ Create field in model for saving customer PI File, for reupload, you wold need to delete the old file. """
+    """ 
+    Create field in model for saving customer PI File, for reupload, you wold need to delete the old file. 
+
+    """
     wb = xlwt.Workbook()
     ws = wb.add_sheet('PI LIST')
     ws.write(0, 0,  "S No.",   style0)
@@ -183,8 +282,8 @@ def send_CPI(request, pk):
         ws.write(dummy, 2,  i.sub_list_no ,   style2)
         ws.write(dummy, 3,  i.description ,   style2)
         ws.write(dummy, 4,  i.model ,   style2)
-        # ws.write(dummy, 5,  i.photo ,   style2)
-        #removing photo because its not yet sorted!
+# ws.write(dummy, 5,  i.photo ,   style2)
+#removing photo because its not yet sorted!
         ws.write(dummy, 6,  i.dimensions ,   style2)
         ws.write(dummy, 7,  i.remarks ,   style2)
         ws.write(dummy, 8,  i.unit ,   style2)
@@ -204,7 +303,7 @@ def send_CPI(request, pk):
     wb.save(x + '/CustomerPI.xls')
 
     x=x + '/CustomerPI.xls'    
-    #Email send to customer with created Customer PI
+    """Email send to customer with created Customer PI"""
     email = EmailMessage(
     'Hello',
     'Body goes here',
@@ -241,31 +340,13 @@ class CustomerPI_Update(UpdateView):
             'gross_weight_kgs',
             'net_weight_kgs',]
     template_name = 'customer_PI/Customer_PI_details_form.html'
-# small form of customer
-# customer created
-# uploading vendor sheet excell button
-# exctract Customer PI required data and display it in customer Details page
-# Verfiy and send email customer PI.
-# If supose any changes is required the add, edit and delete will be there.
-# They will make changes will be done on excell sheet, so there will be re upload button for same thing. 
-# for reupload old object is deleted and will create another then same thing send PI Buton and Send Contract Email Button 
 
 def shipment_type(request, pk):
-    ss=shipment_selection()
-    print("ss created and settings")
-    if request.method == "POST":
-        form = shipment_selection(request.POST)
-        print("request confirmed")
-        print(form.errors)
-        if form.is_valid():
-            print("forms valid")
-            temp = form.save(commit=False)
-            ix=Customer.objects.filter(id=pk)
-            print(pk)
-            ix.update(shipment_type=temp.shipment_type)
-            print("Rendring to dilivery dates.")
-            return HttpResponseRedirect(reverse('customer:dilivery_dates',args=[pk]))
-    return render(request, 'dilivery/shipment_types.html', {"form":ss})
+
+    return render(request, 'dilivery/shipment_types.html')
+
+########################################################DILIVERY DATES########################################################
+
 
 def dilivery_dates(request, pk):
     customer_object = get_object_or_404(Customer, pk=pk)
@@ -310,11 +391,12 @@ def updatedates(request, pk, id):
             x.save()
     return HttpResponseRedirect(reverse('customer:dilivery_dates',args=[id]))
 
-#Inspection Detail Page will have vendor list, Vendor list will have Update inspection,
+########################################################INSPECTIONS########################################################
 
 def create_inspection(request, pk):
     customer_object = get_object_or_404(Customer, pk=pk)
     vendor_queryset = Customer_Details.objects.filter(customer=customer_object).all()
+# Since we are setting up inspection on uploading the excell sheet, we need to setup a validation initially, and then crate the incpection model for which it doesnt exist.
     for i in vendor_queryset:
         inspection_field = Inspection.objects.create(
                                                     customer = customer_object,
@@ -325,17 +407,13 @@ def create_inspection(request, pk):
 def display_inspection(request, pk):
     customer_object = get_object_or_404(Customer, pk=pk)
     inspection_obj = Inspection.objects.filter(customer=customer_object).all()
-# <<<<<<< HEAD
-#     inspection_form = Inspection_Form(inspection_obj)
-#     return render(request, "inspection/inspection-details.html", {"inspection_obj":inspection_obj, "inspection_form":Inspection_Form, "id":pk})
-# =======
-    inspection_form = Inspection_Form()
 
+    inspection_form = Inspection_Form()
+# this for auto uploading the data on inspection form - instance=inspection_obj / But we have multiobjects.
     Container_loading_obj = Container_loading.objects.filter(customer=customer_object).all()
     print("Inspection display: ")
     print(customer_object.id)
     return render(request, "inspection/inspection-details.html", {"inspection_obj":inspection_obj, "inspection_form":Inspection_Form, "id":pk, "Container_loading_obj": Container_loading_obj})
-# >>>>>>> e748b7bf184dd57342434278a5ed26d068f464fd
     
 
 def update_inspection( request, pk, id):
@@ -344,43 +422,45 @@ def update_inspection( request, pk, id):
         if form.is_valid():
             x=get_object_or_404(Inspection, pk=pk)
             if (form.cleaned_data["inspection_done_by"]):
-                print(form.cleaned_data["inspection_done_by"])
                 x.inspection_done_by = form.cleaned_data["inspection_done_by"]
             else:
                 print("Else worked")
 
-            try:
-                form.cleaned_data["inspection_remarks"]
+            if form.cleaned_data["inspection_remarks"]:
                 x.inspection_remarks = form.cleaned_data["inspection_remarks"]
-            except:
+            else:
                 pass
 
-            try:
-                request.FILES['inspection_photo_1']
+            if request.FILES.get('inspection_photo_1', False):
                 x.inspection_photo_1 = request.FILES['inspection_photo_1']
-            except:
+            else:
                 pass
 
-            try:
-                request.FILES['inspection_photo_2']
+            if request.FILES.get('inspection_photo_2', False):
                 x.inspection_photo_2 = request.FILES['inspection_photo_2']
-            except:
+            else:
                 pass
 
-            try:
-                form.cleaned_data["actual_inspection_date"]
+            if form.cleaned_data["actual_inspection_date"]:
                 x.actual_inspection_date = form.cleaned_data["actual_inspection_date"]
-            except:
+            else:
                 pass
 
             x.save()
     return HttpResponseRedirect(reverse('customer:display_inspection',args=[id]))
 
-#Use to convert the image url to absolute URL 
+########################################################SHIPMENT MARKS########################################################
+
+
+"""
+Use to convert the image url to absolute URL 
+
+"""
 def link_callback(uri, rel):
     """
     Convert HTML URIs to absolute system paths so xhtml2pdf can access those
     resources
+
     """
     # use short variable names
     sUrl = settings.STATIC_URL      # Typically /static/
@@ -402,6 +482,12 @@ def link_callback(uri, rel):
                 'media URI must start with %s or %s' % (sUrl, mUrl)
             )
     return path         
+"""
+
+1. We need to check while creating the Shipment marks how to lower down the resolution of the images that are being attachec
+2. We need to create seprate button to send email to customer
+
+"""
 
 def getShipmentMarks(request, pk):
     customer_object = get_object_or_404(Customer, pk=pk)
@@ -431,7 +517,7 @@ def getShipmentMarks(request, pk):
     else:
         return HttpResponse("Oops got an Error, Try again!")
 
-###############################CONTAINER LOADING STAGE#######################################
+########################################################CONATINER LOADING########################################################
 
 
 def create_cont_load(request, pk):
@@ -450,40 +536,35 @@ def container_loading_list(request, pk):
     Container_loading_form = ContainerLoadingForm()
     return render(request, "container-loading/container-loading-details.html", { "Container_loading_obj":Container_loading_obj, "Container_loading_form":Container_loading_form, "id":pk })
 
-#Insted of try do if
 def update_container_loading(request, pk, id):
     if request.method == "POST":
         form = ContainerLoadingForm(request.POST, request.FILES)
         if form.is_valid():
             x=get_object_or_404(Container_loading, pk=pk)
-            try:
-                form.cleaned_data["PortDetails1"]
+            if form.cleaned_data["PortDetails1"]:
                 x.PortDetails1 = form.cleaned_data["PortDetails1"]
-            except:
+            else:
                 pass
 
-            try:
-                form.cleaned_data["PortDetails2"]
+            if form.cleaned_data["PortDetails2"]:
                 x.PortDetails2 = form.cleaned_data["PortDetails2"]
-            except:
+            else:
                 pass
 
-            try:
-                request.FILES['photo1']
+            if request.FILES.get('photo1', False):
                 x.photo1 = request.FILES['photo1']
-            except:
+            else:
+                print("didnt found anything")
                 pass
 
-            try:
-                request.FILES['photo2']
+            if request.FILES.get('photo2', False):
                 x.photo2 = request.FILES['photo2']
-            except:
+            else:
                 pass
 
-            try:
-                request.FILES['photo3']
+            if request.FILES.get('photo3', False):
                 x.photo3 = request.FILES['photo3']
-            except:
+            else:
                 pass
             x.save()
     return HttpResponseRedirect(reverse('customer:container_loading_list',args=[id]))
