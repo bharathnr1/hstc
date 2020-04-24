@@ -1,3 +1,5 @@
+{% load static %}
+{% load bootstrap4 %}
 <!DOCTYPE html>
 <html lang="en">
 <head>{% load static %}
@@ -71,7 +73,7 @@
                     <a class="nav-link" href="{% url 'customer:customer_pi_list' object.pk %}">Customer PI</a>
                   </li>
                   <li class="nav-item active stage">
-                      <a class="nav-link" href="{% url 'customer:shipment_type' object.pk %}">Delivery Dates</a>
+                      <a class="nav-link" href="{% url 'customer:dilivery_dates' object.pk %}">Delivery Dates</a>
                   </li>
                   <li class="nav-item active stage">
                       <a class="nav-link" href="{% url 'customer:display_inspection' object.pk %}">Inspection Details</a>
@@ -100,13 +102,50 @@
    -->
     <h2>{{ object.customer_company }}</h2>
     <h5>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ object.customer_name }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ object.customer_contact }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ object.customer_email }}</h5>
-    <h4 style="text-align: center; width: 100%;"><hr class="hr"></h4>
+    <h4><hr class="hr"></h4>
     
     <button class="btn edit_cus"> <span><i class="fa fa-edit" aria-hidden="true"></i></span> <a href="{% url 'customer:main_customer-edit' object.pk %}">Edit Customer</a></button>
     <button class="btn delete_cus"> <span><i class="fa fa-trash" aria-hidden="true"></i></span><a href="{% url 'customer:main_customer-delete' object.pk %}">&nbspDelete Customer</a> </button>
     <button class="btn add_vendor"> <span><i class="fa fa-plus" aria-hidden="true"></i></span> <a href="{% url 'customer:customer-create' object.pk %}">Add Vendor</a> </button>
     <p></p>
-    <button class="btn upload_excel"><span><i class="fa fa-file-excel"></i></span> &nbspUpload Excel Sheet</button>
+    <!-- <button class="btn upload_excel"><span><i class="fa fa-file-excel"></i></span> <a href="{% url 'customer:uploadfile' object.pk %}"> &nbspUpload Excel Sheet </a></button> -->
+    <button type="button" 
+    class="btn upload_excel" 
+    data-toggle="modal" 
+    data-target="#uploadModal" 
+    ><span><i class="fa fa-file-excel"></i></span>
+      Upload Excel
+    </button>
+
+    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true" style="color:black;">
+      <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="uploadModalLabel">Upload Excel</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <form method="post"  enctype="multipart/form-data" action ="{% url 'customer:uploadfile' object.pk %}" >
+                  {% csrf_token %}
+                  {% bootstrap_form upload_form %}
+                  <div class="modal-footer">
+                    <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" type="submit" name="button">Submit</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+      </div>
+  </div> 
+    <script>
+        $('#uploadModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+        })
+    </script>
+
+
   </div>
 <hr>
 <!-- Vendor List -->    
@@ -223,7 +262,6 @@
         </div>
       </div>
       {% endfor %}
-      
       <br><br>
     <!-- -----------
     {% for each in vendor_list %}
@@ -261,7 +299,35 @@
       <h4 style="text-align: center; width: 100%;">Has the vendor/s returned with the manufacturing dates? <br/> If yes, click the below button to proceed further.</h4>
       <button class="btn stg-c-n"> <span><i class="fa fa-check" aria-hidden="true"></i></span> Mark Stage as complete</button>
       <button class="btn stg-c-y"> <span><i class="fa fa-check" aria-hidden="true"></i></span> Stage Completed</button>
-      <a href="{% url 'customer:shipment_type' object.pk %}"><button class="btn order-summary">Go to Delivery Dates  <span><i class="fa fa-calendar-check" aria-hidden="true"></i></span></button></a>
+      <!-- <a href="{% url 'customer:shipment_type' object.pk %}">
+        
+        <button class="btn order-summary">
+          Go to Delivery Dates  
+          <span>
+            <i class="fa fa-calendar-check" aria-hidden="true"></i>
+          </span>
+        </button>
+      </a> -->
+      <!-- <a href="{% url 'customer:shipment_type' object.pk %}"> -->
+      {% if object.shipment_type == None %}
+      <button type="button" data-toggle="modal" data-target="#exampleModal{{object.pk}}" class="btn order-summary">
+        Dilivery Dates
+        <span>
+          <i class="fa fa-calendar-check" aria-hidden="true"></i>
+        </span>
+      </button>
+      {% else %}
+      <a href="{% url 'customer:dilivery_dates' object.pk %}">
+        
+        <button class="btn order-summary">
+          Go to Delivery Dates  
+          <span>
+            <i class="fa fa-calendar-check" aria-hidden="true"></i>
+          </span>
+        </button>
+      </a>
+
+      {% endif %}
       <a href="{% url 'customer:customer_pi_list' object.pk %}" target="blank"><button class="btn order-summary">Generate Customer PI  <span><i class="fa fa-file-contract" aria-hidden="true"></i></span></button></a>
       <br>
       <p class="sugg">Click on the button again to undo the change</p>
@@ -293,7 +359,64 @@
       });
     </script>
   </body>
+<!-- <P></P>
+    <hr>
+      <a href="{% url 'customer:shipment_type' object.pk %}">Dilivery Dates</a> -->
 
+
+    
+    <div class="modal fade" id="exampleModal{{object.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Update Inspection Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <form method="post" >
+                  <!-- {{i.pk }} {{id}} -->
+                  {% csrf_token %}
+                  {% bootstrap_form form %}
+                  <div class="modal-footer">
+                    <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" type="submit" name="button">Submit</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+      </div>
+  </div> 
+    <script>
+        $('#exampleModal{{object.pk}}').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+        })
+    </script>
+    <!-- <script>
+        // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+        $(window).on("load resize ", function() {
+        var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+        $('.tbl-header').css({'padding-right':scrollWidth});
+        }).resize();
+    </script> -->
+
+    <hr>
+    <a href="{% url 'customer:create_inspection' object.pk %}">create_inspection</a> This should only be clicked once, otherwise it will create mutiple field on secondd click
+    <a href="{% url 'customer:display_inspection' object.pk %}">View Inspection Details</a>
+    <hr>
+    <a href="{% url 'customer:getShipmentMarks' object.pk %}">Sends Email and Create Shipment Marks</a>
+    <hr>
+    <a href="{% url 'customer:create_cont_load'  object.pk %}">Create Customer Loading Objects</a>
+    <hr>
+    <a href="{% url 'customer:container_loading_list'  object.pk %}">View Customer Loading Objects</a> -->
+    <a href="{% url 'customer:container_loading_list'  object.pk %}">View Customer Loading Objects</a>
+    <hr>
+    {% if object.shipment_file.url != None %}
+    <a href="{{ object.shipment_file.url }}">download file</a>
+    {% endif %}
+    <br>
+    <a href="{% url 'customer:uploadfile' object.pk %}">upload file</a>
 
 </body>
 </html>

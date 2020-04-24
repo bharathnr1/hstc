@@ -79,7 +79,7 @@
                     <a class="nav-link" href="{% url 'customer:customer_pi_list' id %}">Customer PI</a>
                   </li>
                   <li class="nav-item active stage">
-                      <a class="nav-link" href="{% url 'customer:shipment_type' id %}">Delivery Dates</a>
+                    <a class="nav-link" href="{% url 'customer:dilivery_dates' id %}">Delivery Dates</a>
                   </li>
                   <li class="nav-item active stage">
                     <a class="nav-link" href="{% url 'customer:display_inspection' id %}">Inspection Details</a>
@@ -220,19 +220,19 @@
             <td class="text-center">No Pics to display</td>
             {% endif %}
 
-            {% if i.vendor_company_name.photo %}
+            {% if i.photo1 %}
             <td class="text-center"> <img src="{{ i.photo1.url }}" alt="Inspection Picture 1" style="width: 200px; height: 200px;"></td>
             {% else %}
             <td class="text-center">No Pics to display</td>
             {% endif %}
 
-            {% if i.vendor_company_name.photo %}
+            {% if i.photo2 %}
             <td class="text-center"> <img src="{{ i.photo2.url }}" alt="Inspection Picture 1" style="width: 200px; height: 200px;"></td>
             {% else %}
             <td class="text-center">No Pics to display</td>
             {% endif %}
 
-            {% if i.vendor_company_name.photo %}
+            {% if i.photo3 %}
             <td class="text-center"> <img src="{{ i.photo3.url }}" alt="Inspection Picture 1" style="width: 200px; height: 200px;"></td>
             {% else %}
             <td class="text-center">No Pics to display</td>
@@ -260,8 +260,7 @@
                       </button>
                   </div>
                   <div class="modal-body">
-                      <form  method="post" action="{% url 'customer:update_container_loading' i.pk id %}">
-                          <!-- {{i.pk }} {{id}} -->
+                      <form  method="post" enctype='multipart/form-data' action="{% url 'customer:update_container_loading' i.pk id %}">
                           {% csrf_token %}
                           {% bootstrap_form Container_loading_form %}
                           <div class="modal-footer">

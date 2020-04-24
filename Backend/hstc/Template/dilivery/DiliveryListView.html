@@ -78,7 +78,7 @@
                     <a class="nav-link" href="{% url 'customer:customer_pi_list' id %}">Customer PI</a>
                   </li>
                   <li class="nav-item active stage">
-                      <a class="nav-link" href="{% url 'customer:shipment_type' id %}">Delivery Dates</a>
+                    <a class="nav-link" href="{% url 'customer:dilivery_dates' id %}">Delivery Dates</a>
                   </li>
                   <li class="nav-item active stage">
                       <a class="nav-link" href="{% url 'customer:display_inspection' id %}">Inspection Details</a>
@@ -142,7 +142,7 @@
         <th class="text-center">Company Name</th>
         <th class="text-center">Description</th>
         <th class="text-center">Model</th>
-        <!-- <th class="text-center">Photo</th> -->
+        <th class="text-center">Photo</th>
         <th class="text-center">Dimensions</th>
         <th class="text-center">Manufacturing Days</th>
         <th class="text-center">Shipment No</th>
@@ -163,6 +163,8 @@
             <td class="text-center">{{i.model }}</td>
             {% if i.photo %}
             <td> <img src="{{ i.photo.url }}" height="100px" width="100px" class="src"></td>
+            {% else %}
+            <td>No Picture</td>
             {% endif %}
             <td>{{i.dimensions }} </td>
             <td>{{i.manufacturing_days }} </td>

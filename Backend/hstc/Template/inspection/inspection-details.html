@@ -78,7 +78,7 @@
                     <a class="nav-link" href="{% url 'customer:customer_pi_list' id %}">Customer PI</a>
                   </li>
                   <li class="nav-item active stage">
-                      <a class="nav-link" href="{% url 'customer:shipment_type' id %}">Delivery Dates</a>
+                    <a class="nav-link" href="{% url 'customer:dilivery_dates' id %}">Delivery Dates</a>
                   </li>
                   <li class="nav-item active stage">
                     <a class="nav-link" href="{% url 'customer:display_inspection' id %}">Inspection Details</a>
@@ -111,12 +111,8 @@
         <th class="text-center">Actual Inspection Date</th>
         <th class="text-center">Inspection Done By</th>
         <th class="text-center">Inspection Remarks</th>
-        {% if i.inspection_photo_1 %}
         <th class="text-center">Inspection Photo 1</th>
-        {% endif %}
-        {% if i.inspection_photo_2 %}
         <th class="text-center">Inspection Photo 2</th>
-        {% endif %}
         <th class="text-center">Update</th>
       </tr>
       </thead>
@@ -131,10 +127,14 @@
             <td class="text-center">{{i.inspection_done_by}}</td>
             <td class="text-center">{{i.inspection_remarks}}</td>
             {% if i.inspection_photo_1 %}
-            <td style="border: solid black 1px;"> <img src="{{ i.inspection_photo_1.url }}" alt="Inspection Picture 1" style="width: 200px; height: 200px;"></td>
+            <td > <img src="{{ i.inspection_photo_1.url }}" alt="Inspection Picture 1" style="width: 150px; height: 150px;"></td>
+            {% else %}
+            <td > No pics to display </td>
             {% endif %}
-            {% if i.inspection_photo_1 %}
-            <td style="border: solid black 1px;"> <img src="{{ i.inspection_photo_2.url }}" alt="Inspection Picture 2" style="width: 200px; height: 200px;"></td>
+            {% if i.inspection_photo_2 %}
+            <td > <img src="{{ i.inspection_photo_2.url }}" alt="Inspection Picture 2" style="width: 150px; height: 150px;"></td>
+            {% else %}
+            <td > No pics to display </td>
             {% endif %}
             <td>
                 <button type="button" 
@@ -155,7 +155,7 @@
                       </button>
                   </div>
                   <div class="modal-body">
-                      <form  method="post" action="{% url 'customer:update_inspection' i.pk id %}">
+                      <form  method="post" enctype='multipart/form-data' action="{% url 'customer:update_inspection' i.pk id %}">
                           <!-- {{i.pk }} {{id}} -->
                           {% csrf_token %}
                           {% bootstrap_form inspection_form %}
@@ -216,6 +216,15 @@
         $('.tbl-header').css({'padding-right':scrollWidth});
         }).resize();
 
+        $(function() {
+            $( ".datepicker" ).datepicker({
+              changeMonth: true,
+              changeYear: true,
+              yearRange: "1900:2020",
+              // You can put more options here.
+          });
+        });
+        
         $('#exampleModal{{i.pk}}').on('shown.bs.modal', function () {
             $('#myInput').trigger('focus')
             })
