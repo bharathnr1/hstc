@@ -169,7 +169,8 @@ p,a, h1{
 }
 
 .card-header {
-    padding: 0.75rem 1.25rem;
+    padding-top: 5px;
+    padding-bottom: 5px;
     margin-bottom: 0;
     color: inherit;
     background-color: #fff;
@@ -179,7 +180,7 @@ p,a, h1{
 #item-1{
     /* background-color: rgba(48, 17, 160, 0.733); */
     /* background-color: #da251c; */
-    background-color: rgb(243, 119, 10);
+    background-color: rgb(209, 6, 6);
     color: white;
 }
 
@@ -192,18 +193,23 @@ p,a, h1{
 
 #item-4{
     /* background-color: rgba(226, 54, 31, 0.932); */
-    background-color: #eb2e25;
+    background-color: #eb251b;
     color: white;
 }
 
 #item-5{
     /* background-color: rgb(143, 106, 211); */
-    background-color: #eb2e25;
+    background-color: #eb251b;
     color: white;
 }
 
 .font-size-lg {
     font-size: 1.9rem !important;
+    text-align: center;
+}
+
+.aside_font{
+    font-size: 1.4em;
     text-align: center;
 }
 

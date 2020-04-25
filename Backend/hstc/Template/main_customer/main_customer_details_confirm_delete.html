@@ -23,14 +23,13 @@
     </style>
 </head>
 <body>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="delete">
             <p>Are you sure you want to delete <strong>{{ object }}</strong>?</p>
             <input class="btn btn-danger" type="submit" value="Confirm">
-            <input class="btn btn-success" type="reset" value="Cancel">
+            <input class="btn btn-success" type="submit" value="Cancel">
         </div>
-    
     </form>   
 </body>
 </html>

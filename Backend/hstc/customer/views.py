@@ -202,7 +202,12 @@ class main_Customer_Update(UpdateView):
 class main_Customer_Delete(DeleteView):
     model=Customer
     template_name='main_customer/main_customer_details_confirm_delete.html'
-    success_url = reverse_lazy('customer:main_customer-list')
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return reverse_lazy('customer:main_customer-list')
+        else:
+            return super(Customer, self).post(request, *args, **kwargs)
+    # success_url = reverse_lazy('customer:main_customer-list')
 
 
 ########################################################Vendors CRUD one by one########################################################
@@ -352,13 +357,24 @@ def shipment_type(request, pk):
 def dilivery_dates(request, pk):
     customer_object = get_object_or_404(Customer, pk=pk)
     vendor_queryset = Customer_Details.objects.filter(customer=customer_object).all()
-    y= partShipmentForm()
+    y = partShipmentForm()
+    x = oneshipment_form()
     inspection_obj = Inspection.objects.filter(customer=customer_object).all()
     print("Inspection data inside delivery function")
     print(inspection_obj)
     if customer_object.shipment_type == "One Shipment":
-        x=oneshipment_form()
-        if request.method == "POST":
+        return render(request, "dilivery/DiliveryListView.html", {"vendor_queryset":vendor_queryset, "partShipmentForm":x,"id":pk, "shipment":customer_object.shipment_type})        
+    elif customer_object.shipment_type == "Part Shipments":
+        return render(request, "dilivery/DiliveryListView.html", {"vendor_queryset" : vendor_queryset, "partShipmentForm":y, "id":pk, "shipment": None, 'inspection_obj': inspection_obj})            
+
+def updatedates(request, pk, id):
+    customer_object = get_object_or_404(Customer, pk=id)
+    vendor_queryset = get_object_or_404(Customer_Details, pk=pk)
+    print("ID: ",id)
+    print("/n PK: ", pk)
+    print(request.POST.get('previous_page'))
+    if request.method=="POST":
+        if(customer_object.shipment_type == "One Shipment"):
             post_form = oneshipment_form(request.POST)
             if post_form.is_valid():
                 dates = post_form.cleaned_data["dilivery_date"]
@@ -367,28 +383,19 @@ def dilivery_dates(request, pk):
                     i.planned_inspection_date=( dates - datetime.timedelta(days=3))
                     i.shipment_number=1
                     i.save()
-                return render(request, "dilivery/DiliveryListView.html", {"vendor_queryset":vendor_queryset, "partShipmentForm":x,"id":pk, "shipment":customer_object.shipment_type})        
-        return render(request, "dilivery/oneshipment.html", { "x":x })
-    elif customer_object.shipment_type == "Part Shipments":
-        return render(request, "dilivery/DiliveryListView.html", {"vendor_queryset" : vendor_queryset, "partShipmentForm":y, "id":pk, "shipment": None, 'inspection_obj': inspection_obj})            
-
-def updatedates(request, pk, id):
-    print("ID: ",id)
-    print("/n PK: ", pk)
-    print(request.POST.get('previous_page'))
-    if request.method=="POST":
-        form = partShipmentForm(request.POST)
-        if form.is_valid():
-            x=get_object_or_404(Customer_Details, pk=pk)
-            tent_date= x.advance_balance_date + datetime.timedelta(days=form.cleaned_data["manufacturing_days"])
-            print(tent_date)
-            x.planned_inspection_date = tent_date -  datetime.timedelta(days=3)
-            print(x.planned_inspection_date)
-            x.shipment_number=form.cleaned_data["shipment_number"]
-            x.manufacturing_days=form.cleaned_data["manufacturing_days"]
-            x.tentative_dilivery_date = tent_date
-            print(x.tentative_dilivery_date)
-            x.save()
+        elif(customer_object.shipment_type == "Part Shipments"):
+            form = partShipmentForm(request.POST)
+            if form.is_valid():
+                x=get_object_or_404(Customer_Details, pk=pk)
+                tent_date= x.advance_balance_date + datetime.timedelta(days=form.cleaned_data["manufacturing_days"])
+                print(tent_date)
+                x.planned_inspection_date = tent_date -  datetime.timedelta(days=3)
+                print(x.planned_inspection_date)
+                x.shipment_number=form.cleaned_data["shipment_number"]
+                x.manufacturing_days=form.cleaned_data["manufacturing_days"]
+                x.tentative_dilivery_date = tent_date
+                print(x.tentative_dilivery_date)
+                x.save()
     return HttpResponseRedirect(reverse('customer:dilivery_dates',args=[id]))
 
 ########################################################INSPECTIONS########################################################
