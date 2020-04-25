@@ -56,7 +56,10 @@ class customer_form(forms.ModelForm):
 class main_customer_form(forms.ModelForm):
     class Meta:
         model=Customer
-        fields = '__all__'
+        fields = ["customer_name",
+        "customer_contact",
+        "customer_email",
+        "customer_company",]
         widgets = {
             'customer_name': forms.TextInput(attrs={'class':'edit_cus'}), 
             }
@@ -75,6 +78,10 @@ class dilivery_selection(forms.ModelForm):
 
 class oneshipment_form(forms.Form):
     dilivery_date = forms.DateField(label='Select the Delivery Date')
+    class Meta:
+        widgets = {
+            'dilivery_date': forms.DateInput(attrs={'class':'datepicker'}),             
+            }
 
 class partShipmentForm(forms.ModelForm):
     class Meta:
@@ -83,7 +90,7 @@ class partShipmentForm(forms.ModelForm):
                   'manufacturing_days',)
         widgets = {
             'manufacturing_days': forms.TextInput(attrs={'class':'form-control'}),        
-            'shipment_number': forms.TextInput(attrs={'class':'form-control'}),        
+            'shipment_number': forms.TextInput(attrs={'class':'form-control'}),             
             }
 
 # Inspection FORMS

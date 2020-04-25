@@ -1,4 +1,5 @@
 {% load bootstrap4 %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,19 +13,136 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
+    <link rel="stylesheet" href="{% static 'css/customer_details_form.css' %}">
 </head>
     <body>
-        <div class="container" style="margin: 0 auto; margin-top: 3em;">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!-- <a class="nav-link" href="./main.html">HSTC <span class="sr-only">(current)</span></a> -->
+            <a class="navbar-brand" href="{% url 'customer:main_customer-list' %}">
+                <img src="{% static '/images/hstc_logo.jpeg' %}" width="30" height="30" class="d-inline-block align-top" alt="Logo">
+                &nbsp HSTC
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <!-- Right Aligned -->
+              <ul class="navbar-nav ml-auto">
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#">Notifications</a>
+                </li> -->
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-4 btn-success" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+                <li class="nav-item dropdown active user">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+                    <span><i class="fa fa-user"></i></span>&nbsp User
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#"><span><i class="fa fa-user-lock"></i></span>&nbsp Manage Access</a>
+                    <a class="dropdown-item" href="#"><span><i class="fa fa-sign-out-alt"></i></span>&nbsp&nbsp Logout</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+        </nav>
+
+        <div class="container">
         <h1>Add Vendor Form! </h1>
-        <h5>Please enter the below details and click submit.</h5>
-        <form method="post" enctype="multipart/form-data" >
-            {% csrf_token %}
-            {% bootstrap_form form %}
+        <h3>Please enter the below details and click submit.</h3>
+        <!-- <form method="post" enctype="multipart/form-data" > -->
+            <!-- {% csrf_token %} -->
+            <!-- {% bootstrap_form form %} -->
             <!-- {{ form.as_p }} -->
-            <input class="btn btn-success" type="submit" value="Submit" />
-            <br><br>
+            <!-- <input class="btn btn-success" type="submit" value="Submit" /> -->
+        <!-- </form> -->
+
+        <form class="container">
+            <div class="form_main">
+                <div class="one">
+                    <!-- <h3>Form 1</h3> -->
+                        <input type="number" name="s_no" class="form-control" maxlength="30" placeholder="Serial No" title="" required="" id="id_s_no">
+                        <input type="number" name="list_no" class="form-control" maxlength="30" placeholder="List No" title="" required="" id="id_list_no">
+                        <input type="number" name="sub_list_no" class="form-control" maxlength="30" placeholder="Sub-List No" title="" required="" id="id_sub_list_no">
+                        <input type="text" name="company_name" class="form-control" maxlength="30" placeholder="Customer Name" title="" required="" id="id_company_name">
+                        <input type="number" name="contact_no" class="form-control" maxlength="30" placeholder="Contact Number" title="" required="" id="id_contact_no">
+                        <input type="email" name="email" class="form-control" maxlength="30" placeholder="Email" title="" required="" id="id_email">
+                        <input type="number" name="wechat" class="form-control" maxlength="30" placeholder="Wechat Number" title="" required="" id="id_wechat">
+                        <input type="number" name="company_name" class="form-control" maxlength="30" placeholder="Invoice Number" title="" required="" id="id_invoice_no">
+                        <input type="date" name="invoice_date" class="form-control" maxlength="30" placeholder="Invoice Date" title="Invoice Date" required="" id="id_invoice_date">
+                        <input type="text" name="description" class="form-control" maxlength="30" placeholder="Description" title="" required="" id="id_description">
+                        <input type="text" name="model" class="form-control" maxlength="30" placeholder="Model" title="" required="" id="id_model">
+                        <input type="image" name="photo" class="form-control" maxlength="30" placeholder="Photo" title="" required="" id="id_photo">
+                        <input type="text" name="dimensions" class="form-control" maxlength="30" placeholder="Dimensions" title="" required="" id="id_dimensions">
+                </div>
+                <div class="two">
+                    <!-- <h3>Form 2</h3> -->
+                    <input type="text" name="remarks" class="form-control" maxlength="30" placeholder="Remarks" title="" required="" id="id_remarks">
+                    <input type="number" name="unit" class="form-control" maxlength="30" placeholder="Unit" title="" required="" id="id_unit">        
+                    <input type="number" name="unit_price" class="form-control" maxlength="30" placeholder="Unit Price" title="" required="" id="id_unit_price">        
+                    <input type="number" name="qty" class="form-control" maxlength="30" placeholder="Quantity" title="" required="" id="id_qty">        
+                    <input type="number" name="customer_amount" class="form-control" maxlength="30" placeholder="Customer Amount" title="" required="" id="id_customer_amount">        
+                    <input type="number" name="customer_amount_after_discount" class="form-control" maxlength="30" placeholder="Customer Amount after Discount" title="" required="" id="id_customer_amount_after_discount">        
+                    <input type="number" name="commission_persentage" class="form-control" maxlength="30" placeholder="Commission Percentage" title="" required="" id="id_commission_persentage">        
+                    <input type="number" name="commission_rmb" class="form-control" maxlength="30" placeholder="Commission rmb" title="" required="" id="id_commission_rmb">        
+                    <input type="number" name="actual_vendor_amount" class="form-control" maxlength="30" placeholder="Actual Vendor Amount" title="" required="" id="id_actual_vendor_amount">        
+                    <input type="number" name="vendor_deposit_persentage" class="form-control" maxlength="30" placeholder="Vendor Deposit Percentage" title="" required="" id="id_vendor_deposit_persentage">        
+                    <input type="number" name="vendor_advance_deposit_amount" class="form-control" maxlength="30" placeholder="Vendor Advance Deposit Amount" title="" required="" id="id_vendor_advance_deposit_amount">        
+                    <input type="number" name="token_deposit_customer" class="form-control" maxlength="30" placeholder="Token Deposit Customer" title="" required="" id="id_token_deposit_customer">        
+                    <input type="number" name="token_deposit_HSTC" class="form-control" maxlength="30" placeholder="Token Deposit HSTC" title="" required="" id="id_token_deposit_HSTC">        
+                </div>
+                <div class="three">
+                    <!-- <h3>Form 3</h3> -->
+                    <input type="date" name="token_deposit_date" class="form-control" maxlength="30" placeholder="Token Deposit Date" title="" required="" id="id_token_deposit_date">
+                    <input type="number" name="vendor_advance_balance" class="form-control" maxlength="30" placeholder="Vendor Advance Balance" title="" required="" id="id_vendor_advance_balance">        
+                    <input type="number" name="vendor_advance_balance_paid" class="form-control" maxlength="30" placeholder="Vendor Advance Balance Paid" title="" required="" id="id_vendor_advance_balance_paid">        
+                    <input type="date" name="advance_balance_date" class="form-control" maxlength="30" placeholder="Advance Balance Date" title="" required="" id="id_advance_balance_date">        
+                    <input type="number" name="vendor_final_balance" class="form-control" maxlength="30" placeholder="Vendor Final Balance" title="" required="" id="id_vendor_final_balance">        
+                    <input type="date" name="vendor_final_balance_date" class="form-control" maxlength="30" placeholder="Vendor Final Balance Date" title="" required="" id="id_vendor_final_balance_date">        
+                    <input type="text" name="account_details" class="form-control" maxlength="30" placeholder="Account Details" title="" required="" id="id_account_details">        
+                    <input type="number" name="CBM_m3" class="form-control" maxlength="30" placeholder="Cubic meters" title="" required="" id="id_CBM_m3">        
+                    <input type="number" name="ctns" class="form-control" maxlength="30" placeholder="Cartons" title="" required="" id="id_ctns">        
+                    <input type="number" name="gross_weight_kgs" class="form-control" maxlength="30" placeholder="Gross Weight in kgs" title="" required="" id="id_gross_weight_kgs">        
+                    <input type="number" name="net_weight_kgs" class="form-control" maxlength="30" placeholder="Net Weight in kgs" title="" required="" id="id_net_weight_kgs">            
+                </div>
+            </div>
+        
+            <input class="btn btn-success sbmt" type="submit" value="Submit" />
+
+           
         </form>
+
+         <!-- <br><hr><br>
+                <form class="container">
+                    <div class="row">
+                
+                        <div class="col-md-3">
+                            <input type="text" name="customer_name" class="form-control edit_cus" maxlength="30" placeholder="Customer name" title="" required="" id="id_customer_name">        
+                        </div>
+                
+                        <div class="col-md-3">
+                            <input type="number" name="customer_contact" class="form-control" placeholder="Customer contact" title="" required="" id="id_customer_contact">        
+                        </div>
+                
+                        <div class="col-md-3">
+                            <input type="email" name="customer_email" maxlength="254" class="form-control" placeholder="Customer email" title="" required="" id="id_customer_email">        
+                        </div>
+                
+                        <div class="col-md-3">
+                            <input type="text" name="customer_company" maxlength="100" class="form-control" placeholder="Customer company" title="" required="" id="id_customer_company">
+                        </div>
+                        <input type="submit" class="btn btn-success" value="Submit" />
+                
+                    </div>
+                </form>
+              <br><hr><br> -->
+
+
         <script>
             $(function() {
                 $( ".datepicker" ).datepicker({

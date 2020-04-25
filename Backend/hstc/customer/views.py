@@ -197,7 +197,10 @@ def uplaod_file(request, pk):
 class main_Customer_Update(UpdateView):
     model = Customer
     template_name='main_customer/main_customer_update_form.html'
-    fields = '__all__'
+    fields = ["customer_name",
+        "customer_contact",
+        "customer_email",
+        "customer_company",]
 
 class main_Customer_Delete(DeleteView):
     model=Customer
