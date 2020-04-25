@@ -58,6 +58,7 @@
 
 
 
+
 .container{
     margin-top: 3em;
 }
@@ -68,57 +69,88 @@ h1, h3{
     text-align: center;
     font-weight: 400;
 }
-.form-group{
+.floating-label-group{
     width: 30%;
     margin: 0 auto;
     padding: 0.5em;
 }
-.form-group label{
-    display: none;
-}
-.form-group input{
+.floating-label-group input{
     border: 0;
     border-bottom: 1.5px solid #d11b12 ;
     border-radius: 2px;
-/* 
-    padding-bottom:5px;
-    background: 
-      linear-gradient(
-        to left, 
-        blueviolet 0%,
-        rgb(228, 65, 149) 12%,
-        rgb(97, 18, 170) 100%
-      )
-      left 
-      bottom
-      #fff    
-      no-repeat; 
-    background-size:100% 2px ; */
 
 }
-.form-group input:focus{
+.floating-label-group input:focus{
     box-shadow: none;
     background-color: transparent;
-
-    color: green !important;
-
 }
-::placeholder
-{
-    font-size: 16px;
-    padding-left: 0em;
-    padding-bottom: 1em;
 
+/* Form design 3 - flex */
+.form_main{
+    display: flex;
 }
-::placeholder:focus
-{
-    color: green !important;
-    font-size: 12px;
-    padding-left: 0em;
-    padding-top: -1em;
+.one{
+    flex: 1;
+    padding: 1em;
 }
+.two{
+    flex: 1;
+    padding: 1em;
+}
+.three{
+    flex: 1;
+    padding: 1em;
+}
+
+
+.form_main input{
+    border: 0;
+    border-bottom: 1.5px solid #d11b12 ;
+    border-radius: 2px;
+    margin: 1em;
+}
+.form_main input:focus{
+    box-shadow: none;
+    background-color: transparent;
+}
+
+.form-control{
+    position: relative;
+}
+
+
+
+.floating-label-group {
+	position: relative;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+	.floating-label {
+        font-size: 16px;
+        margin-left: 1em;
+		color: #495057;
+		position: absolute;
+		pointer-events: none;
+		top: 9px;
+		left: 12px;
+		transition: all 0.2s ease;
+	}
+
+	input:focus ~ .floating-label,
+	input:not(:focus):valid ~ .floating-label {
+		top: -15px;
+		bottom: 0px;
+		left: 4px;
+		font-size: 13px;
+		opacity: 1;
+		color: #bfc3c7;
+	}
+
+
+/* Form design end */
+
+
 .sbmt{
     margin-left: 46%;
     margin-top: 1em;
 }
-
