@@ -59,11 +59,34 @@
             <h3>Please fill the below details to create a new customer.</h3>
             <form method="post" enctype="multipart/form-data" >
                 {% csrf_token %}
-                {% bootstrap_form form %}
+                <!-- {% bootstrap_form form %} -->
                 <!-- {{ form.as_p }}  -->
+                <!-- <input type="submit" class="btn btn-success sbmt" value="Submit" /> -->
+            
+            <form class="container">
+                <div class="floating-label-group">
+                    <input type="text" name="customer_name" class="form-control edit_cus" maxlength="30" placeholder="" title="" required="" id="id_customer_name">        
+                    <label class="floating-label">Customer Name</label>
+                </div>
+
+                <div class="floating-label-group">
+                    <input type="number" name="customer_contact" class="form-control" placeholder="" title="" required="" id="id_customer_contact">        
+                    <label class="floating-label">Customer contact</label>
+                </div>
+
+                <div class="floating-label-group">
+                    <input type="email" name="customer_email" maxlength="254" class="form-control" placeholder="" title="" required="" id="id_customer_email">        
+                    <label class="floating-label">Customer email</label>
+                </div>
+
+                <div class="floating-label-group">
+                    <input type="text" name="customer_company" maxlength="100" class="form-control" placeholder="" title="" required="" id="id_customer_company">
+                    <label class="floating-label">Customer company</label>
+                </div>
+
                 <input type="submit" class="btn btn-success sbmt" value="Submit" />
 
-
+            </form>
                 <!-- <br><hr><br>
                 <form class="container">
                     <div class="row">
