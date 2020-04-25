@@ -200,6 +200,16 @@
           sessionStorage.removeItem("ContainerPageVisited");
           window.location.reload(true); // force refresh page1
         }
+
+        $(function() {
+            $( ".datepicker" ).datepicker({
+              changeMonth: true,
+              changeYear: true,
+              yearRange: "1900:2020",
+              // You can put more options here.
+          });
+        });
+
         // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
         $(window).on("load resize ", function() {
         var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();

@@ -117,7 +117,8 @@
               <form  method="post">
                 <!-- {{id}} -->
                 {% csrf_token %}
-                {% bootstrap_form partShipmentForm %}
+                <!-- {% bootstrap_form partShipmentForm %} -->
+                <input type="date" name="dilivery_date" class="form-control" maxlength="30" placeholder="Delivery Date" title="" required="" id="id_dilivery_date">
                 <div class="modal-footer">
                       <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
                       <button class="btn btn-success" type="submit" name="button">Submit</button>
@@ -292,9 +293,15 @@
         $('.tbl-header').css({'padding-right':scrollWidth});
         }).resize();
 
-        $(document).ready(function(){
-          $(".startdate").datepicker();
+        $(function() {
+            $( ".datepicker" ).datepicker({
+              changeMonth: true,
+              changeYear: true,
+              yearRange: "1900:2020",
+              // You can put more options here.
+          });
         });
+        
 
         $('#exampleModal').on('shown.bs.modal', function () {
         $('#myInput').trigger('focus')
