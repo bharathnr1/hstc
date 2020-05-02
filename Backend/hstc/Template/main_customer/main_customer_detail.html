@@ -195,6 +195,7 @@
                   <th class="text-center">Cu Amt</th>
                   <th class="text-center">Discounted Amt</th>
                   <th class="text-center">Commission %</th>
+                  <th class="text-center">Commission RMB</th>
                   <th class="text-center">Actual Vendor Amt</th>
                   <th class="text-center">Vendor Deposit %</th>
                   <th class="text-center">Vendor Adv Depo Amt</th>
@@ -229,6 +230,8 @@
                     <td class="text-center" >{{ each.model }}</td>
                     {% if each.photo %}
                     <td><img src="{{ each.photo.url }}" alt="A picture" width="100px" height="100px"></td>
+                    {% else %}
+                    <td>Image not Avaialble</td>
                     {% endif %}
                     <td class="text-center">{{ each.dimensions }}</td>
                     <td class="text-center">{{ each.remarks }}</td>
@@ -237,7 +240,8 @@
                     <td class="text-center">{{ each.qty }}</td>
                     <td class="text-center">{{ each.customer_amount }}</td>
                     <td class="text-center">{{ each.customer_amount_after_discount }}</td>
-                    <td class="text-center">{{ each.commission }}</td>
+                    <td class="text-center">{{ each.commission_persentage }}</td>
+                    <td class="text-center">{{ each.commission_rmb }}</td>
                     <td class="text-center">{{ each.actual_vendor_amount }}</td>
                     <td class="text-center">{{ each.vendor_deposit_persentage }}</td>
                     <td class="text-center">{{ each.vendor_advance_deposit_amount }}</td>
@@ -247,7 +251,7 @@
                     <td class="text-center">{{ each.vendor_advance_balance }}</td>
                     <td class="text-center">{{ each.vendor_advance_balance_paid }}</td>
                     <td class="text-center">{{ each.advance_balance_date }}</td>
-                    <td class="text-center">{{ each.vendor_advance_balance_paid }}</td>
+                    <td class="text-center">{{ each.vendor_final_balance }}</td>
                     <td class="text-center">{{ each.vendor_final_balance_date }}</td>
                     <td class="text-center">{{ each.CBM_m3 }}</td>
                     <td class="text-center">{{ each.ctns }}</td>

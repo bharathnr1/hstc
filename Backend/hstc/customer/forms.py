@@ -7,8 +7,7 @@ from django.utils.translation import gettext_lazy as _
 class customer_form(forms.ModelForm):
     class Meta:
         model=Customer_Details
-        fields = [
-                's_no',
+        fields = ["s_no",
                 'list_no',
                 'sub_list_no',
                 'company_name',
@@ -25,20 +24,14 @@ class customer_form(forms.ModelForm):
                 'unit',
                 'unit_price',
                 'qty',
-                'customer_amount',
                 'customer_amount_after_discount',
                 'commission_persentage',
-                'commission_rmb',
-                'actual_vendor_amount',
                 'vendor_deposit_persentage',
-                'vendor_advance_deposit_amount',
                 'token_deposit_customer',
                 'token_deposit_HSTC',
                 'token_deposit_date',
-                'vendor_advance_balance',
                 'vendor_advance_balance_paid',
                 'advance_balance_date',
-                'vendor_final_balance',
                 'vendor_final_balance_date',
                 'account_details',
                 'CBM_m3',
@@ -50,7 +43,6 @@ class customer_form(forms.ModelForm):
                 'invoice_date': forms.DateInput(attrs={'class':'datepicker'}),
                 'token_deposit_date': forms.DateInput(attrs={'class':'datepicker'}),
                 'advance_balance_date': forms.DateInput(attrs={'class':'datepicker'}),
-                'vendor_final_balance_date': forms.DateInput(attrs={'class':'datepicker'}),
             }
 
 class main_customer_form(forms.ModelForm):

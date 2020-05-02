@@ -74,7 +74,7 @@ def main_Customer_Detail(request, pk):
     return render(request, "main_customer/main_customer_detail.html", {"vendor_list":vendor_object,"object":object, "form":ss, "upload_form":upload_form})
 
 def uplaod_file(request, pk):
-# We need to check with bharath that is there any kind of dependancy on expand feature on customer detail page for expanding one vendor detail.
+#BIGGEST ISSUE RIGHT NOW IS THAT ALL THIS LOGIC WORKS ONLY IF CUSTOMER DETAILS ARE CREATED ONCE.
     object = get_object_or_404(Customer, pk=pk)
     form = UploadFileForm()
     if request.method == "POST":
@@ -154,21 +154,14 @@ def uplaod_file(request, pk):
                                                                     unit     = sheet.cell_value(i, 15),
                                                                     unit_price     = int(sheet.cell_value(i, 16)) if type(sheet.cell_value(i , 16)) == type(1.0)   else None, 
                                                                     qty     = int(sheet.cell_value(i, 17)) if type(sheet.cell_value(i , 17)) == type(1.0)   else None, 
-                                                                    customer_amount     = int(sheet.cell_value(i,18)) if type(sheet.cell_value(i , 18)) == type(1.0)   else None, 
                                                                     customer_amount_after_discount     = int(sheet.cell_value(i,19)) if type(sheet.cell_value(i , 19))  == type(1.0)  else None, 
-                                                                    commission_persentage     = sheet.cell_value(i,20),
-                                                                    commission_rmb          = sheet.cell_value(i, 21),
-
-                                                                    actual_vendor_amount    = int(sheet.cell_value(i,22)) if type(sheet.cell_value(i , 22))  == type(1.0)  else None,
-                                                                    vendor_deposit_persentage    = int(sheet.cell_value(i,23)) if type(sheet.cell_value(i , 23))  == type(1.0)  else None,
-                                                                    vendor_advance_deposit_amount    = int(sheet.cell_value(i,24)) if type(sheet.cell_value(i , 24))  == type(1.0)  else None,
+                                                                    commission_persentage     = (sheet.cell_value(i,20)) if type(sheet.cell_value(i,20))  == type(1.0)  else None,
+                                                                    vendor_deposit_persentage    = sheet.cell_value(i,23) if type(sheet.cell_value(i , 23))  == type(1.0)  else None,
                                                                     token_deposit_customer    = int(sheet.cell_value(i,25)) if type(sheet.cell_value(i , 25))  == type(1.0)  else None,
                                                                     token_deposit_HSTC    = int(sheet.cell_value(i,26)) if type(sheet.cell_value(i , 26))  == type(1.0)  else None,
                                                                     token_deposit_date    = datetime.datetime(*xlrd.xldate_as_tuple(sheet.cell_value(i,27), wb.datemode)) if type(sheet.cell_value(i , 27))  == type(1.0)  else None,
-                                                                    vendor_advance_balance    = int(sheet.cell_value(i,28)) if type(sheet.cell_value(i , 28))  == type(1.0)  else None,
                                                                     vendor_advance_balance_paid    = int(sheet.cell_value(i,29)) if type(sheet.cell_value(i , 29))  == type(1.0)  else None,
                                                                     advance_balance_date    = datetime.datetime(*xlrd.xldate_as_tuple(sheet.cell_value(i,30), wb.datemode)) if type(sheet.cell_value(i , 30))  == type(1.0)  else None,
-                                                                    vendor_final_balance    = int(sheet.cell_value(i,31)) if type(sheet.cell_value(i , 31))  == type(1.0)  else None,
                                                                     vendor_final_balance_date    = datetime.datetime(*xlrd.xldate_as_tuple(sheet.cell_value(i,32), wb.datemode) ) if type(sheet.cell_value(i , 32))  == type(1.0)  else None,
                                                                     manufacturing_days    = int(sheet.cell_value(i,33)) if type(sheet.cell_value(i , 33))  == type(1.0)  else None,
                                                                     CBM_m3    = int(sheet.cell_value(i,38)) if type(sheet.cell_value(i , 38))  == type(1.0)  else None,
@@ -176,18 +169,63 @@ def uplaod_file(request, pk):
                                                                     gross_weight_kgs    = int(sheet.cell_value(i,40)) if type(sheet.cell_value(i , 40))  == type(1.0)  else None,
                                                                     net_weight_kgs    = int(sheet.cell_value(i,41)) if type(sheet.cell_value(i , 41))  == type(1.0)  else None,
                                                                 )
-                    vendor_list.save()
-                    print(type(sheet.cell_value(i,35)))
-#Since we are setting up inspection while uploading the excell sheet, we need to setup a validation initially, and then crate the incpection model for which it doesnt exist.
-                for i in range(1, sheet.nrows):
+                    # Validation for customer amount.
+                    if( vendor_list.unit_price != None and vendor_list.qty != None ):
+                        vendor_list.customer_amount = vendor_list.unit_price * vendor_list.qty
+                    else:
+                        pass                    
+
+                    # Validation for commision RMB.                            
+                    if( vendor_list.customer_amount_after_discount != None and vendor_list.commission_persentage != None ):
+                        vendor_list.commission_rmb = vendor_list.customer_amount_after_discount * vendor_list.commission_persentage * 0.01
+                    else:
+                        pass
+
+                    # Validation for Actual Vendor Amount
+                    if( vendor_list.customer_amount_after_discount != None and vendor_list.customer_amount_after_discount != None and  vendor_list.commission_persentage != None):
+                        vendor_list.actual_vendor_amount = vendor_list.customer_amount_after_discount - (vendor_list.customer_amount_after_discount * vendor_list.commission_persentage * 0.01)
+                    else:
+                        pass
+
+                    # Validation for Vendor Advance Deposit Amount 
+                    if(vendor_list.customer_amount_after_discount != None and vendor_list.customer_amount_after_discount != None and  vendor_list.commission_persentage != None and vendor_list.vendor_deposit_persentage != None):
+                        vendor_list.vendor_advance_deposit_amount = (vendor_list.customer_amount_after_discount - (vendor_list.customer_amount_after_discount * vendor_list.commission_persentage * 0.01)) * vendor_list.vendor_deposit_persentage * 0.01
+                    else:
+                        pass
+
+                    # Validation for Vendor Advance Balance
+                    if( vendor_list.customer_amount_after_discount != None and vendor_list.customer_amount_after_discount != None and  vendor_list.commission_persentage != None and vendor_list.vendor_deposit_persentage != None and (vendor_list.token_deposit_customer or vendor_list.token_deposit_HSTC) != None):
+                        if( ( vendor_list.token_deposit_customer and vendor_list.token_deposit_HSTC ) != None):
+                            vendor_list.vendor_advance_balance = ((vendor_list.customer_amount_after_discount - (vendor_list.customer_amount_after_discount * vendor_list.commission_persentage * 0.01)) * vendor_list.vendor_deposit_persentage * 0.01) - ( vendor_list.token_deposit_customer + vendor_list.token_deposit_HSTC )
+                        elif(vendor_list.token_deposit_customer != None):
+                            vendor_list.vendor_advance_balance = ((vendor_list.customer_amount_after_discount - (vendor_list.customer_amount_after_discount * vendor_list.commission_persentage * 0.01)) * vendor_list.vendor_deposit_persentage * 0.01) - (vendor_list.token_deposit_customer)
+                        elif(vendor_list.token_deposit_HSTC != None):
+                            vendor_list.vendor_advance_balance = ((vendor_list.customer_amount_after_discount - (vendor_list.customer_amount_after_discount * vendor_list.commission_persentage * 0.01)) * vendor_list.vendor_deposit_persentage * 0.01) - ( vendor_list.token_deposit_HSTC)
+                    else:
+                        pass
+                    # Validation for Vendor Final Balance 
+                    if(vendor_list.customer_amount_after_discount != None and vendor_list.customer_amount_after_discount != None and  vendor_list.commission_persentage != None and vendor_list.vendor_advance_balance_paid):
+                        if( ( vendor_list.token_deposit_customer and vendor_list.token_deposit_HSTC ) != None):
+                            vendor_list.vendor_final_balance = (vendor_list.customer_amount_after_discount - (vendor_list.customer_amount_after_discount * vendor_list.commission_persentage * 0.01)) - ( vendor_list.token_deposit_customer + vendor_list.token_deposit_HSTC + vendor_list.vendor_advance_balance_paid )
+                        elif(vendor_list.token_deposit_customer != None):
+                            vendor_list.vendor_final_balance = (vendor_list.customer_amount_after_discount - (vendor_list.customer_amount_after_discount * vendor_list.commission_persentage * 0.01)) - ( vendor_list.token_deposit_customer +  vendor_list.vendor_advance_balance_paid )
+                        elif(vendor_list.token_deposit_HSTC != None):
+                            vendor_list.vendor_final_balance = (vendor_list.customer_amount_after_discount - (vendor_list.customer_amount_after_discount * vendor_list.commission_persentage * 0.01)) - ( vendor_list.token_deposit_HSTC + vendor_list.vendor_advance_balance_paid )
+                    else:
+                        pass
+                    #Since we are setting up inspection while uploading the excell sheet, we need to setup a validation initially, and then crate the incpection model for which it doesnt exist.
                     inspection_field = Inspection.objects.create(
                                                                 customer = object,
                                                                 vendor_company_name = get_object_or_404(Customer_Details, pk=vendor_list.pk),
                                                                 actual_inspection_date = datetime.datetime(*xlrd.xldate_as_tuple(sheet.cell_value(i,35), wb.datemode)) if type(sheet.cell_value(i , 35))  == type(1.0)  else None,
                                                                 inspection_done_by = sheet.cell_value(i,36),
                                                                 inspection_remarks = sheet.cell_value(i,37),
-                                                                planned_inspection_date = datetime.datetime(*xlrd.xldate_as_tuple(sheet.cell_value(i,34), wb.datemode)) if type(sheet.cell_value(i , 34))  == type(1.0)  else None,
                                                                 )
+                    if((vendor_list.advance_balance_date and vendor_list.manufacturing_days) != None):
+                         inspection_field.planned_inspection_date = vendor_list.advance_balance_date + datetime.timedelta(days=vendor_list.manufacturing_days)
+                    else:
+                        pass
+                    vendor_list.save()
                     inspection_field.save()
             else:
                 return HttpResponse('The file format of uploaded file in not correct. Please use the excel format given as donwload in the portal.')       
@@ -215,6 +253,8 @@ class main_Customer_Delete(DeleteView):
 
 ########################################################Vendors CRUD one by one########################################################
 
+#Unit is integer feild in customer form?
+#i Dont need all feilds to be cumpulsory, need to check.
 def Customer_Create(request, pk):
     info_form=customer_form()
     if request.method == "POST":
@@ -226,6 +266,12 @@ def Customer_Create(request, pk):
             temp = form.save(commit=False)
             temp.customer = get_object_or_404(Customer, pk=pk)
             temp.save()
+            temp.customer_amount = temp.unit_price * temp.qty                 
+            temp.commission_rmb = temp.customer_amount_after_discount * temp.commission_persentage * 0.01
+            temp.actual_vendor_amount = temp.customer_amount_after_discount - (temp.customer_amount_after_discount * temp.commission_persentage * 0.01)
+            temp.vendor_advance_deposit_amount = (temp.customer_amount_after_discount - (temp.customer_amount_after_discount * temp.commission_persentage * 0.01)) * temp.vendor_deposit_persentage * 0.01
+            temp.vendor_advance_balance = ((temp.customer_amount_after_discount - (temp.customer_amount_after_discount * temp.commission_persentage * 0.01)) * temp.vendor_deposit_persentage * 0.01) - ( temp.token_deposit_customer + temp.token_deposit_HSTC )
+            temp.vendor_final_balance = (temp.customer_amount_after_discount - (temp.customer_amount_after_discount * temp.commission_persentage * 0.01)) - ( temp.token_deposit_customer + temp.token_deposit_HSTC + temp.vendor_advance_balance_paid )
             print("Form is Saved and you are redirected to list page")
             return HttpResponseRedirect(reverse('customer:main_customer-detail', args=[pk]))
     return render(request, "customer/customer_details_form.html", {"form":info_form})
